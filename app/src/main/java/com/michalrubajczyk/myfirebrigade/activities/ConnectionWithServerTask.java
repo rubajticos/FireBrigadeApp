@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade;
+package com.michalrubajczyk.myfirebrigade.activities;
 
 import android.os.AsyncTask;
 

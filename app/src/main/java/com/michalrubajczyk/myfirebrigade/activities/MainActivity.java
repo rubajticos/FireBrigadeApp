@@ -1,8 +1,7 @@
-package com.michalrubajczyk.myfirebrigade;
+package com.michalrubajczyk.myfirebrigade.activities;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.FloatingActionButton;
@@ -12,12 +11,9 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.Socket;
+import com.michalrubajczyk.myfirebrigade.R;
 
 public class MainActivity extends AppCompatActivity {
     private final int INTERNET_REQUEST_CODE = 2;
