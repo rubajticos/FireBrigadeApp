@@ -12,7 +12,7 @@ import java.net.Socket;
 
 public class ConnectionWithServerTask extends AsyncTask<String,Void,Void> {
 
-    String ip = "192.168.0.102";
+    String ip = "192.168.0.104";
     Socket socket;
 
     PrintWriter printWriter;
