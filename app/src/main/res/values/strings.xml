@@ -18,17 +18,23 @@
     <string name="register_button">Zarejestruj</string>
     <string name="title_activity_register">RegisterActivity</string>
 
-    <!--REGISTER ACTIVITY-->
-    <string name="register_username">Login</string>
-    <string name="register_password">Haslo</string>
-    <string name="register_name">Nazwa jednostki</string>
-    <string name="register_voivodeship">Wojewodztwo</string>
-    <string name="register_district">Powiat</string>
-    <string name="register_community">Gmina</string>
-    <string name="register_city">Miejscowosc</string>
-    <string name="register_ksrg">KSRG</string>
-    <string-array name="register_ksrg_spinner">
+    <!--Firebrigade create form-->
+
+    <string name="firebrigade_name">Nazwa jednostki</string>
+    <string name="firebrigade_voivodeship">Wojewodztwo</string>
+    <string name="firebrigade_district">Powiat</string>
+    <string name="firebrigade_community">Gmina</string>
+    <string name="firebrigade_city">Miejscowosc</string>
+    <string name="firebrigade_ksrg">KSRG</string>
+    <string-array name="firebrigade_ksrg_spinner">
         <item>Nalezy do KSRG</item>
         <item>Nie nalezy do KSRG</item>
     </string-array>
+    <string name="action_settings">Settings</string>
+
+    <!--REGISTER-->
+    <string name="register">Zarejestruj sie!</string>
+    <string name="register_username">Login</string>
+    <string name="register_password">Haslo</string>
+    <string name="register_repassword">Powtorz haslo</string>
 </resources>
