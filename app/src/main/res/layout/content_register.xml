@@ -80,13 +80,15 @@
                     android:layout_height="wrap_content"
                     android:text="@string/register_button" />
 
+                <TextView
+                    android:id="@+id/temp_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TextView" />
+
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/temp_edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="TextView" />
+
         </ScrollView>
 
     </LinearLayout>
