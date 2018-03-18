@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.michalrubajczyk.myfirebrigade.activities.RegisterActivity"
+    tools:context="com.michalrubajczyk.myfirebrigade.activity.RegisterActivity"
     tools:showIn="@layout/activity_register">
 
     <LinearLayout
@@ -22,12 +22,6 @@
             android:textAlignment="center"
             android:textSize="18sp"
             android:textColor="@color/colorAccent" />
-
-        <ProgressBar
-            android:id="@+id/register_progressbar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
 
         <ScrollView
             android:id="@+id/register_form"
@@ -79,12 +73,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/register_button" />
-
-                <TextView
-                    android:id="@+id/temp_textview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="TextView" />
 
             </LinearLayout>
 

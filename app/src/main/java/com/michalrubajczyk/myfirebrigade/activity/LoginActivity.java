@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.activities;
+package com.michalrubajczyk.myfirebrigade.activity;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
