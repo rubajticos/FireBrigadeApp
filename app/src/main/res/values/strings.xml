@@ -37,4 +37,17 @@
     <string name="register_username">Login</string>
     <string name="register_password">Haslo</string>
     <string name="register_repassword">Powtorz haslo</string>
+    <string name="register_success">Rejestracja udana</string>
+    <string name="register_denied_user_exist">Rejestracja nieudana - uzytkownik istnieje</string>
+    <string name="register_user_exist">Podany uzytkownik juz istnieje"</string>
+
+    <!-- DIALOG-->
+    <string name="data_downloading_in_progress">Trwa pobieranie danych...</string>
+
+    <!--ERRORS-->
+    <string name="fill_the_field">To pole musi byc wypelnione</string>
+    <string name="passwords_not_the_same">Hasla nie sa takie same</string>
+    <string name="server_error_try_again_later">Blad serwera - sprobuj pozniej</string>
+    <string name="timeout_error">Uplynal czas oczekiwania - sprobuj za chwile</string>
+
 </resources>
