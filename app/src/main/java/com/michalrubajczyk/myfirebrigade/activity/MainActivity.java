@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 
 public class MainActivity extends Activity {
 
@@ -15,7 +16,7 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        ResourcesSingleton.init(getApplicationContext()); //init ResourcesSingleton
         mHandler.postDelayed(mLaunchLoginActivity, 3000);
     }
 
