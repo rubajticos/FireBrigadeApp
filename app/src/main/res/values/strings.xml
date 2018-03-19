@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">MyFirebrigade</string>
+    <string name="app_name_pl">Moja jednostka OSP</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -49,5 +50,10 @@
     <string name="passwords_not_the_same">Hasla nie sa takie same</string>
     <string name="server_error_try_again_later">Blad serwera - sprobuj pozniej</string>
     <string name="timeout_error">Uplynal czas oczekiwania - sprobuj za chwile</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <!--IMAGES-->
+    <string name="main_loading_image">Main Image on Loading</string>
 
 </resources>
