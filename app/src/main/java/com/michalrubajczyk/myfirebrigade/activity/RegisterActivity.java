@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.presenter.RegisterPresenter;
 import com.michalrubajczyk.myfirebrigade.presenter.RegisterPresenterImpl;
@@ -58,25 +59,26 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void registerValidations() {
-        login.setError("Wypelnij pole");
-        password.setError("Wypelnij pole");
-        rePassword.setError("Wypelnij to pole");
+        login.setError(getString(R.string.fill_the_field));
+        password.setError(getString(R.string.fill_the_field));
+        rePassword.setError(getString(R.string.fill_the_field)
+        );
     }
 
     @Override
     public void registerSuccess() {
-        Toast.makeText(this, "Rejestracja udana", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.register_success), Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void passwordNotTheSame() {
-        password.setError("Hasla nie sa takie same");
-        rePassword.setError("Hasla nie sa takie same");
+        password.setError(getString(R.string.passwords_not_the_same));
+        rePassword.setError(getString(R.string.passwords_not_the_same));
     }
 
     @Override
     public void progressDialogShow() {
-        progressDialog.setMessage("Trwa pobieranie danych...");
+        progressDialog.setMessage(getString(R.string.data_downloading_in_progress));
         progressDialog.show();
     }
 
@@ -87,12 +89,17 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void userExistError() {
-        Toast.makeText(this, "Rejestracja nieudana - uzytkownik istnieje", Toast.LENGTH_LONG).show();
-        login.setError("Podany uzytkownik juz istnieje");
+        Toast.makeText(this, getString(R.string.register_denied_user_exist), Toast.LENGTH_LONG).show();
+        login.setError(getString(R.string.register_user_exist));
     }
 
     @Override
     public void badRequestError() {
-        Toast.makeText(this, "Blad serwera - sprobuj pozniej", Toast.LENGTH_LONG).show();
+        Toast.makeText(this, getString(R.string.server_error_try_again_later), Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void timeoutError() {
+        Toast.makeText(this, getString(R.string.timeout_error), Toast.LENGTH_LONG).show();
     }
 }

@@ -45,12 +45,11 @@ public class RegisterPresenterImpl implements RegisterPresenter {
 
                     @Override
                     public void onError(int code) {
-                        codeSupport(code);
+                        errorResponseCodeSupport(code);
                         Log.d("RP: error", "rejestracja nieudana");
                         mRegisterView.progressDialogDismiss();
                     }
                 });
-//                mRegisterView.progressDialogDismiss();
             } else {
                 Log.d("RP: password validation", "rozne hasla");
                 mRegisterView.passwordNotTheSame();
@@ -59,14 +58,15 @@ public class RegisterPresenterImpl implements RegisterPresenter {
 
     }
 
-    private void codeSupport(int code) {
+    private void errorResponseCodeSupport(Integer code) throws NullPointerException {
         switch (code) {
             case HttpStatus.SC_CONFLICT:
                 mRegisterView.userExistError();
                 break;
             case HttpStatus.SC_BAD_REQUEST:
                 mRegisterView.badRequestError();
-                break;
+            case -999:
+                mRegisterView.timeoutError();
         }
 
     }

@@ -62,9 +62,13 @@ public class RegisterModelImpl implements RegisterModel {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("rejestracja", Integer.toString(error.networkResponse.statusCode));
-                        dataListener.onError(error.networkResponse.statusCode);
-
+                        try {
+                            Log.d("rejestracja", error.toString());
+                            dataListener.onError(error.networkResponse.statusCode);
+                        } catch (NullPointerException e) {
+                            Log.d("rejestracja", error.toString());
+                            dataListener.onError(-999);
+                        }
                     }
                 }
         );

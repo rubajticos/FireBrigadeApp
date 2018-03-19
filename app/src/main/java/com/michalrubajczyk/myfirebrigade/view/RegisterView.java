@@ -19,4 +19,6 @@ public interface RegisterView {
     void userExistError();
 
     void badRequestError();
+
+    void timeoutError();
 }
