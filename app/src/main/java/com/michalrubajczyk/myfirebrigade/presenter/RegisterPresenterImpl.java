@@ -4,8 +4,8 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.michalrubajczyk.myfirebrigade.model.DataListener;
-import com.michalrubajczyk.myfirebrigade.model.RegisterModelImpl;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.RegisterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
 import com.michalrubajczyk.myfirebrigade.view.RegisterView;
 
@@ -18,11 +18,11 @@ import org.apache.commons.httpclient.HttpStatus;
 public class RegisterPresenterImpl implements RegisterPresenter {
 
     RegisterView mRegisterView;
-    RegisterModelImpl mRegisterModel;
+    RegisterRequestImpl mRegisterModel;
 
     public RegisterPresenterImpl(RegisterView registerView, Context context) {
         this.mRegisterView = registerView;
-        mRegisterModel = new RegisterModelImpl(context);
+        mRegisterModel = new RegisterRequestImpl(context);
     }
 
     @Override

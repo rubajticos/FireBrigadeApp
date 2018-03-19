@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.model;
+package com.michalrubajczyk.myfirebrigade.model.apiRequests;
 
 /**
  * Created by Michal on 18/03/2018.
