@@ -16,7 +16,7 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mHandler.postDelayed(mLaunchLoginActivity, 5000);
+        mHandler.postDelayed(mLaunchLoginActivity, 3000);
     }
 
     private Runnable mLaunchLoginActivity = new Runnable() {
