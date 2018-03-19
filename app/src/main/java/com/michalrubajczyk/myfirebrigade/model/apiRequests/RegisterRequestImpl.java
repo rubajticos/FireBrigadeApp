@@ -8,6 +8,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
 
 import org.json.JSONException;
@@ -18,6 +20,7 @@ import org.json.JSONObject;
  */
 
 public class RegisterRequestImpl implements RegisterRequest {
+    private final String BASE_SERVER_URL = ResourcesSingleton.getInstance().getString(R.string.base_server_url);
 
     private Context mContext;
     private Gson gson;
@@ -29,7 +32,7 @@ public class RegisterRequestImpl implements RegisterRequest {
 
     @Override
     public void registerUser(UserDTO user, final DataListener dataListener) {
-        String url = "https://192.168.0.103:8443/register";
+        String url = BASE_SERVER_URL + "/register";
 
         JSONObject userJSON = new JSONObject();
         try {
