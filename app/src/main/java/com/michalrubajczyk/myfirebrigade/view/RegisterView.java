@@ -10,11 +10,13 @@ public interface RegisterView {
 
     void registerSuccess();
 
-    void registerError();
-
     void passwordNotTheSame();
 
     void progressDialogShow();
 
     void progressDialogDismiss();
+
+    void userExistError();
+
+    void badRequestError();
 }

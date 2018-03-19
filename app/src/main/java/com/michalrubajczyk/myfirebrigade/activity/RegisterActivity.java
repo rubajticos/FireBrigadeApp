@@ -1,6 +1,5 @@
 package com.michalrubajczyk.myfirebrigade.activity;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
-
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.presenter.RegisterPresenter;
 import com.michalrubajczyk.myfirebrigade.presenter.RegisterPresenterImpl;
@@ -68,12 +65,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
 
     @Override
     public void registerSuccess() {
-        Toast.makeText(this, "Rejestracja udana", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void registerError() {
-        Toast.makeText(this, "Rejestracja nieudana - ponow probe", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Rejestracja udana", Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -91,5 +83,16 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
     @Override
     public void progressDialogDismiss() {
         progressDialog.dismiss();
+    }
+
+    @Override
+    public void userExistError() {
+        Toast.makeText(this, "Rejestracja nieudana - uzytkownik istnieje", Toast.LENGTH_LONG).show();
+        login.setError("Podany uzytkownik juz istnieje");
+    }
+
+    @Override
+    public void badRequestError() {
+        Toast.makeText(this, "Blad serwera - sprobuj pozniej", Toast.LENGTH_LONG).show();
     }
 }

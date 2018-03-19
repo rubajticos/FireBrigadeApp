@@ -39,13 +39,13 @@ public class RegisterModelImpl implements RegisterModel {
     @Override
     public void registerUser(UserDTO user, final DataListener dataListener) {
         RequestQueue requestQueue = Volley.newRequestQueue(mContext);
-        String url = "https://192.168.1.114:8443/register";
+        String url = "https://192.168.0.103:8443/register";
 
         JSONObject userJSON = new JSONObject();
         try {
-            userJSON.put("userId", "-1");
-            userJSON.put("username", "polska");
-            userJSON.put("password", "gola");
+            userJSON.put("userId", null);
+            userJSON.put("username", user.getUsername());
+            userJSON.put("password", user.getPassword());
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -56,17 +56,18 @@ public class RegisterModelImpl implements RegisterModel {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("rejestracja", response.toString());
+                        dataListener.onSuccess(response.toString());
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Log.d("rejestracja", error.toString());
+                        Log.d("rejestracja", Integer.toString(error.networkResponse.statusCode));
+                        dataListener.onError(error.networkResponse.statusCode);
+
                     }
                 }
         );
         requestQueue.add(jsonObjReq);
     }
-
-
 }

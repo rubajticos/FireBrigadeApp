@@ -9,6 +9,8 @@ import com.michalrubajczyk.myfirebrigade.model.RegisterModelImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
 import com.michalrubajczyk.myfirebrigade.view.RegisterView;
 
+import org.apache.commons.httpclient.HttpStatus;
+
 /**
  * Created by Michal on 18/03/2018.
  */
@@ -42,17 +44,29 @@ public class RegisterPresenterImpl implements RegisterPresenter {
                     }
 
                     @Override
-                    public void onError(String data) {
+                    public void onError(int code) {
+                        codeSupport(code);
                         Log.d("RP: error", "rejestracja nieudana");
-                        mRegisterView.registerError();
                         mRegisterView.progressDialogDismiss();
                     }
                 });
-                mRegisterView.progressDialogDismiss();
+//                mRegisterView.progressDialogDismiss();
             } else {
                 Log.d("RP: password validation", "rozne hasla");
                 mRegisterView.passwordNotTheSame();
             }
+        }
+
+    }
+
+    private void codeSupport(int code) {
+        switch (code) {
+            case HttpStatus.SC_CONFLICT:
+                mRegisterView.userExistError();
+                break;
+            case HttpStatus.SC_BAD_REQUEST:
+                mRegisterView.badRequestError();
+                break;
         }
 
     }

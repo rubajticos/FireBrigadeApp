@@ -7,5 +7,5 @@ package com.michalrubajczyk.myfirebrigade.model;
 public interface DataListener {
     public void onSuccess(String data);
 
-    public void onError(String data);
+    public void onError(int code);
 }
