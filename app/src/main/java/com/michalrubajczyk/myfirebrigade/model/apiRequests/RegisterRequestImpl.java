@@ -23,11 +23,9 @@ public class RegisterRequestImpl implements RegisterRequest {
     private final String BASE_SERVER_URL = ResourcesSingleton.getInstance().getString(R.string.base_server_url);
 
     private Context mContext;
-    private Gson gson;
 
     public RegisterRequestImpl(Context context) {
         this.mContext = context;
-        this.gson = new Gson();
     }
 
     @Override
