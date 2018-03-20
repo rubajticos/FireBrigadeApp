@@ -6,7 +6,5 @@ package com.michalrubajczyk.myfirebrigade.model.apiRequests;
 
 public interface LoginRequest {
 
-    void loginUserAndGetAccessToken();
-
-    void getAccessTokenFromRefreshToken();
+    void loginUserAndGetAccessToken(String login, String password, final DataListener dataListener);
 }

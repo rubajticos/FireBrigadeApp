@@ -17,7 +17,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".activity.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+            android:label="@string/title_activity_login" />
         <activity
             android:name=".activity.RegisterActivity"
             android:label="@string/title_activity_register"
@@ -34,6 +34,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".activity.FireBrigadeActivity"
+            android:label="@string/title_activity_fire_brigade"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

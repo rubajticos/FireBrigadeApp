@@ -43,6 +43,14 @@
     <string name="register_denied_user_exist">Rejestracja nieudana - uzytkownik istnieje</string>
     <string name="register_user_exist">Podany uzytkownik juz istnieje"</string>
 
+    <!--LOGIN-->
+    <string name="sing_in">Zaloguj sie</string>
+    <string name="login">Login</string>
+    <string name="password">Haslo</string>
+    <string name="sign_in_dialog">Logowanie...</string>
+    <string name="sign_in_success">Poprawnie zalogowano</string>\
+    <string name="invalid_login_or_password">Niepoprawny login lub haslo</string>
+
     <!-- DIALOG-->
     <string name="data_downloading_in_progress">Trwa pobieranie danych...</string>
 
@@ -53,8 +61,10 @@
     <string name="timeout_error">Uplynal czas oczekiwania - sprobuj za chwile</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="sing_in_error">Wystapil blad podczas logowania - sprobuj ponownie</string>
 
     <!--IMAGES-->
     <string name="main_loading_image">Main Image on Loading</string>
+    <string name="title_activity_fire_brigade">FireBrigadeActivity</string>
 
 </resources>
