@@ -43,23 +43,17 @@ public class RegisterRequestImpl implements RegisterRequest {
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST, url,
                 userJSON,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-                        Log.d("rejestracja", response.toString());
-                        dataListener.onSuccess(response.toString());
-                    }
+                response -> {
+                    Log.d("rejestracja", response.toString());
+                    dataListener.onSuccess(response.toString());
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        try {
-                            Log.d("rejestracja", error.toString());
-                            dataListener.onError(error.networkResponse.statusCode);
-                        } catch (NullPointerException e) {
-                            Log.d("rejestracja", error.toString());
-                            dataListener.onError(-999);
-                        }
+                error -> {
+                    try {
+                        Log.d("rejestracja", error.toString());
+                        dataListener.onError(error.networkResponse.statusCode);
+                    } catch (NullPointerException e) {
+                        Log.d("rejestracja", error.toString());
+                        dataListener.onError(-999);
                     }
                 }
         );
