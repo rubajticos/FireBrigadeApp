@@ -116,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 startActivity(intent);
             }
         });
-        handleSSLHandshake();
+        handleSSLHandshake(); //accept any SSL certifiacte
     }
 
     private void populateAutoComplete() {
