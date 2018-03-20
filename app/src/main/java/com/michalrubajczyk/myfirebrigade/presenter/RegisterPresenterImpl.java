@@ -7,6 +7,7 @@ import android.util.Log;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.RegisterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
+import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
 import com.michalrubajczyk.myfirebrigade.view.RegisterView;
 
 import org.apache.commons.httpclient.HttpStatus;
@@ -15,7 +16,7 @@ import org.apache.commons.httpclient.HttpStatus;
  * Created by Michal on 18/03/2018.
  */
 
-public class RegisterPresenterImpl implements RegisterPresenter {
+public class RegisterPresenterImpl implements RegisterPresenter, HttpErrors {
 
     RegisterView mRegisterView;
     RegisterRequestImpl mRegisterModel;
@@ -58,17 +59,19 @@ public class RegisterPresenterImpl implements RegisterPresenter {
 
     }
 
-    private void errorResponseCodeSupport(Integer code) throws NullPointerException {
+    @Override
+    public void errorResponseCodeSupport(Integer code) throws NullPointerException {
         switch (code) {
             case HttpStatus.SC_CONFLICT:
                 mRegisterView.userExistError();
                 break;
             case HttpStatus.SC_BAD_REQUEST:
                 mRegisterView.badRequestError();
+                break;
             case -999:
                 mRegisterView.timeoutError();
+                break;
         }
-
     }
 
     private boolean emptyStringValidation(String s1, String s2, String s3) {
