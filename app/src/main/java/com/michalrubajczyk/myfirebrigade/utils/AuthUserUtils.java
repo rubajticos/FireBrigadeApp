@@ -44,5 +44,20 @@ public class AuthUserUtils {
         editor.commit();
     }
 
+    public String getUsernameFromSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getString("username", "no username");
+    }
+
+    public String getAccessTokenFromSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getString("access_token", "no access_token");
+    }
+
+    public String getRefreshTokenFromSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        return sharedPreferences.getString("refresh_token", "no refresh_token");
+    }
+
 
 }

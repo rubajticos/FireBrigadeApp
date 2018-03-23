@@ -1,0 +1,49 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeNoDataFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/no_content_lin_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <!-- TODO: Update blank fragment layout -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/hello_blank_fragment" />
+
+            <TextView
+                android:id="@+id/no_content_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:text="@string/firebrigade_no_content"
+                android:textSize="20sp"
+
+                />
+
+            <Button
+                android:id="@+id/add_firebrigade"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/alarm_red"
+                android:text="@string/add_firebrigade"
+                android:textColor="@color/white" />
+
+        </LinearLayout>
+
+
+    </ScrollView>
+
+</FrameLayout>

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyFirebrigade</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.0.103:8443</string>
+    <string name="base_server_url">https://192.168.1.114:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -27,12 +27,13 @@
     <string name="firebrigade_district">Powiat</string>
     <string name="firebrigade_community">Gmina</string>
     <string name="firebrigade_city">Miejscowosc</string>
-    <string name="firebrigade_ksrg">KSRG</string>
-    <string-array name="firebrigade_ksrg_spinner">
-        <item>Nalezy do KSRG</item>
-        <item>Nie nalezy do KSRG</item>
-    </string-array>
+    <string name="firebrigade_ksrg">Jednostka nalezy do KSRG</string>
     <string name="action_settings">Settings</string>
+    <string name="firebrigade_add_form_confirm">Dodaj jednostke</string>
+
+    <!--Firebrigade-->
+    <string name="firebrigade_no_content">Brak jednostki do wyswietlenia</string>
+    <string name="add_firebrigade">Dodaj jednostke do konta</string>
 
     <!--REGISTER-->
     <string name="register">Zarejestruj sie!</string>
@@ -66,5 +67,8 @@
     <!--IMAGES-->
     <string name="main_loading_image">Main Image on Loading</string>
     <string name="title_activity_fire_brigade">FireBrigadeActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
