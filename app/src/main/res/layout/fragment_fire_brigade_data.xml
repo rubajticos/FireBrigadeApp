@@ -4,11 +4,101 @@
     android:layout_height="match_parent"
     tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeWithDataFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:id="@+id/tmp_tv"
+    <ScrollView
+        android:id="@+id/firebrigade_scroll"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
 
+        <LinearLayout
+            android:id="@+id/firebrigade_linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/firebrigade_infotext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="25sp"
+                android:textColor="@color/dark_gray"
+                android:textAlignment="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="5dp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_voivodeship"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_district"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_community"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_city"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_ksrg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_firefighters_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/firebrigade_cars_count"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:textSize="20sp"
+                android:text="TextView" />
+        </LinearLayout>
+    </ScrollView>
 </FrameLayout>

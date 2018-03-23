@@ -3,9 +3,11 @@ package com.michalrubajczyk.myfirebrigade.activity;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.widget.Button;
 
 import com.michalrubajczyk.myfirebrigade.R;
@@ -63,11 +65,25 @@ public class FireBrigadeActivity extends AppCompatActivity implements FireBrigad
     public void setFragmentWithFirebrigade(FireBrigadeDTO fireBrigadeDTO) {
         mViewPager.setCurrentItem(1);
         FireBrigadeWithDataFragment fragment = (FireBrigadeWithDataFragment) mSectionStatePagerAdapter.getItem(mViewPager.getCurrentItem());
-        fragment.showFireBrigade(fireBrigadeDTO.toString());
+        showFireBrigadeToFragment(fragment, fireBrigadeDTO);
+    }
+
+    private void showFireBrigadeToFragment(FireBrigadeWithDataFragment fragment, FireBrigadeDTO firebrigade) {
+        Log.d("Firebrigade info", firebrigade.toString());
+        fragment.showFireBrigadeName(firebrigade.getName());
+        fragment.showFireBrigadeVoivodeship(firebrigade.getVoivodeship());
+        fragment.showFireBrigadeDistrict(firebrigade.getDistrict());
+        fragment.showFireBrigadeCommunity(firebrigade.getCommunity());
+        fragment.showFireBrigadeCity(firebrigade.getCity());
+        fragment.showFireBrigadeKSRG(firebrigade.isKsrg());
+        fragment.showFirefightersCount(firebrigade.getFirefightersIds().size());
+        fragment.showCarsCount(firebrigade.getCarsIds().size());
     }
 
     @Override
     public void setFragmentNoFirebrigade() {
         mViewPager.setCurrentItem(0);
     }
+
+
 }

@@ -34,6 +34,17 @@
     <!--Firebrigade-->
     <string name="firebrigade_no_content">Brak jednostki do wyswietlenia</string>
     <string name="add_firebrigade">Dodaj jednostke do konta</string>
+    <string name="infotxt">Informacje o Twojej jednostce</string>
+    <string name="name"><![CDATA[<b>Nazwa: </b>]]> </string>
+    <string name="voivodeship"><![CDATA[<b>Wojewodztwo: </b>]]></string>
+    <string name="district"><![CDATA[<b>Powiat: </b>]]></string>
+    <string name="community"><![CDATA[<b>Gmina: </b>]]></string>
+    <string name="city"><![CDATA[<b>Miejscowosc: </b>]]></string>
+    <string name="firefighters_count"><![CDATA[<b>Ilosc strazakow: </b>]]></string>
+    <string name="cars_count"><![CDATA[<b>Ilosc samochodow: </b>]]></string>
+    <string name="ksrg_true">Jednostka nalezy do <![CDATA[<b>KSRG</b>]]></string>
+    <string name="ksrg_false">Jednostka nie nalezy do <![CDATA[<b>KSRG</b>]]></string>
+
 
     <!--REGISTER-->
     <string name="register">Zarejestruj sie!</string>
