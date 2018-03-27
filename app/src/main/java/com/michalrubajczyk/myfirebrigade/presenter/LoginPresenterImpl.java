@@ -3,13 +3,12 @@ package com.michalrubajczyk.myfirebrigade.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.LoginRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
 import com.michalrubajczyk.myfirebrigade.view.LoginView;
 
-import org.apache.commons.httpclient.HttpStatus;
+import java.net.HttpURLConnection;
 
 /**
  * Created by Michal on 20/03/2018.
@@ -66,10 +65,10 @@ public class LoginPresenterImpl implements LoginPresenter, HttpErrors {
     @Override
     public void errorResponseCodeSupport(Integer code) {
         switch (code) {
-            case HttpStatus.SC_BAD_REQUEST:
+            case HttpURLConnection.HTTP_BAD_REQUEST:
                 mLoginView.signInValidationError();
                 break;
-            case HttpStatus.SC_UNAUTHORIZED:
+            case HttpURLConnection.HTTP_UNAUTHORIZED:
                 mLoginView.signInValidationError();
             case -999:
                 mLoginView.signInTimeoutError();

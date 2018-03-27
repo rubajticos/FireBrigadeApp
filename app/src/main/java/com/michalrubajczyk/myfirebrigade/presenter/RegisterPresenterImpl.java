@@ -3,14 +3,13 @@ package com.michalrubajczyk.myfirebrigade.presenter;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
-
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.RegisterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
 import com.michalrubajczyk.myfirebrigade.view.RegisterView;
 
-import org.apache.commons.httpclient.HttpStatus;
+import java.net.HttpURLConnection;
 
 /**
  * Created by Michal on 18/03/2018.
@@ -62,10 +61,10 @@ public class RegisterPresenterImpl implements RegisterPresenter, HttpErrors {
     @Override
     public void errorResponseCodeSupport(Integer code) throws NullPointerException {
         switch (code) {
-            case HttpStatus.SC_CONFLICT:
+            case HttpURLConnection.HTTP_CONFLICT:
                 mRegisterView.userExistError();
                 break;
-            case HttpStatus.SC_BAD_REQUEST:
+            case HttpURLConnection.HTTP_BAD_REQUEST:
                 mRegisterView.badRequestError();
                 break;
             case -999:
