@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeWithDataFragment">
+    tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeFragment">
 
     <ScrollView
         android:id="@+id/firebrigade_scroll"
@@ -29,73 +29,10 @@
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/firebrigade_name"
+                android:id="@+id/firebrigade_details"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_voivodeship"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_district"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_community"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_city"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_ksrg"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_firefighters_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginTop="5dp"
-                android:textSize="20sp"
-                android:text="TextView" />
-
-            <TextView
-                android:id="@+id/firebrigade_cars_count"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
                 android:layout_marginTop="5dp"
                 android:textSize="20sp"
                 android:text="TextView" />

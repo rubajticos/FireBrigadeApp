@@ -1,6 +1,7 @@
 package com.michalrubajczyk.myfirebrigade.presenter;
 
 import android.content.Context;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.google.gson.Gson;
@@ -9,34 +10,38 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImp
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
-import com.michalrubajczyk.myfirebrigade.view.FireBrigadeMainView;
+import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
+
+import java.net.HttpURLConnection;
 
 /**
  * Created by Michal on 23/03/2018.
  */
 
-public class FireBrigadeMainPresenterImpl implements FireBrigadeMainPresenter, FireBrigadeWithDataPresenter, HttpErrors {
+public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpErrors {
     private final String TAG = "FireBrigadeMainPsnt";
 
-    FireBrigadeMainView mFireBrigadeMainView;
+    FireBrigadeActivityView mFireBrigadeActivityView;
     FireBrigadeRequestImpl mFireBrigadeRequest;
     AuthUserUtils mAuthUserUtils;
 
-    public FireBrigadeMainPresenterImpl(FireBrigadeMainView fireBrigadeMainView, Context context) {
-        this.mFireBrigadeMainView = fireBrigadeMainView;
+    public FireBrigadePresenterImpl(FireBrigadeActivityView fireBrigadeActivityView, Context context) {
+        this.mFireBrigadeActivityView = fireBrigadeActivityView;
         this.mFireBrigadeRequest = new FireBrigadeRequestImpl(context);
         this.mAuthUserUtils = new AuthUserUtils(context);
     }
 
     @Override
-    public void getFireBrigadeByUsername() {
-        String username = mAuthUserUtils.getUsernameFromSharedPreferences();
+    public void loadFireBrigadeByUsername() {
+        String username = getUsername();
         mFireBrigadeRequest.getFireBrigadeByUsername(username, new DataListener() {
             @Override
             public void onSuccess(String data) {
                 Log.d(TAG, "success response: " + data);
                 FireBrigadeDTO fireBrigadeDTO = parseDataToObject(data);
-                mFireBrigadeMainView.setFragmentWithFirebrigade(fireBrigadeDTO);
+                mFireBrigadeActivityView.setFireBrigade(fireBrigadeDTO);
+                mFireBrigadeActivityView.setFireBrigadeFragment();
+                mFireBrigadeActivityView.prepareAndShowFireBrigadeData();
             }
 
             @Override
@@ -47,6 +52,10 @@ public class FireBrigadeMainPresenterImpl implements FireBrigadeMainPresenter, F
         });
     }
 
+    private String getUsername() {
+        return mAuthUserUtils.getUsernameFromSharedPreferences();
+    }
+
     private FireBrigadeDTO parseDataToObject(String data) {
         Gson gson = new Gson();
         return gson.fromJson(data, FireBrigadeDTO.class);
@@ -55,14 +64,14 @@ public class FireBrigadeMainPresenterImpl implements FireBrigadeMainPresenter, F
     @Override
     public void errorResponseCodeSupport(Integer code) {
         switch (code) {
-            case 500:
+            case HttpURLConnection.HTTP_INTERNAL_ERROR:
                 Log.d(TAG, "error - no firebrigade for this username");
-                mFireBrigadeMainView.setFragmentNoFirebrigade();
+                mFireBrigadeActivityView.setEmptyFragment();
         }
     }
 
     @Override
-    public void performFireBrigadeToShow(FireBrigadeDTO fireBrigadeDTO) {
+    public void createFireBrigadeToUser(String name, String voivodeship, String district, String community, String city, boolean ksrg) {
 
     }
 }

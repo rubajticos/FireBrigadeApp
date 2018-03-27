@@ -119,13 +119,22 @@ public class FireBrigadeDTO {
 
     @Override
     public String toString() {
-        return "FireBrigadeDTO{" +
-                ", name='" + name + '\'' +
-                ", voivodeship='" + voivodeship + '\'' +
-                ", district='" + district + '\'' +
-                ", community='" + community + '\'' +
-                ", city='" + city + '\'' +
-                ", ksrg=" + ksrg +
-                '}';
+        return "<b>Nazwa jednostki: </b>" + name + "<br/>" +
+                "<b>Wojewódzwto: </b>" + voivodeship + "<br/>" +
+                "<b>Powiat: </b>" + district + "<br/>" +
+                "<b>Gmina: </b>" + community + "<br/>" +
+                "<b>Miejscowość: </b>" + city + "<br/>" +
+                "<b>KSRG: </b>" + ksrgToString() + "<br/>" +
+                "<b>Strażaków: </b>" + firefightersIds.size() + "<br/>" +
+                "<b>Samochodów: </b>" + carsIds.size();
     }
+
+    private String ksrgToString() {
+        if (isKsrg()) {
+            return "TAK";
+        }
+
+        return "NIE";
+    }
+
 }

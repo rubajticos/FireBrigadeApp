@@ -8,16 +8,10 @@
     tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity"
     tools:showIn="@layout/activity_fire_brigade">
 
-    <LinearLayout
-        android:id="@+id/firebrigade_layout"
+    <FrameLayout
+        android:id="@+id/firabrigade_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/container"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-
-    </LinearLayout>
+    </FrameLayout>
 </android.support.constraint.ConstraintLayout>

@@ -6,9 +6,14 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 /**
  * Created by Michal on 23/03/2018.
@@ -47,14 +52,35 @@ public class FireBrigadeRequestImpl implements FireBrigadeRequest {
     }
 
     @Override
-    public void addFireBrigadeForUser() {
-
-    }
-
-    FireBrigadeDTO parseResponseToFireBrigadeDTO(String response) {
+    public void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO, String username, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/firebrigade/user/" + username;
+        JSONObject jsonObject = null;
         Gson gson = new Gson();
-        FireBrigadeDTO fireBrigadeDTO = new FireBrigadeDTO();
-        fireBrigadeDTO = gson.fromJson(response, FireBrigadeDTO.class);
-        return fireBrigadeDTO;
+        try {
+            String jsonString = gson.toJson(fireBrigadeDTO, FireBrigadeDTO.class);
+            jsonObject = new JSONObject(jsonString);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest addFireBrigadeRequest = new JsonObjectRequest(Request.Method.POST, url,
+                jsonObject,
+                response -> {
+                    Log.d(TAG, response.toString());
+                    dataListener.onSuccess(response.toString());
+                },
+                error -> {
+                    try {
+                        Log.d(TAG, error.toString());
+                        dataListener.onError(error.networkResponse.statusCode);
+                    } catch (NullPointerException e) {
+                        Log.d(TAG, e.toString());
+                        dataListener.onError(-999);
+                    }
+                }
+        );
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(addFireBrigadeRequest);
     }
+
 }

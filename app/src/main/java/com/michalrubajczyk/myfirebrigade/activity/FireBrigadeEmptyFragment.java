@@ -1,8 +1,8 @@
 package com.michalrubajczyk.myfirebrigade.activity;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,14 +10,14 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.view.FireBrigadeEmptyView;
 
 /**
  * Created by Michal on 21/03/2018.
  */
 
-public class FireBrigadeNoDataFragment extends Fragment implements FireBrigadeEmptyView {
+public class FireBrigadeEmptyFragment extends Fragment {
     private static final String TAG = "FireBrig_frag NO DATA";
+
 
     private Button addFireBrigade;
 
@@ -31,14 +31,8 @@ public class FireBrigadeNoDataFragment extends Fragment implements FireBrigadeEm
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Start new Firebrigade fragment...");
-                ((FireBrigadeActivity) getActivity()).setViewPager(2);
             }
         });
         return view;
-    }
-
-    @Override
-    public void goToRegisterFireBrigade() {
-
     }
 }
