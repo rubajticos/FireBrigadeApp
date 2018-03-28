@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.activity;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -17,7 +18,7 @@ import com.michalrubajczyk.myfirebrigade.R;
 
 public class FireBrigadeEmptyFragment extends Fragment {
     private static final String TAG = "FireBrig_frag NO DATA";
-
+    private MyEmptyFireBrigadeListener listener;
 
     private Button addFireBrigade;
 
@@ -31,8 +32,30 @@ public class FireBrigadeEmptyFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Log.d(TAG, "Start new Firebrigade fragment...");
+                listener.setFireBrigadeCreateFragment();
             }
         });
         return view;
+    }
+
+
+    public interface MyEmptyFireBrigadeListener {
+        public void setFireBrigadeCreateFragment();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof MyEmptyFireBrigadeListener) {
+            listener = (MyEmptyFireBrigadeListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() + "musi implementować MyEmptyFireBrigadeListener");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
     }
 }

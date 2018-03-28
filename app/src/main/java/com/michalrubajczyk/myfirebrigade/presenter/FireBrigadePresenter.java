@@ -10,5 +10,5 @@ public interface FireBrigadePresenter {
 
     void loadFireBrigadeByUsername();
 
-    void createFireBrigadeToUser(String name, String voivodeship, String district, String community, String city, boolean ksrg);
+    void createFireBrigadeToUser(FireBrigadeDTO fireBrigade);
 }

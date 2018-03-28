@@ -71,7 +71,8 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
     }
 
     @Override
-    public void createFireBrigadeToUser(String name, String voivodeship, String district, String community, String city, boolean ksrg) {
+    public void createFireBrigadeToUser(FireBrigadeDTO firebrigade) {
+
 
     }
 }

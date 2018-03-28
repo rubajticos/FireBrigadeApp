@@ -12,7 +12,7 @@ import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenter;
 import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenterImpl;
 import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
 
-public class FireBrigadeActivity extends FragmentActivity implements FireBrigadeActivityView, FireBrigadeFragment.MyFirebrigadeActivityListener {
+public class FireBrigadeActivity extends FragmentActivity implements FireBrigadeActivityView, FireBrigadeFragment.MyFirebrigadeActivityListener, FireBrigadeEmptyFragment.MyEmptyFireBrigadeListener {
 
     private FireBrigadePresenter mPresenter;
     private final FragmentManager fm = getFragmentManager();
@@ -68,7 +68,10 @@ public class FireBrigadeActivity extends FragmentActivity implements FireBrigade
 
     @Override
     public void setFireBrigadeCreateFragment() {
-
+        FragmentTransaction ft = this.fm.beginTransaction();
+        this.mCurrentFragment = new FireBrigadeCreateFragment();
+        ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
+        ft.addToBackStack(null);
+        ft.commit();
     }
-
 }
