@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">MyFirebrigade</string>
+    <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.0.109:8443</string>
+    <string name="base_server_url">https://192.168.1.114:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -23,57 +23,58 @@
     <!--Firebrigade create form-->
 
     <string name="firebrigade_name">Nazwa jednostki</string>
-    <string name="firebrigade_voivodeship">Wojewodztwo</string>
+    <string name="firebrigade_voivodeship">Województwo</string>
     <string name="firebrigade_district">Powiat</string>
     <string name="firebrigade_community">Gmina</string>
-    <string name="firebrigade_city">Miejscowosc</string>
-    <string name="firebrigade_ksrg">Jednostka nalezy do KSRG</string>
+    <string name="firebrigade_city">Miejscowość</string>
+    <string name="firebrigade_ksrg">Jednostka należy do KSRG</string>
     <string name="action_settings">Settings</string>
-    <string name="firebrigade_add_form_confirm">Dodaj jednostke</string>
+    <string name="firebrigade_add_form_confirm">Dodaj jednostkę</string>
+    <string name="firebrigae_create_success">Pomyślnie utworzono jednostkę</string>
 
     <!--Firebrigade-->
-    <string name="firebrigade_no_content">Brak jednostki do wyswietlenia</string>
-    <string name="add_firebrigade">Dodaj jednostke do konta</string>
+    <string name="firebrigade_no_content">Brak jednostki do wyświetlenia</string>
+    <string name="add_firebrigade">Dodaj jednostkę do konta</string>
     <string name="infotxt">Informacje o Twojej jednostce</string>
     <string name="name"><![CDATA[<b>Nazwa: </b>]]> </string>
-    <string name="voivodeship"><![CDATA[<b>Wojewodztwo: </b>]]></string>
+    <string name="voivodeship"><![CDATA[<b>Województwo: </b>]]></string>
     <string name="district"><![CDATA[<b>Powiat: </b>]]></string>
     <string name="community"><![CDATA[<b>Gmina: </b>]]></string>
-    <string name="city"><![CDATA[<b>Miejscowosc: </b>]]></string>
-    <string name="firefighters_count"><![CDATA[<b>Ilosc strazakow: </b>]]></string>
-    <string name="cars_count"><![CDATA[<b>Ilosc samochodow: </b>]]></string>
-    <string name="ksrg_true">Jednostka nalezy do <![CDATA[<b>KSRG</b>]]></string>
-    <string name="ksrg_false">Jednostka nie nalezy do <![CDATA[<b>KSRG</b>]]></string>
+    <string name="city"><![CDATA[<b>Miejscowość: </b>]]></string>
+    <string name="firefighters_count"><![CDATA[<b>Ilość strażakow: </b>]]></string>
+    <string name="cars_count"><![CDATA[<b>Ilość samochodów: </b>]]></string>
+    <string name="ksrg_true">Jednostka należy do <![CDATA[<b>KSRG</b>]]></string>
+    <string name="ksrg_false">Jednostka nie należy do <![CDATA[<b>KSRG</b>]]></string>
 
 
     <!--REGISTER-->
-    <string name="register">Zarejestruj sie!</string>
+    <string name="register">Zarejestruj się!</string>
     <string name="register_username">Login</string>
-    <string name="register_password">Haslo</string>
-    <string name="register_repassword">Powtorz haslo</string>
+    <string name="register_password">Hasło</string>
+    <string name="register_repassword">Powtórz hasło</string>
     <string name="register_success">Rejestracja udana</string>
-    <string name="register_denied_user_exist">Rejestracja nieudana - uzytkownik istnieje</string>
-    <string name="register_user_exist">Podany uzytkownik juz istnieje"</string>
+    <string name="register_denied_user_exist">Rejestracja nieudana - użytkownik istnieje</string>
+    <string name="register_user_exist">Podany użytkownik juz istnieje"</string>
 
     <!--LOGIN-->
-    <string name="sing_in">Zaloguj sie</string>
+    <string name="sing_in">Zaloguj się</string>
     <string name="login">Login</string>
-    <string name="password">Haslo</string>
+    <string name="password">Hasło</string>
     <string name="sign_in_dialog">Logowanie...</string>
     <string name="sign_in_success">Poprawnie zalogowano</string>\
-    <string name="invalid_login_or_password">Niepoprawny login lub haslo</string>
+    <string name="invalid_login_or_password">Niepoprawny login lub hasło</string>
 
     <!-- DIALOG-->
     <string name="data_downloading_in_progress">Trwa pobieranie danych...</string>
 
     <!--ERRORS-->
-    <string name="fill_the_field">To pole musi byc wypelnione</string>
-    <string name="passwords_not_the_same">Hasla nie sa takie same</string>
-    <string name="server_error_try_again_later">Blad serwera - sprobuj pozniej</string>
-    <string name="timeout_error">Uplynal czas oczekiwania - sprobuj za chwile</string>
+    <string name="fill_the_field">To pole musi byc wypełnione</string>
+    <string name="passwords_not_the_same">Hasła nie są takie same</string>
+    <string name="server_error_try_again_later">Błąd serwera - spróbuj później</string>
+    <string name="timeout_error">Upłynął czas oczekiwania - spróbuj za chwilę</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="sing_in_error">Wystapil blad podczas logowania - sprobuj ponownie</string>
+    <string name="sing_in_error">Wystąpił błąd podczas logowania - spróbuj ponownie</string>
 
     <!--IMAGES-->
     <string name="main_loading_image">Main Image on Loading</string>
