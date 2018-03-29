@@ -6,7 +6,9 @@ package com.michalrubajczyk.myfirebrigade.view;
 
 public interface FireBrigadeCreateView {
 
-    void validateFields();
+    void validationSuccess();
+
+    void validationFailure();
 
     void registerSuccess();
 

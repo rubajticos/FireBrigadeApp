@@ -12,7 +12,12 @@ import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenter;
 import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenterImpl;
 import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
 
-public class FireBrigadeActivity extends FragmentActivity implements FireBrigadeActivityView, FireBrigadeFragment.MyFirebrigadeActivityListener, FireBrigadeEmptyFragment.MyEmptyFireBrigadeListener {
+public class FireBrigadeActivity extends FragmentActivity
+        implements
+        FireBrigadeActivityView,
+        FireBrigadeFragment.MyFirebrigadeActivityListener,
+        FireBrigadeEmptyFragment.MyEmptyFireBrigadeListener,
+        FireBrigadeCreateFragment.MyCreateFireBrigadeListener {
 
     private FireBrigadePresenter mPresenter;
     private final FragmentManager fm = getFragmentManager();
@@ -73,5 +78,24 @@ public class FireBrigadeActivity extends FragmentActivity implements FireBrigade
         ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
         ft.addToBackStack(null);
         ft.commit();
+    }
+
+    @Override
+    public void validatePreparedFireBrigade(FireBrigadeDTO fireBrigadeDTO) {
+        if (mPresenter.validateFireBrigade(fireBrigadeDTO)) {
+            callValidationSuccess();
+        } else {
+            callValidationFailure();
+        }
+    }
+
+    private void callValidationSuccess() {
+        this.getFragmentManager().executePendingTransactions();
+        ((FireBrigadeCreateFragment) this.mCurrentFragment).validationSuccess();
+    }
+
+    private void callValidationFailure() {
+        this.getFragmentManager().executePendingTransactions();
+        ((FireBrigadeCreateFragment) this.mCurrentFragment).validationFailure();
     }
 }

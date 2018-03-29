@@ -11,4 +11,6 @@ public interface FireBrigadePresenter {
     void loadFireBrigadeByUsername();
 
     void createFireBrigadeToUser(FireBrigadeDTO fireBrigade);
+
+    boolean validateFireBrigade(FireBrigadeDTO fireBrigadeDTO);
 }

@@ -13,6 +13,7 @@ import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
 import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
 
 import java.net.HttpURLConnection;
+import java.util.ArrayList;
 
 /**
  * Created by Michal on 23/03/2018.
@@ -73,6 +74,31 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
     @Override
     public void createFireBrigadeToUser(FireBrigadeDTO firebrigade) {
 
+
+    }
+
+    @Override
+    public boolean validateFireBrigade(FireBrigadeDTO fireBrigadeDTO) {
+        if (validate(fireBrigadeDTO)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean validate(FireBrigadeDTO fireBrigadeDTO) {
+        ArrayList<String> values = new ArrayList<>();
+        values.add(fireBrigadeDTO.getCity());
+        values.add(fireBrigadeDTO.getCommunity());
+        values.add(fireBrigadeDTO.getDistrict());
+        values.add(fireBrigadeDTO.getName());
+        values.add(fireBrigadeDTO.getVoivodeship());
+
+        for (String o : values) {
+            if (TextUtils.isEmpty(o)) return false;
+        }
+
+        return true;
 
     }
 }

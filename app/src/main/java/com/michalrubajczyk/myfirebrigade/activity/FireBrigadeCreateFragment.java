@@ -1,6 +1,8 @@
 package com.michalrubajczyk.myfirebrigade.activity;
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 import com.michalrubajczyk.myfirebrigade.view.FireBrigadeCreateView;
 
 /**
@@ -22,6 +25,8 @@ import com.michalrubajczyk.myfirebrigade.view.FireBrigadeCreateView;
 public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCreateView {
     private static final String TAG = "AddFirebrigade fragment";
 
+    private MyCreateFireBrigadeListener listener;
+
     private EditText fireBrigadeName;
     private EditText fireBrigadeVoivodeship;
     private EditText fireBrigadeDistrict;
@@ -29,6 +34,8 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
     private EditText fireBrigadeCity;
     private CheckBox fireBrigadeKSRG;
     private Button addFireBrigade;
+
+    private ProgressDialog progressDialog;
 
 
     @Nullable
@@ -43,36 +50,79 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
         fireBrigadeCity = (EditText) view.findViewById(R.id.firebrigade_city);
         fireBrigadeKSRG = (CheckBox) view.findViewById(R.id.firebrigade_ksrg_checkbox);
 
+        progressDialog = new ProgressDialog(getActivity());
 
         addFireBrigade = (Button) view.findViewById(R.id.firebrigade_add);
         addFireBrigade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getActivity().getApplicationContext(), "Tworzenie jednostki", Toast.LENGTH_LONG).show();
+                listener.validatePreparedFireBrigade(prepareFireBrigade());
             }
         });
-
-
         return view;
     }
 
     @Override
-    public void validateFields() {
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        if (activity instanceof MyCreateFireBrigadeListener) {
+            listener = (MyCreateFireBrigadeListener) activity;
+        } else {
+            throw new ClassCastException(activity.toString() + "musi implementować MyCreateFireBrigadeListener");
+        }
+    }
 
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        listener = null;
+    }
+
+    public interface MyCreateFireBrigadeListener {
+        public void validatePreparedFireBrigade(FireBrigadeDTO fireBrigadeDTO);
+
+        public void setFireBrigadeFragment();
+    }
+
+    @Override
+    public void validationSuccess() {
+        Log.d(TAG, "weryfikacja danych pomyślna");
+        Toast.makeText(getActivity().getApplicationContext(), "Weryfikacja pomyślna", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void validationFailure() {
+        Log.d(TAG, "weryfikacja danych niepomyślna");
+        Toast.makeText(getActivity().getApplicationContext(), "Weryfikacja niepomyślna", Toast.LENGTH_LONG).show();
     }
 
     @Override
     public void registerSuccess() {
-
+        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.firebrigae_create_success), Toast.LENGTH_LONG).show();
+        listener.setFireBrigadeFragment();
     }
 
     @Override
     public void progressDialogShow() {
-
+        progressDialog.setMessage("Dodawanie jednostki...");
+        progressDialog.show();
     }
 
     @Override
     public void progressDialogDismiss() {
+        progressDialog.dismiss();
+    }
 
+    private FireBrigadeDTO prepareFireBrigade() {
+        FireBrigadeDTO fireBrigade = new FireBrigadeDTO();
+        fireBrigade.setName(this.fireBrigadeName.getText().toString());
+        fireBrigade.setVoivodeship(this.fireBrigadeVoivodeship.getText().toString());
+        fireBrigade.setDistrict(this.fireBrigadeDistrict.getText().toString());
+        fireBrigade.setCommunity(this.fireBrigadeCommunity.getText().toString());
+        fireBrigade.setCity(this.fireBrigadeCity.getText().toString());
+        fireBrigade.setKsrg(this.fireBrigadeKSRG.isChecked());
+
+        return fireBrigade;
     }
 }
