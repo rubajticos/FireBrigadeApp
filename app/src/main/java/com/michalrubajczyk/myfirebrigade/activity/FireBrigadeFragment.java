@@ -31,7 +31,6 @@ public class FireBrigadeFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_fire_brigade_data, container, false);
         details = (TextView) view.findViewById(R.id.firebrigade_details);
         infoTxt = (TextView) view.findViewById(R.id.firebrigade_infotext);
-
         showInfo();
         return view;
     }

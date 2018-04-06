@@ -10,7 +10,9 @@ public interface FireBrigadeCreateView {
 
     void validationFailure();
 
-    void registerSuccess();
+    void creatingSuccess();
+
+    void creatingFailure();
 
     void progressDialogShow();
 

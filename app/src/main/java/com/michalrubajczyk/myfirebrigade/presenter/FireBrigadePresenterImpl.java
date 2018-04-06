@@ -73,8 +73,20 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
 
     @Override
     public void createFireBrigadeToUser(FireBrigadeDTO firebrigade) {
+        mFireBrigadeActivityView.showCreatingLoading();
+        mFireBrigadeRequest.addFireBrigadeToUser(firebrigade, mAuthUserUtils.getUsernameFromSharedPreferences(), new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                mFireBrigadeActivityView.dismissCreatingLoading();
+                mFireBrigadeActivityView.callCreatingSuccess();
+            }
 
-
+            @Override
+            public void onError(int code) {
+                mFireBrigadeActivityView.dismissCreatingLoading();
+                mFireBrigadeActivityView.callCreatingFailure();
+            }
+        });
     }
 
     @Override

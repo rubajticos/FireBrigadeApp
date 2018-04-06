@@ -37,6 +37,8 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
 
     private ProgressDialog progressDialog;
 
+    private FireBrigadeDTO fireBrigadeDTO = new FireBrigadeDTO();
+
 
     @Nullable
     @Override
@@ -56,8 +58,8 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
         addFireBrigade.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getActivity().getApplicationContext(), "Tworzenie jednostki", Toast.LENGTH_LONG).show();
-                listener.validatePreparedFireBrigade(prepareFireBrigade());
+                prepareFireBrigade();
+                listener.validatePreparedFireBrigade(fireBrigadeDTO);
             }
         });
         return view;
@@ -82,25 +84,39 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
     public interface MyCreateFireBrigadeListener {
         public void validatePreparedFireBrigade(FireBrigadeDTO fireBrigadeDTO);
 
+        public void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO);
+
         public void setFireBrigadeFragment();
+
+        public void loadFireBrigadeForUser();
     }
 
     @Override
     public void validationSuccess() {
         Log.d(TAG, "weryfikacja danych pomyślna");
-        Toast.makeText(getActivity().getApplicationContext(), "Weryfikacja pomyślna", Toast.LENGTH_LONG).show();
+        createFireBrigade();
+    }
+
+    public void createFireBrigade() {
+        listener.addFireBrigadeToUser(this.fireBrigadeDTO);
     }
 
     @Override
     public void validationFailure() {
         Log.d(TAG, "weryfikacja danych niepomyślna");
-        Toast.makeText(getActivity().getApplicationContext(), "Weryfikacja niepomyślna", Toast.LENGTH_LONG).show();
+        Toast.makeText(getActivity().getApplicationContext(), "Weryfikacja niepomyślna, wszystkie pola muszą być wypełnione", Toast.LENGTH_SHORT).show();
     }
 
     @Override
-    public void registerSuccess() {
-        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.firebrigae_create_success), Toast.LENGTH_LONG).show();
-        listener.setFireBrigadeFragment();
+    public void creatingSuccess() {
+        Log.d(TAG, "dodawanie jednostki do uzytkownika udane");
+        listener.loadFireBrigadeForUser();
+    }
+
+    @Override
+    public void creatingFailure() {
+        Log.d(TAG, "dodawanie jednostki do uzytkownika nieudane");
+        Toast.makeText(getActivity().getApplicationContext(), getString(R.string.firebrigae_create_failure), Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -114,15 +130,12 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
         progressDialog.dismiss();
     }
 
-    private FireBrigadeDTO prepareFireBrigade() {
-        FireBrigadeDTO fireBrigade = new FireBrigadeDTO();
-        fireBrigade.setName(this.fireBrigadeName.getText().toString());
-        fireBrigade.setVoivodeship(this.fireBrigadeVoivodeship.getText().toString());
-        fireBrigade.setDistrict(this.fireBrigadeDistrict.getText().toString());
-        fireBrigade.setCommunity(this.fireBrigadeCommunity.getText().toString());
-        fireBrigade.setCity(this.fireBrigadeCity.getText().toString());
-        fireBrigade.setKsrg(this.fireBrigadeKSRG.isChecked());
-
-        return fireBrigade;
+    private void prepareFireBrigade() {
+        this.fireBrigadeDTO.setName(this.fireBrigadeName.getText().toString());
+        this.fireBrigadeDTO.setVoivodeship(this.fireBrigadeVoivodeship.getText().toString());
+        this.fireBrigadeDTO.setDistrict(this.fireBrigadeDistrict.getText().toString());
+        this.fireBrigadeDTO.setCommunity(this.fireBrigadeCommunity.getText().toString());
+        this.fireBrigadeDTO.setCity(this.fireBrigadeCity.getText().toString());
+        this.fireBrigadeDTO.setKsrg(this.fireBrigadeKSRG.isChecked());
     }
 }

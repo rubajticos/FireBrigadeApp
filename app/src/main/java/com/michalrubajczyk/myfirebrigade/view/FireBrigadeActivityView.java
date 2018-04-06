@@ -17,4 +17,16 @@ public interface FireBrigadeActivityView {
     void setFireBrigade(FireBrigadeDTO fireBrigadeDTO);
 
     void setFireBrigadeCreateFragment();
+
+    void callCreatingFailure();
+
+    void callCreatingSuccess();
+
+    void callValidationSuccess();
+
+    void callValidationFailure();
+
+    void showCreatingLoading();
+
+    void dismissCreatingLoading();
 }

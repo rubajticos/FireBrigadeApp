@@ -47,6 +47,11 @@ public class FireBrigadeActivity extends FragmentActivity
     }
 
     @Override
+    public void loadFireBrigadeForUser() {
+        mPresenter.loadFireBrigadeByUsername();
+    }
+
+    @Override
     public void prepareAndShowFireBrigadeData() {
         String brigade = this.mFireBrigade.toString();
         showFireBrigadeDetails(brigade);
@@ -76,7 +81,6 @@ public class FireBrigadeActivity extends FragmentActivity
         FragmentTransaction ft = this.fm.beginTransaction();
         this.mCurrentFragment = new FireBrigadeCreateFragment();
         ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
-        ft.addToBackStack(null);
         ft.commit();
     }
 
@@ -89,13 +93,44 @@ public class FireBrigadeActivity extends FragmentActivity
         }
     }
 
-    private void callValidationSuccess() {
+    @Override
+    public void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO) {
+        mPresenter.createFireBrigadeToUser(fireBrigadeDTO);
+    }
+
+    @Override
+    public void callCreatingFailure() {
+        this.getFragmentManager().executePendingTransactions();
+        ((FireBrigadeCreateFragment) this.mCurrentFragment).creatingFailure();
+    }
+
+    @Override
+    public void callCreatingSuccess() {
+        this.getFragmentManager().executePendingTransactions();
+        ((FireBrigadeCreateFragment) this.mCurrentFragment).creatingSuccess();
+    }
+
+    @Override
+    public void callValidationSuccess() {
         this.getFragmentManager().executePendingTransactions();
         ((FireBrigadeCreateFragment) this.mCurrentFragment).validationSuccess();
     }
 
-    private void callValidationFailure() {
+    @Override
+    public void callValidationFailure() {
         this.getFragmentManager().executePendingTransactions();
         ((FireBrigadeCreateFragment) this.mCurrentFragment).validationFailure();
+    }
+
+    @Override
+    public void showCreatingLoading() {
+        this.getFragmentManager().executePendingTransactions();
+        ((FireBrigadeCreateFragment) this.mCurrentFragment).progressDialogShow();
+    }
+
+    @Override
+    public void dismissCreatingLoading() {
+        this.getFragmentManager().executePendingTransactions();
+        ((FireBrigadeCreateFragment) this.mCurrentFragment).progressDialogDismiss();
     }
 }

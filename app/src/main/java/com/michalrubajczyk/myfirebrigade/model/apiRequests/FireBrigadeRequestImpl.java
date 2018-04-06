@@ -58,7 +58,9 @@ public class FireBrigadeRequestImpl implements FireBrigadeRequest {
         Gson gson = new Gson();
         try {
             String jsonString = gson.toJson(fireBrigadeDTO, FireBrigadeDTO.class);
+            Log.d(TAG, jsonString);
             jsonObject = new JSONObject(jsonString);
+            Log.d(TAG, jsonObject.toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -8,24 +9,28 @@ import java.util.List;
 
 public class FireBrigadeDTO {
 
-    private int idFireBrigade;
+    private Integer idFireBrigade;
     private String name;
     private String voivodeship;
     private String district;
     private String community;
     private String city;
     private boolean ksrg;
-    private Integer user;
-    private List<Integer> firefightersIds;
-    private List<Integer> carsIds;
-    private List<Integer> equipmentIds;
-    private List<FireBrigadeIncidentDTO> incidents;
 
-    public int getIdFireBrigade() {
+    public FireBrigadeDTO() {
+        this.name = "";
+        this.voivodeship = "";
+        this.district = "";
+        this.community = "";
+        this.city = "";
+        this.ksrg = false;
+    }
+
+    public Integer getIdFireBrigade() {
         return idFireBrigade;
     }
 
-    public void setIdFireBrigade(int idFireBrigade) {
+    public void setIdFireBrigade(Integer idFireBrigade) {
         this.idFireBrigade = idFireBrigade;
     }
 
@@ -77,46 +82,6 @@ public class FireBrigadeDTO {
         this.ksrg = ksrg;
     }
 
-    public Integer getUser() {
-        return user;
-    }
-
-    public void setUser(Integer user) {
-        this.user = user;
-    }
-
-    public List<Integer> getFirefightersIds() {
-        return firefightersIds;
-    }
-
-    public void setFirefightersIds(List<Integer> firefightersIds) {
-        this.firefightersIds = firefightersIds;
-    }
-
-    public List<Integer> getCarsIds() {
-        return carsIds;
-    }
-
-    public void setCarsIds(List<Integer> carsIds) {
-        this.carsIds = carsIds;
-    }
-
-    public List<Integer> getEquipmentIds() {
-        return equipmentIds;
-    }
-
-    public void setEquipmentIds(List<Integer> equipmentIds) {
-        this.equipmentIds = equipmentIds;
-    }
-
-    public List<FireBrigadeIncidentDTO> getIncidents() {
-        return incidents;
-    }
-
-    public void setIncidents(List<FireBrigadeIncidentDTO> incidents) {
-        this.incidents = incidents;
-    }
-
     @Override
     public String toString() {
         return "<b>Nazwa jednostki: </b>" + name + "<br/>" +
@@ -124,9 +89,7 @@ public class FireBrigadeDTO {
                 "<b>Powiat: </b>" + district + "<br/>" +
                 "<b>Gmina: </b>" + community + "<br/>" +
                 "<b>Miejscowość: </b>" + city + "<br/>" +
-                "<b>KSRG: </b>" + ksrgToString() + "<br/>" +
-                "<b>Strażaków: </b>" + firefightersIds.size() + "<br/>" +
-                "<b>Samochodów: </b>" + carsIds.size();
+                "<b>KSRG: </b>" + ksrgToString() + "<br/>";
     }
 
     private String ksrgToString() {
