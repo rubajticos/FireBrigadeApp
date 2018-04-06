@@ -4,7 +4,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
@@ -12,7 +13,7 @@ import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenter;
 import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenterImpl;
 import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
 
-public class FireBrigadeActivity extends FragmentActivity
+public class FireBrigadeActivity extends AppCompatActivity
         implements
         FireBrigadeActivityView,
         FireBrigadeFragment.MyFirebrigadeActivityListener,
@@ -33,6 +34,8 @@ public class FireBrigadeActivity extends FragmentActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fire_brigade);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.fire_brigade_toolbar);
+        setSupportActionBar(toolbar);
         mPresenter = new FireBrigadePresenterImpl(FireBrigadeActivity.this, this);
 
         mPresenter.loadFireBrigadeByUsername();
@@ -61,6 +64,14 @@ public class FireBrigadeActivity extends FragmentActivity
     public void showFireBrigadeDetails(String string) {
         this.getFragmentManager().executePendingTransactions();
         ((FireBrigadeFragment) this.mCurrentFragment).setFireBrigadeDetails(string);
+    }
+
+    @Override
+    public void setFireBrigadeEditFragment() {
+        FragmentTransaction ft = this.fm.beginTransaction();
+        this.mCurrentFragment = new FireBrigadeEditFragment();
+        ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
+        ft.commit();
     }
 
     @Override

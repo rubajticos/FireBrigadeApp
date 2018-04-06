@@ -33,6 +33,9 @@
     <string name="firebrigae_create_success">Pomyślnie utworzono jednostkę</string>
     <string name="firebrigae_create_failure">Dodawanie jednostki nie powiodło się... spróbuj ponownie...</string>
 
+    <!--Firebrigade actions-->
+    <string name="action_firebrigade_edit">Edytuj jednostkę</string>
+
     <!--Firebrigade-->
     <string name="firebrigade_no_content">Brak jednostki do wyświetlenia</string>
     <string name="add_firebrigade">Dodaj jednostkę do konta</string>

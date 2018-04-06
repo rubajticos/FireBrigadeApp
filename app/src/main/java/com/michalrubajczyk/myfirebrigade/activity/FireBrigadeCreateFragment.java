@@ -43,7 +43,7 @@ public class FireBrigadeCreateFragment extends Fragment implements FireBrigadeCr
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_fragment_add_firebrigade, container, false);
+        View view = inflater.inflate(R.layout.fragment_fragment_create_firebrigade, container, false);
 
         fireBrigadeName = (EditText) view.findViewById(R.id.firebrigade_details);
         fireBrigadeVoivodeship = (EditText) view.findViewById(R.id.firebrigade_voivodeship);
