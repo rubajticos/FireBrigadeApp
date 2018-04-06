@@ -9,7 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends Activity {
 
     Handler mHandler = new Handler();
 
@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ResourcesSingleton.init(getApplicationContext()); //init ResourcesSingleton
-        mHandler.postDelayed(mLaunchLoginActivity, 3000);
+        mHandler.postDelayed(mLaunchLoginActivity, 2000);
     }
 
     private Runnable mLaunchLoginActivity = new Runnable() {
