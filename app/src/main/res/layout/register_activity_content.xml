@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.michalrubajczyk.myfirebrigade.activity.RegisterActivity"
-    tools:showIn="@layout/activity_register">
+    tools:showIn="@layout/register_activity">
 
     <LinearLayout
         android:id="@+id/linear_register_header"

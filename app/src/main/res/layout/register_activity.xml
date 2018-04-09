@@ -20,6 +20,6 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <include layout="@layout/content_register" />
+    <include layout="@layout/register_activity_content" />
 
 </android.support.design.widget.CoordinatorLayout>
