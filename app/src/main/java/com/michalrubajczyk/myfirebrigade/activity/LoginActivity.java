@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity;
 import com.michalrubajczyk.myfirebrigade.presenter.LoginPresenter;
 import com.michalrubajczyk.myfirebrigade.presenter.LoginPresenterImpl;
 import com.michalrubajczyk.myfirebrigade.utils.SSLAccept;
@@ -44,7 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login_activity);
 
         ssl.handleSSLHandshake(); //accept any SSL certifiacte
         mPresenter = new LoginPresenterImpl(LoginActivity.this, this);
