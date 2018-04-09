@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.1.114:8443</string>
+    <string name="base_server_url">https://192.168.0.102:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -32,13 +32,16 @@
     <string name="firebrigade_add_form_confirm">Dodaj jednostkę</string>
     <string name="firebrigae_create_success">Pomyślnie utworzono jednostkę</string>
     <string name="firebrigae_create_failure">Dodawanie jednostki nie powiodło się... spróbuj ponownie...</string>
+    <string name="firebrigade_save_button">Zapisz</string>
 
     <!--Firebrigade actions-->
     <string name="action_firebrigade_edit">Edytuj jednostkę</string>
 
     <!--Firebrigade-->
     <string name="firebrigade_no_content">Brak jednostki do wyświetlenia</string>
-    <string name="add_firebrigade">Dodaj jednostkę do konta</string>
+    <string name="firebrigade_add_info">Wciśnij + aby dodać jednostkę</string>
+    <string name="add_firebrigade">Dodawanie jednostki</string>
+    <string name="edit_firebrigade">Edytowanie jednostki</string>
     <string name="infotxt">Informacje o Twojej jednostce</string>
     <string name="name"><![CDATA[<b>Nazwa: </b>]]> </string>
     <string name="voivodeship"><![CDATA[<b>Województwo: </b>]]></string>
@@ -86,5 +89,16 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--DRAWER ACTIONS-->
+    <string name="drawer_firebrigade">Moje OSP</string>
+    <string name="drawer_firefighters">Strażacy</string>
+    <string name="drawer_cars">Samochody</string>
+    <string name="drawer_equipment">Sprzęt</string>
+    <string name="drawer_incidents">Zdarzenia</string>
+    <string name="drawer_analyze">Analiza</string>
+
+    <string name="navigation_view_header_title">Moja jednostka OSP</string>
+    <string name="title_activity_add_edit_fire_brigade">AddEditFireBrigadeActivity</string>
 
 </resources>

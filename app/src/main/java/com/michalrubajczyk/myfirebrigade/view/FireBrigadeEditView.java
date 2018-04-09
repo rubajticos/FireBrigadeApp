@@ -1,4 +1,13 @@
 package com.michalrubajczyk.myfirebrigade.view;
 
-interface FireBrigadeEditView {
+public interface FireBrigadeEditView {
+
+    void showUpdateProgressBar();
+
+    void dismissUpdateProgressBar();
+
+    void onSuccess();
+
+    void onFailure();
+
 }

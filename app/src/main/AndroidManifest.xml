@@ -35,9 +35,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activity.FireBrigadeActivity"
+            android:name=".activity.FireBrigadeActivity.FireBrigadeActivity"
             android:label="@string/title_activity_fire_brigade"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".activity.AddEditFireBrigadeActivity.AddEditFireBrigadeActivity"
+            android:label="@string/title_activity_add_edit_fire_brigade"
+            android:parentActivityName=".activity.FireBrigadeActivity.FireBrigadeActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity" />
+        </activity>
     </application>
 
 </manifest>

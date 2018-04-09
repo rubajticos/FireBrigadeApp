@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item
+        android:id="@+id/firebrigade_navigation_menu_item"
+        android:icon="@drawable/ic_cloud"
+        android:title="@string/drawer_firebrigade" />
+    <item
+        android:id="@+id/firefighters_navigation_menu_item"
+        android:icon="@drawable/ic_cloud"
+        android:title="@string/drawer_firefighters" />
+    <item
+        android:id="@+id/cars_navigation_menu_item"
+        android:icon="@drawable/ic_cloud"
+        android:title="@string/drawer_cars" />
+    <item
+        android:id="@+id/equipment_navigation_menu_item"
+        android:icon="@drawable/ic_cloud"
+        android:title="@string/drawer_equipment" />
+    <item
+        android:id="@+id/incidents_navigation_menu_item"
+        android:icon="@drawable/ic_cloud"
+        android:title="@string/drawer_incidents" />
+    <item
+        android:id="@+id/analyze_navigation_menu_item"
+        android:icon="@drawable/ic_cloud"
+        android:title="@string/drawer_analyze" />
+
 </menu>
