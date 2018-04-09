@@ -1,4 +1,6 @@
 package com.michalrubajczyk.myfirebrigade;
 
-public class BaseView {
+public interface BaseView<T> {
+
+    void setPresenter(T presenter);
 }
