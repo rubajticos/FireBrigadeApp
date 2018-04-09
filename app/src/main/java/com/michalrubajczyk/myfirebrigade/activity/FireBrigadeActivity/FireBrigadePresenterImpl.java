@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.presenter;
+package com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -10,7 +10,6 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImp
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
-import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
 
 import java.net.HttpURLConnection;
 import java.util.ArrayList;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
  * Created by Michal on 23/03/2018.
  */
 
-public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpErrors {
+public class FireBrigadePresenterImpl implements HttpErrors {
     private final String TAG = "FireBrigadeMainPsnt";
 
     FireBrigadeActivityView mFireBrigadeActivityView;
@@ -34,7 +33,6 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
         this.mAuthUserUtils = new AuthUserUtils(context);
     }
 
-    @Override
     public void loadFireBrigadeByUsername() {
         String username = getUsername();
         mFireBrigadeRequest.getFireBrigadeByUsername(username, new DataListener() {
@@ -65,9 +63,8 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
         return gson.fromJson(data, FireBrigadeDTO.class);
     }
 
-    @Override
     public void checkFireBrigadeAndSetFragment() {
-        if (myFireBrigade == null){
+        if (myFireBrigade == null) {
             Log.d("firebrigade", "null firebrigade");
             mFireBrigadeActivityView.setEmptyFragment();
         } else {
@@ -84,7 +81,6 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
         }
     }
 
-    @Override
     public void createFireBrigadeToUser(FireBrigadeDTO firebrigade) {
         mFireBrigadeActivityView.showCreatingLoading();
         mFireBrigadeRequest.addFireBrigadeToUser(firebrigade, mAuthUserUtils.getUsernameFromSharedPreferences(), new DataListener() {
@@ -102,7 +98,6 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
         });
     }
 
-    @Override
     public boolean validateFireBrigade(FireBrigadeDTO fireBrigadeDTO) {
         if (validate(fireBrigadeDTO)) {
             return true;

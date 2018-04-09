@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.view;
+package com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity;
 
 /**
  * Created by Michal on 23/03/2018.

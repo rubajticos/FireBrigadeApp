@@ -1,155 +1,96 @@
-package com.michalrubajczyk.myfirebrigade.activity;
+package com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
-import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenter;
-import com.michalrubajczyk.myfirebrigade.presenter.FireBrigadePresenterImpl;
-import com.michalrubajczyk.myfirebrigade.view.FireBrigadeActivityView;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
+import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
+import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
 
-public class FireBrigadeActivity extends AppCompatActivity
-        implements
-        FireBrigadeActivityView,
-        FireBrigadeFragment.MyFirebrigadeActivityListener,
-        FireBrigadeEmptyFragment.MyEmptyFireBrigadeListener,
-        FireBrigadeCreateFragment.MyCreateFireBrigadeListener,
-        FireBrigadeEditFragment.MyEditFireBrigadeListener{
+public class FireBrigadeActivity extends AppCompatActivity {
 
-    private FireBrigadePresenter mPresenter;
-    private final FragmentManager fm = getFragmentManager();
-    private Fragment mCurrentFragment = null;
-
-
-    public FireBrigadeActivity() {
-
-    }
+    private DrawerLayout mDrawerLayout;
+    private FireBrigadePresenter mFireBrigadePresenter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_fire_brigade);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.fire_brigade_toolbar);
+        setContentView(R.layout.firebrigade_activity);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.firebrigade_toolbar);
         setSupportActionBar(toolbar);
-        mPresenter = new FireBrigadePresenterImpl(this, this);
+        ActionBar ab = getSupportActionBar();
+        ab.setHomeAsUpIndicator(R.drawable.ic_menu);
+        ab.setDisplayHomeAsUpEnabled(true);
 
-        mPresenter.loadFireBrigadeByUsername();
-    }
-
-    @Override
-    public void showFireBrigade(String fireBrigade) {
-        showFireBrigadeDetails(fireBrigade);
-    }
-
-    @Override
-    public void setFireBrigadeFragment() {
-        FragmentTransaction ft = this.fm.beginTransaction();
-        this.mCurrentFragment = new FireBrigadeFragment();
-        ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
-        ft.commit();
-    }
-
-    @Override
-    public void loadFireBrigadeForUser() {
-        mPresenter.loadFireBrigadeByUsername();
-    }
-
-    @Override
-    public void showFireBrigadeDetails(String string) {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeFragment) this.mCurrentFragment).setFireBrigadeDetails(string);
-    }
-
-    @Override
-    public void setFireBrigadeEditFragment() {
-        FragmentTransaction ft = this.fm.beginTransaction();
-        this.mCurrentFragment = new FireBrigadeEditFragment();
-        ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
-        ft.addToBackStack(null);
-        ft.commit();
-    }
-
-    @Override
-    public void setEmptyFragment() {
-        FragmentTransaction ft = this.fm.beginTransaction();
-        this.mCurrentFragment = new FireBrigadeEmptyFragment();
-        ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
-        ft.commit();
-    }
-
-
-    @Override
-    public void setFireBrigadeCreateFragment() {
-        FragmentTransaction ft = this.fm.beginTransaction();
-        this.mCurrentFragment = new FireBrigadeCreateFragment();
-        ft.replace(R.id.firabrigade_container, this.mCurrentFragment);
-        ft.commit();
-    }
-
-    @Override
-    public void validatePreparedFireBrigade(FireBrigadeDTO fireBrigadeDTO) {
-        if (mPresenter.validateFireBrigade(fireBrigadeDTO)) {
-            callValidationSuccess();
-        } else {
-            callValidationFailure();
+        mDrawerLayout = (DrawerLayout) findViewById(R.id.firebrigade_drawer_layout);
+        NavigationView navigationView = (NavigationView) findViewById(R.id.firebrigade_nav_view);
+        if (navigationView != null) {
+            setupDrawerContent(navigationView);
         }
+
+        FireBrigadeFragment fireBrigadeFragment =
+                (FireBrigadeFragment) getSupportFragmentManager().findFragmentById(R.id.contentFrame);
+        if (fireBrigadeFragment == null) {
+            fireBrigadeFragment = FireBrigadeFragment.newInstance();
+            ActivityUtils.addFragmentToActivity(
+                    getSupportFragmentManager(), fireBrigadeFragment, R.id.contentFrame
+            );
+        }
+
+        mFireBrigadePresenter = new FireBrigadePresenter(new FireBrigadeRequestImpl(this), new AuthUserUtils(this), fireBrigadeFragment);
     }
 
     @Override
-    public void updateFireBrigade(FireBrigadeDTO fireBrigadeDTO) {
-
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_fire_brigade, menu);
+        return true;
     }
 
     @Override
-    public void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO) {
-        mPresenter.createFireBrigadeToUser(fireBrigadeDTO);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+            case R.id.action_firebrigade_edit:
+                mDrawerLayout.openDrawer(GravityCompat.START);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void callCreatingFailure() {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeCreateFragment) this.mCurrentFragment).creatingFailure();
-    }
+    public void setupDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.firebrigade_nav_view:
+                        break;
+                    case R.id.firefighters_navigation_menu_item:
+                        break;
+                    case R.id.cars_navigation_menu_item:
+                        break;
+                    case R.id.equipment_navigation_menu_item:
+                        break;
+                    case R.id.incidents_navigation_menu_item:
+                        break;
+                    case R.id.analyze_navigation_menu_item:
+                        break;
+                }
 
-    @Override
-    public void callCreatingSuccess() {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeCreateFragment) this.mCurrentFragment).creatingSuccess();
-    }
-
-    @Override
-    public void callValidationSuccess() {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeCreateFragment) this.mCurrentFragment).validationSuccess();
-    }
-
-    @Override
-    public void callValidationFailure() {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeCreateFragment) this.mCurrentFragment).validationFailure();
-    }
-
-    @Override
-    public void showCreatingLoading() {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeCreateFragment) this.mCurrentFragment).progressDialogShow();
-    }
-
-    @Override
-    public void dismissCreatingLoading() {
-        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeCreateFragment) this.mCurrentFragment).progressDialogDismiss();
-    }
-
-    @Override
-    public void showFireBrigadeToEdit() {
-//        this.getFragmentManager().executePendingTransactions();
-        ((FireBrigadeEditFragment) this.mCurrentFragment).prepareEditForm(null);
+                item.setChecked(true);
+                mDrawerLayout.closeDrawers();
+                return true;
+            }
+        });
     }
 }
