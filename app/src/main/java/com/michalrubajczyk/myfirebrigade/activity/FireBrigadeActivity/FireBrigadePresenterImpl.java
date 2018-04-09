@@ -26,6 +26,8 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
     FireBrigadeRequestImpl mFireBrigadeRequest;
     AuthUserUtils mAuthUserUtils;
 
+    private FireBrigadeDTO myFireBrigade = null;
+
     public FireBrigadePresenterImpl(FireBrigadeActivityView fireBrigadeActivityView, Context context) {
         this.mFireBrigadeActivityView = fireBrigadeActivityView;
         this.mFireBrigadeRequest = new FireBrigadeRequestImpl(context);
@@ -40,14 +42,15 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
             public void onSuccess(String data) {
                 Log.d(TAG, "success response: " + data);
                 FireBrigadeDTO fireBrigadeDTO = parseDataToObject(data);
-                mFireBrigadeActivityView.setFireBrigade(fireBrigadeDTO);
-                mFireBrigadeActivityView.setFireBrigadeFragment();
-                mFireBrigadeActivityView.prepareAndShowFireBrigadeData();
+                Log.d("prepared firebrigade: ", fireBrigadeDTO.toString());
+                myFireBrigade = fireBrigadeDTO;
+                Log.d("prepared firebrigade: ", myFireBrigade.toString());
+                checkFireBrigadeAndSetFragment();
             }
 
             @Override
             public void onError(int code) {
-                errorResponseCodeSupport(code);
+                loadFirebrigadeErrorResponseCodeSupport(code);
                 Log.d(TAG, "request error");
             }
         });
@@ -63,11 +66,21 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
     }
 
     @Override
-    public void errorResponseCodeSupport(Integer code) {
+    public void checkFireBrigadeAndSetFragment() {
+        if (myFireBrigade == null){
+            Log.d("firebrigade", "null firebrigade");
+            mFireBrigadeActivityView.setEmptyFragment();
+        } else {
+            mFireBrigadeActivityView.setFireBrigadeFragment();
+            mFireBrigadeActivityView.showFireBrigade(myFireBrigade.toString());
+        }
+    }
+
+    public void loadFirebrigadeErrorResponseCodeSupport(Integer code) {
         switch (code) {
             case HttpURLConnection.HTTP_INTERNAL_ERROR:
                 Log.d(TAG, "error - no firebrigade for this username");
-                mFireBrigadeActivityView.setEmptyFragment();
+                this.myFireBrigade = null;
         }
     }
 
@@ -111,6 +124,10 @@ public class FireBrigadePresenterImpl implements FireBrigadePresenter, HttpError
         }
 
         return true;
+    }
+
+    @Override
+    public void errorResponseCodeSupport(Integer code) {
 
     }
 }

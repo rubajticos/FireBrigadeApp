@@ -13,4 +13,6 @@ public interface FireBrigadePresenter {
     void createFireBrigadeToUser(FireBrigadeDTO fireBrigade);
 
     boolean validateFireBrigade(FireBrigadeDTO fireBrigadeDTO);
+
+    void checkFireBrigadeAndSetFragment();
 }

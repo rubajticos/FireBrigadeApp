@@ -56,6 +56,7 @@ public class FireBrigadeFragment extends Fragment {
             case R.id.action_firebrigade_edit:
                 Toast.makeText(getActivity().getApplicationContext(), "Edycja jednostki", Toast.LENGTH_SHORT)
                         .show();
+                listener.setFireBrigadeEditFragment();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

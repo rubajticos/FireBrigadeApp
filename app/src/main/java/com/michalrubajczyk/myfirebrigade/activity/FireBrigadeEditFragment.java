@@ -1,4 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.activity;
 
-class FireBrigadeEditFragment extends android.app.Fragment {
+import android.app.Fragment;
+
+public class FireBrigadeEditFragment extends Fragment {
 }
