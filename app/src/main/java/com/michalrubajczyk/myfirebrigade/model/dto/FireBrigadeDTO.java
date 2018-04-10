@@ -1,5 +1,10 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import android.icu.text.StringSearch;
+
+import com.google.common.base.Strings;
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +22,7 @@ public class FireBrigadeDTO {
     private String city;
     private boolean ksrg;
 
+
     public FireBrigadeDTO() {
         this.name = "";
         this.voivodeship = "";
@@ -24,6 +30,36 @@ public class FireBrigadeDTO {
         this.community = "";
         this.city = "";
         this.ksrg = false;
+    }
+
+    public FireBrigadeDTO(String json) {
+        FireBrigadeDTO prepareDto = prepareFromJson(json);
+        this.idFireBrigade = prepareDto.getIdFireBrigade();
+        this.name = prepareDto.getName();
+        this.voivodeship = prepareDto.getVoivodeship();
+        this.district = prepareDto.getDistrict();
+        this.community = prepareDto.getCommunity();
+        this.city = prepareDto.getCity();
+        this.ksrg = prepareDto.isKsrg();
+    }
+
+    public FireBrigadeDTO(String name, String voivodeship, String district, String community, String city, boolean ksrg) {
+        this.name = name;
+        this.voivodeship = voivodeship;
+        this.district = district;
+        this.community = community;
+        this.city = city;
+        this.ksrg = ksrg;
+    }
+
+    public FireBrigadeDTO(Integer id, String name, String voivodeship, String district, String community, String city, boolean ksrg) {
+        this.idFireBrigade = id;
+        this.name = name;
+        this.voivodeship = voivodeship;
+        this.district = district;
+        this.community = community;
+        this.city = city;
+        this.ksrg = ksrg;
     }
 
     public Integer getIdFireBrigade() {
@@ -100,4 +136,16 @@ public class FireBrigadeDTO {
         return "NIE";
     }
 
+    private FireBrigadeDTO prepareFromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, FireBrigadeDTO.class);
+    }
+
+    public boolean isEmpty() {
+        return Strings.isNullOrEmpty(name) &&
+                Strings.isNullOrEmpty(voivodeship) &&
+                Strings.isNullOrEmpty(district) &&
+                Strings.isNullOrEmpty(community) &&
+                Strings.isNullOrEmpty(city);
+    }
 }

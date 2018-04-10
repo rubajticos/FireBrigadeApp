@@ -52,6 +52,28 @@ public class FireBrigadeRequestImpl implements FireBrigadeRequest {
     }
 
     @Override
+    public void getFireBrigade(Integer firebrigadeId, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/firebrigade/" + firebrigadeId;
+
+        JsonObjectRequest getFireBrigadeRequest = new JsonObjectRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "sever not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getFireBrigadeRequest);
+    }
+
+    @Override
     public void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO, String username, DataListener dataListener) {
         String url = BASE_SERVER_URL + "/firebrigade/user/" + username;
         JSONObject jsonObject = null;
@@ -83,6 +105,40 @@ public class FireBrigadeRequestImpl implements FireBrigadeRequest {
                 }
         );
         RequestQueueSingleton.getInstance(mContext).addToRequestQueue(addFireBrigadeRequest);
+    }
+
+    @Override
+    public void updateFirebrigade(FireBrigadeDTO updateFirebrigade, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/firebrigade";
+        JSONObject jsonObject = null;
+        Gson gson = new Gson();
+        try {
+            String jsonString = gson.toJson(updateFirebrigade, FireBrigadeDTO.class);
+            Log.d(TAG, jsonString);
+            jsonObject = new JSONObject(jsonString);
+            Log.d(TAG, jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest updateFireBrigadeRequest = new JsonObjectRequest(Request.Method.PUT, url,
+                jsonObject,
+                response -> {
+                    Log.d(TAG, response.toString());
+                    dataListener.onSuccess(response.toString());
+                },
+                error -> {
+                    try {
+                        Log.d(TAG, error.toString());
+                        dataListener.onError(error.networkResponse.statusCode);
+                    } catch (NullPointerException e) {
+                        Log.d(TAG, e.toString());
+                        dataListener.onError(-999);
+                    }
+                }
+        );
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(updateFireBrigadeRequest);
     }
 
 }

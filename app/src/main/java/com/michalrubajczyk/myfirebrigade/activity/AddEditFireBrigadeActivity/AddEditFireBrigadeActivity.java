@@ -8,10 +8,13 @@ import android.support.v7.widget.Toolbar;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
+import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
 
 public class AddEditFireBrigadeActivity extends AppCompatActivity {
 
     public static final int REQUEST_ADD_FIREBRIGADE = 1;
+
+    public static final String SHOULD_LOAD_DATA_FROM_SERVER_KEY = "SHOULD_LOAD_DATA_FROM_SERVER_KEY";
 
     private AddEditFireBrigadePresenter mAddEditFiraBrigadePresenter;
 
@@ -30,8 +33,7 @@ public class AddEditFireBrigadeActivity extends AppCompatActivity {
         AddEditFireBrigadeFragment addEditFireBrigadeFragment = (AddEditFireBrigadeFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.addEditFireBrigade_content_frame);
 
-        Integer fireBrigadeId = getIntent().getIntExtra(AddEditFireBrigadeFragment.ARGUMENT_EDIT_FIREBRIGADE_ID, Integer.parseInt(null));
-
+        String fireBrigadeId = getIntent().getStringExtra(AddEditFireBrigadeFragment.ARGUMENT_EDIT_FIREBRIGADE_ID);
         setToolbarTitle(fireBrigadeId);
 
         if (addEditFireBrigadeFragment == null) {
@@ -39,22 +41,32 @@ public class AddEditFireBrigadeActivity extends AppCompatActivity {
 
             if (getIntent().hasExtra(AddEditFireBrigadeFragment.ARGUMENT_EDIT_FIREBRIGADE_ID)) {
                 Bundle bundle = new Bundle();
-                bundle.putInt(AddEditFireBrigadeFragment.ARGUMENT_EDIT_FIREBRIGADE_ID, fireBrigadeId);
+                bundle.putString(AddEditFireBrigadeFragment.ARGUMENT_EDIT_FIREBRIGADE_ID, fireBrigadeId);
                 addEditFireBrigadeFragment.setArguments(bundle);
             }
         }
 
         ActivityUtils.addFragmentToActivity(getSupportFragmentManager(), addEditFireBrigadeFragment, R.id.addEditFireBrigade_content_frame);
 
+        boolean shouldLoadDataFromServer = true;
+
+        // Prevent the presenter from loading data from the repository if this is a config change.
+        if (savedInstanceState != null) {
+            // Data might not have loaded when the config change happen, so we saved the state.
+            shouldLoadDataFromServer = savedInstanceState.getBoolean(SHOULD_LOAD_DATA_FROM_SERVER_KEY);
+        }
+
         mAddEditFiraBrigadePresenter = new AddEditFireBrigadePresenter(
                 fireBrigadeId,
                 new FireBrigadeRequestImpl(this),
-                addEditFireBrigadeFragment
+                new AuthUserUtils(this),
+                addEditFireBrigadeFragment,
+                shouldLoadDataFromServer
         );
 
     }
 
-    private void setToolbarTitle(Integer firebrigadeId) {
+    private void setToolbarTitle(String firebrigadeId) {
         if (firebrigadeId == null) {
             mActionBar.setTitle(R.string.add_firebrigade);
         } else {

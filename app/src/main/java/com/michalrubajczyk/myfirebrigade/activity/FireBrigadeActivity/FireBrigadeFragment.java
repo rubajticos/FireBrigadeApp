@@ -8,6 +8,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeActivity;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeFragment;
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 
 /**
@@ -26,7 +28,7 @@ import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
  */
 
 public class FireBrigadeFragment extends Fragment implements FireBrigadeContract.View {
-    private static final String TAG = "FireBrig_frag NO DATA";
+    private static final String TAG = "FireBrigade Fragment";
 
     private FireBrigadeContract.Presenter mPresenter;
 
@@ -43,6 +45,8 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
     private LinearLayout mFireBrigadeView;
 
     private ProgressBar mProgressBar;
+
+    private String mFireBrigadeId;
 
     public FireBrigadeFragment() {
     }
@@ -122,6 +126,7 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
     @Override
     public void showFireBrigade(FireBrigadeDTO fireBrigade) {
         mFirebrigadeDataView.setText(Html.fromHtml(fireBrigade.toString()));
+        mFireBrigadeId = Integer.toString(fireBrigade.getIdFireBrigade());
         mFireBrigadeView.setVisibility(View.VISIBLE);
         mNoFireBrigadeView.setVisibility(View.GONE);
     }
@@ -136,6 +141,8 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
     @Override
     public void showEditFireBrigade() {
         Intent intent = new Intent(getContext(), AddEditFireBrigadeActivity.class);
+        Log.d("mFireBrigadeId", mFireBrigadeId);
+        intent.putExtra(AddEditFireBrigadeFragment.ARGUMENT_EDIT_FIREBRIGADE_ID, mFireBrigadeId);
         startActivityForResult(intent, AddEditFireBrigadeActivity.REQUEST_ADD_FIREBRIGADE);
         showMessage("Edytowanie jednostki");
     }

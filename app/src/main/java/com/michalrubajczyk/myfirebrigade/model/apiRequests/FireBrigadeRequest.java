@@ -10,5 +10,9 @@ public interface FireBrigadeRequest {
 
     void getFireBrigadeByUsername(String username, DataListener dataListener);
 
+    void getFireBrigade(Integer firebrigadeId, DataListener dataListener);
+
     void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO, String username, DataListener dataListener);
+
+    void updateFirebrigade(FireBrigadeDTO updateFirebrigade, DataListener dataListener);
 }

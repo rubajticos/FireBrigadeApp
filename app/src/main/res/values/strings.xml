@@ -42,6 +42,8 @@
     <string name="firebrigade_add_info">Wciśnij + aby dodać jednostkę</string>
     <string name="add_firebrigade">Dodawanie jednostki</string>
     <string name="edit_firebrigade">Edytowanie jednostki</string>
+    <string name="add_firebrigade_error">Wypełnij wszystkie pola</string>
+    <string name="update_firebrigade_error">Błąd podczas aktualizacji, spróbuj ponownie...</string>
     <string name="infotxt">Informacje o Twojej jednostce</string>
     <string name="name"><![CDATA[<b>Nazwa: </b>]]> </string>
     <string name="voivodeship"><![CDATA[<b>Województwo: </b>]]></string>
