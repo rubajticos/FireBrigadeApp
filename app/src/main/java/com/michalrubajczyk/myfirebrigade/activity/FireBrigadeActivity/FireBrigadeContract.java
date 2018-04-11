@@ -20,8 +20,9 @@ public interface FireBrigadeContract {
 
         void showLoadingFireBrigadeError();
 
-
         void showNoFireBrigade();
+
+        void showLogin();
 
     }
 
@@ -32,6 +33,8 @@ public interface FireBrigadeContract {
         void loadFireBrigade(boolean forceUpdate);
 
         void addFireBrigade();
+
+        void logOut();
 
     }
 

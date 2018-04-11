@@ -99,6 +99,10 @@
     <string name="drawer_equipment">Sprzęt</string>
     <string name="drawer_incidents">Zdarzenia</string>
     <string name="drawer_analyze">Analiza</string>
+    <string name="drawer_logout">Wyloguj się</string>
+
+    <string name="group_drawer_firebrigade">Jednostka</string>
+    <string name="group_drawer_others">Pozostałe</string>
 
     <string name="navigation_view_header_title">Moja jednostka OSP</string>
     <string name="title_activity_add_edit_fire_brigade">AddEditFireBrigadeActivity</string>

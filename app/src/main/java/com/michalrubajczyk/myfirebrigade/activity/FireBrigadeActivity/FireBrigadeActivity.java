@@ -83,6 +83,9 @@ public class FireBrigadeActivity extends AppCompatActivity {
                         break;
                     case R.id.analyze_navigation_menu_item:
                         break;
+                    case R.id.log_out_navigation_menu_item:
+                        mFireBrigadePresenter.logOut();
+                        break;
                 }
 
                 item.setChecked(true);

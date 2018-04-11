@@ -11,8 +11,11 @@ import com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigad
 import com.michalrubajczyk.myfirebrigade.activity.LoginActivity.LoginActivity;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
+import com.michalrubajczyk.myfirebrigade.utils.SSLAccept;
 
 public class MainActivity extends Activity {
+    private SSLAccept ssl = new SSLAccept();
+
 
     Handler mHandler = new Handler();
     AuthUserUtils mUserUtils;
@@ -23,6 +26,7 @@ public class MainActivity extends Activity {
         setContentView(R.layout.main_activity);
         ResourcesSingleton.init(getApplicationContext()); //init ResourcesSingleton
         mUserUtils = new AuthUserUtils(getApplicationContext());
+        ssl.handleSSLHandshake(); //accept any SSL certifiacte
         mHandler.postDelayed(mLaunchLoginActivity, 2000);
 
     }
@@ -31,14 +35,13 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
             Log.d("shared username", mUserUtils.getUsernameFromSharedPreferences());
-            if (mUserUtils.getUsernameFromSharedPreferences().length() == 0){
+            if (mUserUtils.getUsernameFromSharedPreferences().length() == 0) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             } else {
                 Intent intent = new Intent(getApplicationContext(), FireBrigadeActivity.class);
                 startActivity(intent);
             }
-
 
 
         }

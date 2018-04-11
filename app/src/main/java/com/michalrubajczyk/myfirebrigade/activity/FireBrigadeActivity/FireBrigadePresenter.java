@@ -71,6 +71,12 @@ public class FireBrigadePresenter implements FireBrigadeContract.Presenter {
 
     }
 
+    @Override
+    public void logOut() {
+        mUser.clearUserDataSharedPreferences();
+        mFireBrigadeView.showLogin();
+    }
+
 }
 
 

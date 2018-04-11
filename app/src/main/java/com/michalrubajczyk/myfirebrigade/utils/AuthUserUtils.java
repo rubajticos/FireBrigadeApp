@@ -59,5 +59,14 @@ public class AuthUserUtils {
         return sharedPreferences.getString("refresh_token", "no refresh_token");
     }
 
+    public void clearUserDataSharedPreferences() {
+        SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.remove("username");
+        editor.remove("access_token");
+        editor.remove("refresh_token");
+        editor.commit();
+    }
+
 
 }

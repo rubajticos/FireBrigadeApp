@@ -21,6 +21,7 @@ import android.widget.TextView;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeActivity;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeFragment;
+import com.michalrubajczyk.myfirebrigade.activity.LoginActivity.LoginActivity;
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 
 /**
@@ -160,6 +161,14 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
     public void showNoFireBrigade() {
         mFireBrigadeView.setVisibility(View.GONE);
         mNoFireBrigadeView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public void showLogin() {
+        Log.d(TAG, "showLogin() - przejscie do logowania");
+        Intent intent = new Intent(getContext(), LoginActivity.class);
+        startActivity(intent);
+        onDestroy();
     }
 
 }

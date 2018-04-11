@@ -15,13 +15,11 @@ import android.widget.Toast;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RegisterActivity.RegisterActivity;
-import com.michalrubajczyk.myfirebrigade.utils.SSLAccept;
 
 /**
  * A login screen that offers login via email/password.
  */
 public class LoginActivity extends AppCompatActivity implements LoginView {
-    private SSLAccept ssl = new SSLAccept();
 
     private LoginPresenter mPresenter;
 
@@ -45,7 +43,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_activity);
 
-        ssl.handleSSLHandshake(); //accept any SSL certifiacte
         mPresenter = new LoginPresenterImpl(LoginActivity.this, this);
 
         mProgressDialog = new ProgressDialog(LoginActivity.this);
