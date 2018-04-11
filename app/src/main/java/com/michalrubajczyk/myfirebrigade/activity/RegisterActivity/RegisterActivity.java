@@ -32,6 +32,7 @@ public class RegisterActivity extends AppCompatActivity implements RegisterView 
         setContentView(R.layout.register_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle(R.string.activity_register);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

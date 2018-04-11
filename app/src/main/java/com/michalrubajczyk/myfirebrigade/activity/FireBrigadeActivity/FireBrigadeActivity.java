@@ -28,6 +28,7 @@ public class FireBrigadeActivity extends AppCompatActivity {
         setContentView(R.layout.firebrigade_activity);
         Toolbar toolbar = (Toolbar) findViewById(R.id.firebrigade_toolbar);
         setSupportActionBar(toolbar);
+        setTitle(R.string.activity_firebrigade);
         ActionBar ab = getSupportActionBar();
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);

@@ -107,4 +107,10 @@
     <string name="navigation_view_header_title">Moja jednostka OSP</string>
     <string name="title_activity_add_edit_fire_brigade">AddEditFireBrigadeActivity</string>
 
+    <!--ACTIVITY TITLES-->
+    <string name="activity_login">Logowanie</string>
+    <string name="activity_register">Rejestracja</string>
+    <string name="activity_firebrigade">Jednostka</string>
+    <string name="activity_addEditFirebrigade">Dodaj/edytuj</string>
+
 </resources>
