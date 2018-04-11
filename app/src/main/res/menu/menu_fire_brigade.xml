@@ -2,6 +2,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity">
+
+    <item
+        android:id="@+id/action_firebrigade_refresh"
+        android:orderInCategory="100"
+        android:title="@string/refresh_action"
+        app:showAsAction="never" />
+
     <item
         android:id="@+id/action_firebrigade_edit"
         android:orderInCategory="100"

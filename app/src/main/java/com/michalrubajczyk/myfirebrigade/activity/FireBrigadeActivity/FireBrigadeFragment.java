@@ -109,8 +109,9 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
             case R.id.action_firebrigade_edit:
                 showEditFireBrigade();
                 break;
+            case R.id.action_firebrigade_refresh:
+                mPresenter.loadFireBrigade(false);
         }
-        mPresenter.loadFireBrigade(false);
         return true;
     }
 

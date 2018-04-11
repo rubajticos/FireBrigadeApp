@@ -113,4 +113,7 @@
     <string name="activity_firebrigade">Jednostka</string>
     <string name="activity_addEditFirebrigade">Dodaj/edytuj</string>
 
+    <!--OTHERS-->
+    <string name="refresh_action">Odśwież</string>
+
 </resources>
