@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.presenter;
+package com.michalrubajczyk.myfirebrigade.activity.RegisterActivity;
 
 import android.content.Context;
 import android.text.TextUtils;
@@ -7,7 +7,6 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.RegisterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
-import com.michalrubajczyk.myfirebrigade.view.RegisterView;
 
 import java.net.HttpURLConnection;
 

@@ -31,7 +31,7 @@ public class MainActivity extends Activity {
         @Override
         public void run() {
             Log.d("shared username", mUserUtils.getUsernameFromSharedPreferences());
-            if (mUserUtils.getUsernameFromSharedPreferences().length() == 0) {
+            if (mUserUtils.getUsernameFromSharedPreferences().length() == 0){
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
             } else {

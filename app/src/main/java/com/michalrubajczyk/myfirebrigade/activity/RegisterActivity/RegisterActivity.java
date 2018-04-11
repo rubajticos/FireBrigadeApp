@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.activity;
+package com.michalrubajczyk.myfirebrigade.activity.RegisterActivity;
 
 import android.app.ProgressDialog;
 import android.os.Bundle;
@@ -11,9 +11,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.presenter.RegisterPresenter;
-import com.michalrubajczyk.myfirebrigade.presenter.RegisterPresenterImpl;
-import com.michalrubajczyk.myfirebrigade.view.RegisterView;
 
 public class RegisterActivity extends AppCompatActivity implements RegisterView {
 
