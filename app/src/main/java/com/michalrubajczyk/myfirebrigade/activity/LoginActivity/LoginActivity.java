@@ -90,6 +90,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         Toast.makeText(this, getString(R.string.sign_in_success), Toast.LENGTH_LONG).show();
         Intent intent = new Intent(getApplicationContext(), FireBrigadeActivity.class);
         startActivity(intent);
+        finish();
     }
 
     @Override
