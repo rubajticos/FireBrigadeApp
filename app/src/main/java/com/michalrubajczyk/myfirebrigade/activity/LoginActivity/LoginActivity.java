@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.activity;
+package com.michalrubajczyk.myfirebrigade.activity.LoginActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -14,10 +14,8 @@ import android.widget.Toast;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity;
-import com.michalrubajczyk.myfirebrigade.presenter.LoginPresenter;
-import com.michalrubajczyk.myfirebrigade.presenter.LoginPresenterImpl;
+import com.michalrubajczyk.myfirebrigade.activity.RegisterActivity.RegisterActivity;
 import com.michalrubajczyk.myfirebrigade.utils.SSLAccept;
-import com.michalrubajczyk.myfirebrigade.view.LoginView;
 
 /**
  * A login screen that offers login via email/password.

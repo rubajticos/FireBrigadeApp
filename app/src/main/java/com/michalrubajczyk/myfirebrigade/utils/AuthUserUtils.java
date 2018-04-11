@@ -46,7 +46,7 @@ public class AuthUserUtils {
 
     public String getUsernameFromSharedPreferences() {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(mContext);
-        return sharedPreferences.getString("username", "no username");
+        return sharedPreferences.getString("username", "");
     }
 
     public String getAccessTokenFromSharedPreferences() {
