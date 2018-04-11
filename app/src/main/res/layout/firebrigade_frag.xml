@@ -37,7 +37,7 @@
                 android:layout_marginRight="10dp"
                 android:text="@string/firebrigade_data_view"
                 android:textColor="@color/colorPrimaryDark"
-                android:textSize="20sp" />
+                android:textSize="17sp" />
 
             <ProgressBar
                 android:id="@+id/firebrigadeProgressBar"
@@ -72,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/firebrigade_no_content"
+                android:textSize="17sp"
                 android:layout_marginBottom="8dp" />
 
             <TextView
@@ -80,6 +81,7 @@
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:gravity="center"
+                android:textSize="17sp"
                 android:text="@string/firebrigade_add_info" />
         </LinearLayout>
     </RelativeLayout>
