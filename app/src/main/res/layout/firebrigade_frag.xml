@@ -44,6 +44,12 @@
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/firebrigadeImage"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                app:srcCompat="@drawable/firehouse" />
         </LinearLayout>
 
         <LinearLayout

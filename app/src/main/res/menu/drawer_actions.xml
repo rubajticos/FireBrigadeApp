@@ -3,32 +3,32 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/firebrigade_navigation_menu_item"
-            android:icon="@drawable/ic_cloud"
+            android:icon="@drawable/ic_domain_black"
             android:title="@string/drawer_firebrigade" />
 
         <item
             android:id="@+id/firefighters_navigation_menu_item"
-            android:icon="@drawable/ic_cloud"
+            android:icon="@drawable/ic_person_black"
             android:title="@string/drawer_firefighters" />
 
         <item
             android:id="@+id/cars_navigation_menu_item"
-            android:icon="@drawable/ic_cloud"
+            android:icon="@drawable/ic_truck"
             android:title="@string/drawer_cars" />
 
         <item
             android:id="@+id/equipment_navigation_menu_item"
-            android:icon="@drawable/ic_cloud"
+            android:icon="@drawable/ic_build_black"
             android:title="@string/drawer_equipment" />
 
         <item
             android:id="@+id/incidents_navigation_menu_item"
-            android:icon="@drawable/ic_cloud"
+            android:icon="@drawable/ic_security_black"
             android:title="@string/drawer_incidents" />
 
         <item
             android:id="@+id/analyze_navigation_menu_item"
-            android:icon="@drawable/ic_cloud"
+            android:icon="@drawable/ic_donut_small_black"
             android:title="@string/drawer_analyze" />
     </group>
 
