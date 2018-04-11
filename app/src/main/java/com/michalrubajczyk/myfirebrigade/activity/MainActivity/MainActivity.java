@@ -38,9 +38,11 @@ public class MainActivity extends Activity {
             if (mUserUtils.getUsernameFromSharedPreferences().length() == 0) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
+                finish();
             } else {
                 Intent intent = new Intent(getApplicationContext(), FireBrigadeActivity.class);
                 startActivity(intent);
+                finish();
             }
 
 
