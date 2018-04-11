@@ -19,13 +19,25 @@
                 android:id="@+id/firebrigadeInfoTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:text="@string/firebrigade_data_info"
+                android:gravity="center"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="20dp"
+                android:textSize="20sp"
+                android:lineSpacingExtra="10dp"
+                android:textColor="@color/colorPrimaryDark"
+
+                />
 
             <TextView
                 android:id="@+id/firebrigadeDataTV"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/firebrigade_data_view"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="20sp" />
 
             <ProgressBar
                 android:id="@+id/firebrigadeProgressBar"

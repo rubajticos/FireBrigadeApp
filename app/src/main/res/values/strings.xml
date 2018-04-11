@@ -44,7 +44,8 @@
     <string name="edit_firebrigade">Edytowanie jednostki</string>
     <string name="add_firebrigade_error">Wypełnij wszystkie pola</string>
     <string name="update_firebrigade_error">Błąd podczas aktualizacji, spróbuj ponownie...</string>
-    <string name="infotxt">Informacje o Twojej jednostce</string>
+    <string name="firebrigade_data_info">Dane jednostki</string>
+    <string name="firebrigade_data_view">Tu powinny być dane jednostki!</string>
     <string name="name"><![CDATA[<b>Nazwa: </b>]]> </string>
     <string name="voivodeship"><![CDATA[<b>Województwo: </b>]]></string>
     <string name="district"><![CDATA[<b>Powiat: </b>]]></string>
