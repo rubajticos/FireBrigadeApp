@@ -1,17 +1,20 @@
 package com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
+import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
 public class FirefighterActivity extends AppCompatActivity {
+    public static final String EXTRA_FIREBRIGADE_ID = "FIREBRIGADE_ID";
+
+
+    private FirefighterPresenter mFirefighterPresenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +24,7 @@ public class FirefighterActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         setTitle(R.string.activity_firefighter);
         ActionBar ab = getSupportActionBar();
-        ab.setHomeAsUpIndicator(R.drawable.ic_menu_white);
+        ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
 
         FirefighterFragment firefighterFragment =
@@ -33,14 +36,12 @@ public class FirefighterActivity extends AppCompatActivity {
             );
         }
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.firefighter_addFloatingButton);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        mFirefighterPresenter = new FirefighterPresenter(new FireBrigadeUtils(this), new FirefighterRequestImpl(this), firefighterFragment);
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

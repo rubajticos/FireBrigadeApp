@@ -2,6 +2,7 @@ package com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,10 @@ import android.widget.TextView;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 
-import org.w3c.dom.Text;
-
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.MyViewHolder> {
 
@@ -50,12 +52,22 @@ public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.
         Firefighter firefighter = firefighterList.get(position);
         holder.name.setText(firefighter.getName());
         holder.lastName.setText(firefighter.getLastName());
-        holder.expiryMedicalTest.setText(holder.expiryMedicalTest.getText() + firefighter.getExpiryMedicalTest().toString());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        holder.expiryMedicalTest.setText(holder.expiryMedicalTest.getText() + " " + dateFormat.format(firefighter.getExpiryMedicalTest()));
     }
 
     @Override
     public int getItemCount() {
         return firefighterList.size();
+    }
+
+    public void replaceData(List<Firefighter> firefighters) {
+        setList(firefighters);
+        notifyDataSetChanged();
+    }
+
+    public void setList(List<Firefighter> firefighters) {
+        firefighterList = firefighters;
     }
 
 

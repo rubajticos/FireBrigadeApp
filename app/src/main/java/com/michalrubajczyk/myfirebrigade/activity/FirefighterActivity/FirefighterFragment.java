@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -34,9 +35,13 @@ import java.util.List;
 public class FirefighterFragment extends Fragment implements FirefighterContract.View {
     private static final String TAG = "Firefighter Fragment";
 
+    private FirefighterContract.Presenter mPresenter;
+
+    private FirefighterAdapter mAdapter;
+
     private View mNoFirefighterView;
 
-    private RelativeLayout mFirefighterView;
+    private View mFirefighterView;
 
     private ImageView mNoFirefightersIcon;
     private TextView mNoFirefightersMainText;
@@ -44,11 +49,7 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
 
     private ProgressBar mProgressBar;
 
-    private String mFirefighterid;
-
-    private List<Firefighter> firefighterList = new ArrayList<>();
     private RecyclerView recyclerView;
-    private FirefighterAdapter mAdapter;
 
     public FirefighterFragment() {
     }
@@ -60,11 +61,12 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
     @Override
     public void onResume() {
         super.onResume();
+        mPresenter.start();
     }
 
     @Override
     public void setPresenter(FirefighterContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 
     @Override
@@ -78,44 +80,88 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
         View root = inflater.inflate(R.layout.firefighter_frag, container, false);
 
         //Setup firefighter view
+        mFirefighterView = (RelativeLayout) root.findViewById(R.id.firefighterRL);
+        recyclerView = (RecyclerView) root.findViewById(R.id.firefighter_recyclerView);
+        mAdapter = new FirefighterAdapter(new ArrayList<>(0));
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+        recyclerView.setNestedScrollingEnabled(false);
 
         //Setup noFirefighter view
-        mNoFirefighterView = root.findViewById(R.id.noFirefighterRL);
+        mNoFirefighterView = (LinearLayout) root.findViewById(R.id.noFirefighterRL);
         mNoFirefightersIcon = (ImageView) root.findViewById(R.id.noFirefightersIcon);
         mNoFirefightersMainText = (TextView) root.findViewById(R.id.noFirefightersMainText);
         mNoFirefightersAddView = (TextView) root.findViewById(R.id.noFirefighterAddInfo);
-        mNoFirefightersAddView.setOnClickListener(v -> Snackbar.make(getView(), "Dodawanie strażaka", Snackbar.LENGTH_LONG).show());
+        mNoFirefightersAddView.setOnClickListener(v -> {
+            showAddFirefighter();
+            Snackbar.make(getView(), "Dodawanie strażaka", Snackbar.LENGTH_LONG).show();
+        });
 
         FloatingActionButton fab =
                 (FloatingActionButton) getActivity().findViewById(R.id.firefighter_addFloatingButton);
-        fab.setOnClickListener(v -> Snackbar.make(getView(), "Dodawanie strażaka", Snackbar.LENGTH_LONG).show());
+        fab.setOnClickListener(v -> {
+            showAddFirefighter();
+            Snackbar.make(getView(), "Dodawanie strażaka", Snackbar.LENGTH_LONG).show();
+        });
 
         mProgressBar = (ProgressBar) root.findViewById(R.id.firefighterProgressBar);
 
         setHasOptionsMenu(true);
 
-        recyclerView = (RecyclerView) root.findViewById(R.id.firefighter_recyclerView);
-        mAdapter = new FirefighterAdapter(firefighterList);
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(mAdapter);
-
-        prepareFirefighterData();
-        mNoFirefighterView.setVisibility(View.GONE);
-
         return root;
     }
 
-    private void prepareFirefighterData() {
-        Firefighter firefighter = new Firefighter();
-        firefighter.setName("Testowy");
-        firefighter.setLastName("strażak");
-        firefighter.setExpiryMedicalTest(new Date(118, 4, 18));
-        firefighterList.add(firefighter);
-
-        mAdapter.notifyDataSetChanged();
+    @Override
+    public void setLoadingIndicator(boolean active) {
+        mProgressBar.setVisibility(View.VISIBLE);
     }
 
+    @Override
+    public void hideLoadingIndicator() {
+        mProgressBar.setVisibility(View.GONE);
+    }
 
+    @Override
+    public void showFirefighters(List<Firefighter> firefightersList) {
+        mAdapter.replaceData(firefightersList);
+
+        mFirefighterView.setVisibility(View.VISIBLE);
+        mNoFirefighterView.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showAddFirefighter() {
+        // TODO: 18/04/2018 przejscie do dodawania strazaka
+//        Intent intent = new Intent(getContext(), AddEditFirefighterActivity.class);
+//        startActivityForResult(intent, AddEditFirefighterActivity.REQUEST_ADD_FIREFIGHTER);
+    }
+
+    @Override
+    public void showFirefighterDetailUi(int firefighterId) {
+        // TODO: 18/04/2018 przejscie do edycji strazaka
+//        Intent intent = new Intent(getContext(), FirefighterDetailActivity.class);
+//        intent.putExtra(FirefighterDetailActivity.EXTRA_FIREFIGHTER_ID, firefighterId);
+    }
+
+    @Override
+    public void showLoadingFirefightersError() {
+        showMessage(getString(R.string.firefighter_loading_error));
+    }
+
+    private void showMessage(String message) {
+        Snackbar.make(getView(), message, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showNoFirefighters() {
+        mFirefighterView.setVisibility(View.GONE);
+        mNoFirefighterView.setVisibility(View.VISIBLE);
+    }
+
+    @Override
+    public boolean isActive() {
+        return isAdded();
+    }
 }

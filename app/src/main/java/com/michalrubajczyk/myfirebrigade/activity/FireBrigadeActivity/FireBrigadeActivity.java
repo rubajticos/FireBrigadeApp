@@ -20,6 +20,7 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImp
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
+import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
 public class FireBrigadeActivity extends AppCompatActivity {
 
@@ -52,7 +53,7 @@ public class FireBrigadeActivity extends AppCompatActivity {
             );
         }
 
-        mFireBrigadePresenter = new FireBrigadePresenter(new FireBrigadeRequestImpl(this), new AuthUserUtils(this), fireBrigadeFragment);
+        mFireBrigadePresenter = new FireBrigadePresenter(new FireBrigadeRequestImpl(this), new AuthUserUtils(this), new FireBrigadeUtils(this), fireBrigadeFragment);
     }
 
     @Override

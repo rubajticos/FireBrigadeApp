@@ -125,6 +125,7 @@
     <string name="firefighter_list_item_medical_tests_first_sentence">Badania do: </string>
     <string name="firefighter_list_item_name">Imię</string>
     <string name="firefighter_list_item_lastName">Nazwisko</string>
+    <string name="firefighter_loading_error">Wystąpił błąd podczas ładowania strażaków</string>
 
 
 </resources>

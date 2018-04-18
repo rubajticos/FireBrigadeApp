@@ -7,6 +7,7 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImp
 import com.michalrubajczyk.myfirebrigade.model.auth.AuthUserInfo;
 import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
+import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
 /**
  * Created by Michal on 23/03/2018.
@@ -20,11 +21,14 @@ public class FireBrigadePresenter implements FireBrigadeContract.Presenter {
 
     private final AuthUserUtils mUser;
 
+    private final FireBrigadeUtils mFireBrigadeUtils;
+
     private boolean mFirstLoad = true;
 
-    public FireBrigadePresenter(FireBrigadeRequestImpl fireBrigadeRequest, AuthUserUtils authUserUtils, FireBrigadeContract.View fireBrigadeView) {
+    public FireBrigadePresenter(FireBrigadeRequestImpl fireBrigadeRequest, AuthUserUtils authUserUtils, FireBrigadeUtils fireBrigadeUtils, FireBrigadeContract.View fireBrigadeView) {
         mFireBrigadeRequests = fireBrigadeRequest;
         mFireBrigadeView = fireBrigadeView;
+        mFireBrigadeUtils = fireBrigadeUtils;
         mUser = authUserUtils;
         mFireBrigadeView.setPresenter(this);
     }
@@ -46,19 +50,23 @@ public class FireBrigadePresenter implements FireBrigadeContract.Presenter {
             @Override
             public void onSuccess(String data) {
                 FireBrigadeDTO firebrigade = makeFirebrigadeFromResponse(data);
+                mFireBrigadeUtils.addFireBrigadeIdToSharedPreferences(firebrigade.getIdFireBrigade());
                 mFireBrigadeView.showFireBrigade(firebrigade);
+                mFireBrigadeView.hideLoadingSpinner(true);
             }
 
             @Override
             public void onError(int code) {
                 if (code == 500) {
                     mFireBrigadeView.showNoFireBrigade();
+                    mFireBrigadeView.hideLoadingSpinner(true);
                 } else {
                     mFireBrigadeView.showNoFireBrigade();
+                    mFireBrigadeView.hideLoadingSpinner(true);
                 }
             }
         });
-        mFireBrigadeView.hideLoadingSpinner(true);
+
     }
 
     private FireBrigadeDTO makeFirebrigadeFromResponse(String data) {
@@ -74,6 +82,7 @@ public class FireBrigadePresenter implements FireBrigadeContract.Presenter {
     @Override
     public void logOut() {
         mUser.clearUserDataSharedPreferences();
+        mFireBrigadeUtils.clearFireBrigadeIdSharedPreferences();
         mFireBrigadeView.showLogin();
     }
 
