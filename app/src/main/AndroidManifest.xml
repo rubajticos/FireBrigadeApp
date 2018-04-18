@@ -47,6 +47,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity" />
         </activity>
+        <activity
+            android:name=".activity.FirefighterActivity.FirefighterActivity"
+            android:label="@string/title_activity_firefighter"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

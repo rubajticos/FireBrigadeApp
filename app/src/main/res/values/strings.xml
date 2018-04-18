@@ -113,8 +113,15 @@
     <string name="activity_register">Rejestracja</string>
     <string name="activity_firebrigade">Jednostka</string>
     <string name="activity_addEditFirebrigade">Dodaj/edytuj</string>
+    <string name="activity_firefighter">Strażacy</string>
 
     <!--OTHERS-->
     <string name="refresh_action">Odśwież</string>
+    <string name="title_activity_firefighter">FirefighterActivity</string>
+
+    <!--FIREFIGHTER ACTIVITY-->
+    <string name="firefighters_no_content">Brak strażaków do wyświetlenia</string>
+    <string name="firefighter_add_info">Wciśnij + aby dodać strażaka</string>
+
 
 </resources>
