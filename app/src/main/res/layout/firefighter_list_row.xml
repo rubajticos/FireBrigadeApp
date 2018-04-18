@@ -21,7 +21,7 @@
             android:id="@+id/firefighter_list_item_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name"
+            android:text="@string/firefighter_list_item_name"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
@@ -29,7 +29,7 @@
             android:id="@+id/firefighter_list_item_lastname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lastname"
+            android:text="@string/firefighter_list_item_lastName"
             android:layout_below="@id/firefighter_list_item_name"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
@@ -39,6 +39,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:text="Medical tests" />
+            android:text="@string/firefighter_list_item_medical_tests_first_sentence" />
     </RelativeLayout>
 </android.support.constraint.ConstraintLayout>

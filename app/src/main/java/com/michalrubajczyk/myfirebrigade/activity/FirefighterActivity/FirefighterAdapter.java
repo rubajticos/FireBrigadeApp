@@ -50,7 +50,7 @@ public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.
         Firefighter firefighter = firefighterList.get(position);
         holder.name.setText(firefighter.getName());
         holder.lastName.setText(firefighter.getLastName());
-        holder.lastName.setText(firefighter.getExpiryMedicalTest().toString());
+        holder.expiryMedicalTest.setText(holder.expiryMedicalTest.getText() + firefighter.getExpiryMedicalTest().toString());
     }
 
     @Override

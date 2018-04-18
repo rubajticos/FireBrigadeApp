@@ -102,6 +102,7 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
         recyclerView.setAdapter(mAdapter);
 
         prepareFirefighterData();
+        mNoFirefighterView.setVisibility(View.GONE);
 
         return root;
     }

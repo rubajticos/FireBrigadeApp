@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,7 +14,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeActivity;
+import com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity.FirefighterActivity;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
+import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
 
@@ -75,6 +79,8 @@ public class FireBrigadeActivity extends AppCompatActivity {
                     case R.id.firebrigade_nav_view:
                         break;
                     case R.id.firefighters_navigation_menu_item:
+                        Intent intent = new Intent(getApplicationContext(), FirefighterActivity.class);
+                        startActivity(intent);
                         break;
                     case R.id.cars_navigation_menu_item:
                         break;
