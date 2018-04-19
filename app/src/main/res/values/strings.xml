@@ -90,7 +90,6 @@
     <string name="main_loading_image">Main Image on Loading</string>
     <string name="title_activity_fire_brigade">FireBrigadeActivity</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--DRAWER ACTIONS-->
@@ -126,6 +125,10 @@
     <string name="firefighter_list_item_name">Imię</string>
     <string name="firefighter_list_item_lastName">Nazwisko</string>
     <string name="firefighter_loading_error">Wystąpił błąd podczas ładowania strażaków</string>
+    <string name="title_activity_firefighter_details">FirefighterDetailsActivity</string>
+
+    <!--FIREFIGHTER DETAIL ACTIVITY-->
+    <string name="firefighter_detail_missing">Brak danych...</string>
 
 
 </resources>

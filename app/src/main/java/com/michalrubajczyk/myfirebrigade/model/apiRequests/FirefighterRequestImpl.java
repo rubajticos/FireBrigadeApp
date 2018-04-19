@@ -47,7 +47,23 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void getFirefighterById(int firefighterId, DataListener dataListener) {
-
+        String url = BASE_SERVER_URL + "/firefighter/" + firefighterId;
+        JsonObjectRequest getFirefightersRequest = new JsonObjectRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "sever not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getFirefightersRequest);
     }
 
     @Override

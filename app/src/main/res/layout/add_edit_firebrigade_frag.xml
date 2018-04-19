@@ -4,7 +4,6 @@
     android:layout_height="match_parent"
     tools:context="com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity.FireBrigadeActivity">
 
-    <!-- TODO: Update blank fragment layout -->
 
     <ScrollView
         android:id="@+id/scroll_view"

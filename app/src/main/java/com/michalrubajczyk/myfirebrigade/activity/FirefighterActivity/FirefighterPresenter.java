@@ -80,8 +80,8 @@ public class FirefighterPresenter implements FirefighterContract.Presenter {
     }
 
     @Override
-    public void openFirefighterDetails(Firefighter requestedFirefighter) {
-
+    public void openFirefighterDetails(Integer requestedFirefighterId) {
+        mFirefighterView.showFirefighterDetailUi(requestedFirefighterId);
     }
 
 

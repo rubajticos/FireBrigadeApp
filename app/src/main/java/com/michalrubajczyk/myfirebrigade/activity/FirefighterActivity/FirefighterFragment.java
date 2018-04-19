@@ -1,16 +1,14 @@
 package com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity;
 
-import android.app.Notification;
 import android.content.Intent;
-import android.media.Image;
-import android.os.Message;
+import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +17,13 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.common.base.Strings;
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.FirefighterDetailsActivity.FirefighterDetailsActivity;
+import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -88,6 +85,21 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
         recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
+            @Override
+            public void onClick(View view, int position) {
+                Log.d(TAG, "Klikniecie strazaka");
+                Integer firefighterId = (int) (long) recyclerView.getAdapter().getItemId(position);
+                Log.d(TAG, "Id wyswietlanego: " + Integer.toString(firefighterId));
+                mPresenter.openFirefighterDetails(firefighterId);
+            }
+
+            @Override
+            public void onLongClick(View view, int position) {
+
+            }
+        }));
+
 
         //Setup noFirefighter view
         mNoFirefighterView = (LinearLayout) root.findViewById(R.id.noFirefighterRL);
@@ -140,9 +152,9 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
 
     @Override
     public void showFirefighterDetailUi(int firefighterId) {
-        // TODO: 18/04/2018 przejscie do edycji strazaka
-//        Intent intent = new Intent(getContext(), FirefighterDetailActivity.class);
-//        intent.putExtra(FirefighterDetailActivity.EXTRA_FIREFIGHTER_ID, firefighterId);
+        Intent intent = new Intent(getContext(), FirefighterDetailsActivity.class);
+        intent.putExtra(FirefighterDetailsActivity.EXTRA_FIREFIGHTER_ID, Integer.toString(firefighterId));
+        startActivity(intent);
     }
 
     @Override

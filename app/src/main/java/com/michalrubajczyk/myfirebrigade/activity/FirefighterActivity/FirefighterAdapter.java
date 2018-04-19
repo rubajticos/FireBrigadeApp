@@ -61,6 +61,11 @@ public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.
         return firefighterList.size();
     }
 
+    @Override
+    public long getItemId(int position) {
+        return firefighterList.get(position).getIdFirefighter();
+    }
+
     public void replaceData(List<Firefighter> firefighters) {
         setList(firefighters);
         notifyDataSetChanged();

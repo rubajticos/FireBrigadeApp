@@ -37,6 +37,6 @@ public interface FirefighterContract {
 
         void deleteFirefighter();
 
-        void openFirefighterDetails(Firefighter requestedFirefighter);
+        void openFirefighterDetails(Integer requestedFirefighterId);
     }
 }
