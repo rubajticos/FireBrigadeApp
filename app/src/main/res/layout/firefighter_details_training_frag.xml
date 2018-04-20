@@ -16,16 +16,40 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <TextView
-                android:id="@+id/firefighter_detail_trainingLabel"
+            <LinearLayout
+                android:id="@+id/firefighter_detail_training_labelLL"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingBottom="8dp"
-                android:paddingLeft="@dimen/row_padding_vertical"
-                android:paddingRight="@dimen/row_padding_vertical"
-                android:paddingTop="16dp"
-                android:text="@string/firefighter_detail_training_label"
-                android:textSize="12sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/firefighter_detail_trainingLabel"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="@dimen/row_padding_vertical"
+                    android:paddingRight="@dimen/row_padding_vertical"
+                    android:paddingTop="16dp"
+                    android:text="@string/firefighter_detail_training_label"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/firefighter_detail_trainingDateLabel"
+                    android:layout_weight="1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="@dimen/row_padding_vertical"
+                    android:paddingRight="@dimen/row_padding_vertical"
+                    android:paddingTop="16dp"
+                    android:text="@string/firefighter_detail_training_dateLabel"
+                    android:textSize="14sp" />
+
+
+            </LinearLayout>
+
 
             <ProgressBar
                 android:id="@+id/firefighter_detail_trainingProgressBar"
@@ -35,7 +59,7 @@
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/firefighter_detail_trainingRecyclerView"
-                android:layout_below="@id/firefighter_detail_trainingLabel"
+                android:layout_below="@id/firefighter_detail_training_labelLL"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />
@@ -43,6 +67,7 @@
 
         <LinearLayout
             android:id="@+id/noFirefighter_detail_trainingLL"
+            android:paddingTop="30dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
@@ -50,10 +75,10 @@
 
             <ImageView
                 android:id="@+id/noFirefighterDetailTrainingIcon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_gravity="center"
-                app:srcCompat="@android:drawable/presence_busy" />
+                app:srcCompat="@drawable/ic_firefighter" />
 
             <TextView
                 android:id="@+id/noFirefightersDetailTrainingMainText"

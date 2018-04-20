@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -7,7 +8,9 @@
         android:id="@+id/firefighter_detailLL"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
         <!--todo Dodawnie labela "Informacje o strażaku" i etykiet do imienia, nazwisko itd-->
 
@@ -15,36 +18,75 @@
             android:id="@+id/firefighter_detailLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/firefighter_detail_label"
-            android:textSize="14sp"
-            android:paddingTop="16dp"
             android:background="@color/white"
             android:paddingLeft="@dimen/row_padding_vertical"
-            android:paddingRight="@dimen/row_padding_vertical" />
+            android:paddingRight="@dimen/row_padding_vertical"
+            android:paddingTop="16dp"
+            android:text="@string/firefighter_detail_label"
+            android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/firefighter_detailName"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/row_padding_vertical"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="TextView"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
 
-        <TextView
-            android:id="@+id/firefighter_detailLastName"
+            <TextView
+                android:id="@+id/nameLabelTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/firefighter_list_item_name"
+                android:textColor="@color/black_overlay"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/firefighter_detailName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="TextView"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/row_padding_vertical"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="TextView"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lastNameLabelTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/firefighter_list_item_lastName"
+                android:textColor="@color/black_overlay"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/firefighter_detailLastName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="TextView"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+        </LinearLayout>
 
         <ProgressBar
             android:id="@+id/firefighter_details_ProgressBar"
@@ -52,29 +94,69 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <TextView
-            android:id="@+id/firefighter_detailBirthdayDate"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/row_padding_vertical"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="TextView"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
 
-        <TextView
-            android:id="@+id/firefighter_detailExpiryMedicalTestDate"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom"
-            android:paddingBottom="@dimen/activity_horizontal_margin"
-            android:paddingLeft="@dimen/row_padding_vertical"
-            android:paddingTop="@dimen/activity_horizontal_margin"
-            android:text="TextView"
-            android:textColor="@color/colorPrimaryDark"
-            android:textSize="16sp" />
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/birthdayLabelTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/firefighter_list_item_birthDate"
+                android:textColor="@color/black_overlay"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/firefighter_detailBirthdayDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="TextView"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/medicalTestsLabelTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="@string/firefighter_list_item_medicalTests"
+                android:textColor="@color/black_overlay"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/firefighter_detailExpiryMedicalTestDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/border_bottom"
+                android:paddingBottom="@dimen/activity_horizontal_margin"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingTop="@dimen/activity_horizontal_margin"
+                android:text="TextView"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp" />
+        </LinearLayout>
+
 
     </LinearLayout>
 

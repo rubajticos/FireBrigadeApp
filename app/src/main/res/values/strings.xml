@@ -123,8 +123,10 @@
     <string name="firefighters_no_content">Brak strażaków do wyświetlenia</string>
     <string name="firefighter_add_info">Wciśnij + aby dodać strażaka</string>
     <string name="firefighter_list_item_medical_tests_first_sentence">Badania do: </string>
-    <string name="firefighter_list_item_name">Imię</string>
-    <string name="firefighter_list_item_lastName">Nazwisko</string>
+    <string name="firefighter_list_item_name">Imię:</string>
+    <string name="firefighter_list_item_lastName">Nazwisko:</string>
+    <string name="firefighter_list_item_birthDate">Data urodzenia:</string>
+    <string name="firefighter_list_item_medicalTests">Wygaśnięcie badań lekarskich</string>
     <string name="firefighter_loading_error">Wystąpił błąd podczas ładowania strażaków</string>
 
 
@@ -132,6 +134,7 @@
     <string name="firefighter_detail_missing">Brak danych...</string>
     <string name="firefighter_detail_label">Informacje ogólne</string>
     <string name="firefighter_detail_training_label">Wyszkolenie</string>
+    <string name="firefighter_detail_training_dateLabel">Data uzyskania</string>
     <string name="firefighters_detail_training_no_content">Strażak nie ma jeszcze żadnych szkoleń</string>
     <string name="firefighter_detail_training_edit_info">Edytuj strażaka jeśli chcesz dodać umiejętności</string>
     <string name="firefighter_detail_training_loading_error">Błąd podczas ładowania szkoleń</string>
