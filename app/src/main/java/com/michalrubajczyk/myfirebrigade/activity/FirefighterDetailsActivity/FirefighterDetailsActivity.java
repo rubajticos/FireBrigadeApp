@@ -22,6 +22,8 @@ public class FirefighterDetailsActivity extends AppCompatActivity {
         ab.setDisplayHomeAsUpEnabled(true);
         ab.setDisplayShowHomeEnabled(true);
 
+        setTitle(R.string.activity_firefighter_details);
+
         String firefighterId = getIntent().getStringExtra(EXTRA_FIREFIGHTER_ID);
 
         FirefighterDetailFragment firefighterDetailFragment = (FirefighterDetailFragment) getSupportFragmentManager()

@@ -60,10 +60,10 @@ public class FirefighterPresenter implements FirefighterContract.Presenter {
                 if (code == 500) {
                     mFirefighterView.showNoFirefighters();
                     mFirefighterView.hideLoadingIndicator();
+                    mFirefighterView.showLoadingFirefightersError();
                 } else {
                     mFirefighterView.showNoFirefighters();
                     mFirefighterView.hideLoadingIndicator();
-                    mFirefighterView.showLoadingFirefightersError();
                 }
             }
         });

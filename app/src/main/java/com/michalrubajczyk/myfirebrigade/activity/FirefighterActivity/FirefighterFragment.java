@@ -170,6 +170,7 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
     public void showNoFirefighters() {
         mFirefighterView.setVisibility(View.GONE);
         mNoFirefighterView.setVisibility(View.VISIBLE);
+        showMessage(getString(R.string.firefighters_no_content));
     }
 
     @Override

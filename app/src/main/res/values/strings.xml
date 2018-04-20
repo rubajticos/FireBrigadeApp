@@ -113,6 +113,7 @@
     <string name="activity_firebrigade">Jednostka</string>
     <string name="activity_addEditFirebrigade">Dodaj/edytuj</string>
     <string name="activity_firefighter">Strażacy</string>
+    <string name="activity_firefighter_details">Informacje</string>
 
     <!--OTHERS-->
     <string name="refresh_action">Odśwież</string>
@@ -125,7 +126,7 @@
     <string name="firefighter_list_item_name">Imię</string>
     <string name="firefighter_list_item_lastName">Nazwisko</string>
     <string name="firefighter_loading_error">Wystąpił błąd podczas ładowania strażaków</string>
-    <string name="title_activity_firefighter_details">FirefighterDetailsActivity</string>
+
 
     <!--FIREFIGHTER DETAIL ACTIVITY-->
     <string name="firefighter_detail_missing">Brak danych...</string>
