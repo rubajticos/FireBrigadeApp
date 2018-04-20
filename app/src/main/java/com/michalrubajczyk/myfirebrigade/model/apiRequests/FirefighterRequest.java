@@ -17,7 +17,7 @@ public interface FirefighterRequest {
 
     void updateFirefighter(Firefighter firefighter, DataListener dataListener);
 
-    void getFirefighterTrainings(Firefighter firefighter, DataListener dataListener);
+    void getFirefighterTrainings(int firefighterId, DataListener dataListener);
 
     void updateFirefighterTrainings(List<FirefighterTraining> trainingList, DataListener dataListener);
 }

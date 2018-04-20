@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/firefighter_detail_trainingContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:id="@+id/firefighter_detail_trainingRL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+            <TextView
+                android:id="@+id/firefighter_detail_trainingLabel"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="8dp"
+                android:paddingLeft="@dimen/row_padding_vertical"
+                android:paddingRight="@dimen/row_padding_vertical"
+                android:paddingTop="16dp"
+                android:text="@string/firefighter_detail_training_label"
+                android:textSize="12sp" />
+
+            <ProgressBar
+                android:id="@+id/firefighter_detail_trainingProgressBar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/firefighter_detail_trainingRecyclerView"
+                android:layout_below="@id/firefighter_detail_trainingLabel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/noFirefighter_detail_trainingLL"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerInParent="true">
+
+            <ImageView
+                android:id="@+id/noFirefighterDetailTrainingIcon"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                app:srcCompat="@android:drawable/presence_busy" />
+
+            <TextView
+                android:id="@+id/noFirefightersDetailTrainingMainText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_marginBottom="8dp"
+                android:text="@string/firefighters_detail_training_no_content"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/noFirefightersDetailTrainingAddInfo"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="@string/firefighter_detail_training_edit_info"
+                android:textSize="17sp" />
+        </LinearLayout>
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

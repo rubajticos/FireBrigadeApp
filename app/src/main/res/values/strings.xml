@@ -130,6 +130,11 @@
 
     <!--FIREFIGHTER DETAIL ACTIVITY-->
     <string name="firefighter_detail_missing">Brak danych...</string>
+    <string name="firefighter_detail_label">Informacje ogólne</string>
+    <string name="firefighter_detail_training_label">Wyszkolenie</string>
+    <string name="firefighters_detail_training_no_content">Strażak nie ma jeszcze żadnych szkoleń</string>
+    <string name="firefighter_detail_training_edit_info">Edytuj strażaka jeśli chcesz dodać umiejętności</string>
+    <string name="firefighter_detail_training_loading_error">Błąd podczas ładowania szkoleń</string>
 
 
 </resources>

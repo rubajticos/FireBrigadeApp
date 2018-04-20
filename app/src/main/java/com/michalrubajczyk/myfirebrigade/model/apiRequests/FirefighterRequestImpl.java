@@ -82,8 +82,24 @@ public class FirefighterRequestImpl implements FirefighterRequest {
     }
 
     @Override
-    public void getFirefighterTrainings(Firefighter firefighter, DataListener dataListener) {
-
+    public void getFirefighterTrainings(int firefighterId, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/trainings/firefighter/" + firefighterId;
+        JsonArrayRequest getFirefighterTrainingRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "#getFirefighterTrainings() - server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getFirefighterTrainingRequest);
     }
 
     @Override

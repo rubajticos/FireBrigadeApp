@@ -26,6 +26,7 @@ public class FirefighterDetailsActivity extends AppCompatActivity {
 
         String firefighterId = getIntent().getStringExtra(EXTRA_FIREFIGHTER_ID);
 
+        //Firefighter DETAIL
         FirefighterDetailFragment firefighterDetailFragment = (FirefighterDetailFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.firefighter_details_contentFrame);
 
@@ -36,11 +37,12 @@ public class FirefighterDetailsActivity extends AppCompatActivity {
                     firefighterDetailFragment, R.id.firefighter_details_contentFrame);
         }
 
+        //Firefighter DETAIL TRAININGS
         FirefighterDetailsTrainingFragment firefighterDetailsTrainingFragment = (FirefighterDetailsTrainingFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.firefighter_detail_trainings_contentFrame);
 
-        if (firefighterDetailFragment == null) {
-            firefighterDetailFragment = FirefighterDetailFragment.newInstance(firefighterId);
+        if (firefighterDetailsTrainingFragment == null) {
+            firefighterDetailsTrainingFragment = FirefighterDetailsTrainingFragment.newInstance(firefighterId);
 
             ActivityUtils.addFragmentToActivity(getSupportFragmentManager(),
                     firefighterDetailsTrainingFragment, R.id.firefighter_detail_trainings_contentFrame);
@@ -51,7 +53,11 @@ public class FirefighterDetailsActivity extends AppCompatActivity {
                 firefighterDetailFragment,
                 Integer.parseInt(firefighterId));
 
-//        new FirefighterDetailsTrainingPresenter()
+        new FirefighterDetailsTrainingPresenter(
+                new FirefighterRequestImpl(this),
+                firefighterDetailsTrainingFragment,
+                Integer.parseInt(firefighterId)
+        );
     }
 
     @Override

@@ -48,9 +48,15 @@ public interface FirefighterDetailsContract {
 
     interface ViewDetailsTraining extends BaseView<PresenterDetailsTraining> {
 
+        void setLoadingIndicator(boolean active);
+
+        void hideLoadingIndicator();
+
         void showTrainings(List<FirefighterTraining> trainings);
 
-        void hideTrainings();
+        void showNoTrainings();
+
+        void showLoadingFirefightersError();
 
     }
 
