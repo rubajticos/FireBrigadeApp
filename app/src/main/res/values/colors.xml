@@ -8,4 +8,5 @@
     <color name="white">#fff</color>
     <color name="dark_gray">#4f4f4f</color>
     <color name="alarm_red">#fc0300</color>
+    <color name="darkful">#000000</color>
 </resources>

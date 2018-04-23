@@ -146,6 +146,9 @@
     <string name="add_edit_firefighter_lastName">Nazwisko</string>
     <string name="add_edit_firefighter_birthday">Data urodzenia</string>
     <string name="add_edit_firefighter_expiryMedicalTestsDate">Badania medyczne ważne do</string>
+    <string name="add_edit_firefighter_add_title">Dodawanie strażaka</string>
+    <string name="add_edit_firefighter_edit_title">Edycja strażaka</string>
+    <string name="action_save">Zapisz</string>
 
 
 </resources>

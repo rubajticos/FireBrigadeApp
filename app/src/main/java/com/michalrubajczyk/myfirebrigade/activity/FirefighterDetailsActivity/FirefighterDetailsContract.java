@@ -16,6 +16,8 @@ public interface FirefighterDetailsContract {
 
         void showMissingFirefighter();
 
+        void setFirefighterId(String firefighterId);
+
         void hideName();
 
         void showName(String name);

@@ -40,46 +40,73 @@
 
             </android.support.design.widget.TextInputLayout>
 
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputEditText
+                <TextView
+                    android:id="@+id/add_edit_firefighter_birthdayDateLabel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="0"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black_overlay"
+                    android:text="@string/add_edit_firefighter_birthday" />
+
+                <TextView
                     android:id="@+id/add_edit_firefighter_birthdayDate"
-
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/add_edit_firefighter_birthday"
-                    android:inputType="date"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/darkful"
+                    android:text="" />
+            </LinearLayout>
 
-                    />
-            </android.support.design.widget.TextInputLayout>
-
-            <android.support.design.widget.TextInputLayout
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
 
-                <android.support.design.widget.TextInputEditText
-                    android:id="@+id/add_edit_firefighter_expiryMedicalTestsDate"
-
-                    android:layout_width="match_parent"
+                <TextView
+                    android:id="@+id/add_edit_firefighter_expiryMedicalTestsLabel"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:hint="@string/add_edit_firefighter_expiryMedicalTestsDate"
-                    android:inputType="date"
+                    android:layout_weight="0"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="10dp"
+                    android:paddingBottom="10dp"
+                    android:textSize="18sp"
+                    android:textColor="@color/black_overlay"
+                    android:text="@string/add_edit_firefighter_expiryMedicalTestsDate" />
 
-                    />
-            </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:id="@+id/add_edit_firefighter_expiryMedicalTestsDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textColor="@color/darkful"
+                    android:text="" />
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/add_edit_firefighter_trainingsLL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+            </LinearLayout>
+
         </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/add_edit_firefighter_trainingsLL"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-
-        </LinearLayout>
-
-
     </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

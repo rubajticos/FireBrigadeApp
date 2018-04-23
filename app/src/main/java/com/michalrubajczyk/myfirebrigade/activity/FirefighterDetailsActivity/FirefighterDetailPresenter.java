@@ -68,6 +68,7 @@ public class FirefighterDetailPresenter implements FirefighterDetailsContract.Pr
         String birthdayDate = dateFormat.format(firefighter.getBirthday());
         String expiryMedicalTest = dateFormat.format(firefighter.getExpiryMedicalTest());
 
+        mFirefighterDetailsView.setFirefighterId(Integer.toString(firefighter.getIdFirefighter()));
         mFirefighterDetailsView.showName(name);
         mFirefighterDetailsView.showLastName(lastName);
         mFirefighterDetailsView.showBirthday(birthdayDate);

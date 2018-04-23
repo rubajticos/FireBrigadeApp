@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity.AddEditFirefighterActivity;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity.AddEditFirefighterFragment;
 
 public class FirefighterDetailFragment extends Fragment implements FirefighterDetailsContract.ViewDetails {
 
@@ -26,6 +28,7 @@ public class FirefighterDetailFragment extends Fragment implements FirefighterDe
 
     private FirefighterDetailsContract.PresenterDetails mPresenter;
 
+    private String mFirefighterId;
     private TextView mFirefighterName;
     private TextView mFirefighterLastName;
     private TextView mFirefighterBirthdayDate;
@@ -64,7 +67,10 @@ public class FirefighterDetailFragment extends Fragment implements FirefighterDe
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getContext(), AddEditFirefighterActivity.class);
+                Log.d("FirefighterId", mFirefighterId);
+                intent.putExtra(AddEditFirefighterFragment.ARGUMENT_EDIT_FIREFIGHTER_ID, mFirefighterId);
                 startActivity(intent);
+                showMessage("Edytowanie strażaka");
             }
         });
 
@@ -94,6 +100,11 @@ public class FirefighterDetailFragment extends Fragment implements FirefighterDe
     @Override
     public void showMissingFirefighter() {
         showMessage(getString(R.string.firefighter_detail_missing));
+    }
+
+    @Override
+    public void setFirefighterId(String firefighterId) {
+        this.mFirefighterId = firefighterId;
     }
 
     @Override
