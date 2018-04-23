@@ -1,5 +1,7 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import com.google.gson.Gson;
+
 import java.util.Date;
 
 public class Firefighter {
@@ -19,6 +21,19 @@ public class Firefighter {
         this.lastName = lastName;
         this.birthday = birthday;
         this.expiryMedicalTest = expiryMedicalTest;
+    }
+
+    public Firefighter(String json) {
+        Firefighter prepareFirefighter = prepareFromJson(json);
+        this.name = prepareFirefighter.getName();
+        this.lastName = prepareFirefighter.getLastName();
+        this.birthday = prepareFirefighter.getBirthday();
+        this.expiryMedicalTest = prepareFirefighter.getExpiryMedicalTest();
+    }
+
+    private Firefighter prepareFromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, Firefighter.class);
     }
 
     public int getIdFirefighter() {
