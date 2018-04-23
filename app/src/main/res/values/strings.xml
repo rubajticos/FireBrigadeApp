@@ -142,6 +142,7 @@
     <string name="title_activity_add_edit_firefighter">AddEditFirefighterActivity</string>
 
     <!--ADD EDIT FIREFIGHTER ACTIVITY-->
+    <string name="add_edit_firefighter_simple_data_label">Podstawowe dane</string>
     <string name="add_edit_firefighter_name">Imię</string>
     <string name="add_edit_firefighter_lastName">Nazwisko</string>
     <string name="add_edit_firefighter_birthday">Data urodzenia</string>
@@ -149,6 +150,7 @@
     <string name="add_edit_firefighter_add_title">Dodawanie strażaka</string>
     <string name="add_edit_firefighter_edit_title">Edycja strażaka</string>
     <string name="action_save">Zapisz</string>
+    <string name="action_add_training">Dodaj szkolenie</string>
 
 
 </resources>

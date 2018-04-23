@@ -14,6 +14,14 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="5dp"
+                android:text="@string/add_edit_firefighter_simple_data_label"
+                android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -22,6 +30,7 @@
                     android:id="@+id/add_edit_firefighter_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:hint="@string/add_edit_firefighter_name"
                     android:inputType="text" />
 
@@ -35,6 +44,7 @@
                     android:id="@+id/add_edit_firefighter_lastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:hint="@string/add_edit_firefighter_lastName"
                     android:inputType="text" />
 
@@ -63,9 +73,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:textSize="18sp"
                     android:textColor="@color/darkful"
+                    android:background="@drawable/border_bottom_no_white"
                     android:text="" />
+
             </LinearLayout>
 
             <LinearLayout
@@ -92,20 +106,80 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:textSize="18sp"
                     android:textColor="@color/darkful"
+                    android:background="@drawable/border_bottom_no_white"
                     android:text="" />
             </LinearLayout>
 
-
-            <LinearLayout
-                android:id="@+id/add_edit_firefighter_trainingsLL"
+            <TextView
                 android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:text="@string/firefighter_detail_training_label"
+                android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+            <TableLayout
+                android:id="@+id/add_edit_firefighter_trainings_TL"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TableRow>
+
+                    <TextView
+                        android:id="@+id/firefighter_detail_trainingLabel"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="@dimen/row_padding_vertical"
+                        android:paddingRight="@dimen/row_padding_vertical"
+                        android:paddingTop="16dp"
+                        android:text="@string/firefighter_detail_training_label"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/firefighter_detail_trainingDateLabel"
+                        android:layout_weight="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="@dimen/row_padding_vertical"
+                        android:paddingRight="@dimen/row_padding_vertical"
+                        android:paddingTop="16dp"
+                        android:text="@string/firefighter_detail_training_dateLabel"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:id="@+id/firefighter_detail_trainingDateLabel2"
+                        android:layout_weight="2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="left"
+                        android:paddingBottom="8dp"
+                        android:paddingLeft="@dimen/row_padding_vertical"
+                        android:paddingRight="@dimen/row_padding_vertical"
+                        android:paddingTop="16dp"
+                        android:text="Usuń"
+                        android:textSize="14sp" />
+
+
+                </TableRow>
+
+            </TableLayout>
+
+            <Button
+                android:id="@+id/add_edit_firefighter_add_training"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-
-            </LinearLayout>
+                android:layout_margin="@dimen/activity_vertical_margin"
+                android:text="@string/action_add_training" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

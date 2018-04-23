@@ -17,6 +17,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
@@ -37,7 +40,9 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     private TextView mBirthday;
     private TextView mExpiryMedicalTests;
 
-    private Button mSaveButton;
+    private TableLayout mTrainingsTL;
+
+    private Button mAddTrainingButton;
 
 
     public AddEditFirefighterFragment() {
@@ -69,31 +74,82 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
         mBirthday.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Calendar cal = Calendar.getInstance();
-                int year = cal.get(Calendar.YEAR);
-                int month = cal.get(Calendar.MONTH);
-                int day = cal.get(Calendar.DAY_OF_MONTH);
-
                 DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
                         mBirthday.setText(i2 + "." + i1 + "." + i);
                     }
                 };
-
-                DatePickerDialog dialog = new DatePickerDialog(
-                        getActivity(),
-                        R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
-                        mDateSetListener,
-                        year, month, day);
-                dialog.show();
+                createAndShowDatePickerDialog(mDateSetListener);
             }
         });
 
         mExpiryMedicalTests = (TextView) root.findViewById(R.id.add_edit_firefighter_expiryMedicalTestsDate);
+        mExpiryMedicalTests.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        mExpiryMedicalTests.setText(i2 + "." + i1 + "." + i);
+                    }
+                };
+                createAndShowDatePickerDialog(mDateSetListener);
+            }
+        });
+
+        mTrainingsTL = (TableLayout) root.findViewById(R.id.add_edit_firefighter_trainings_TL);
+        mTrainingsTL.removeAllViews();
+        mAddTrainingButton = (Button) root.findViewById(R.id.add_edit_firefighter_add_training);
+        mAddTrainingButton.setOnClickListener(view -> {
+            Log.d(TAG, "kilknieto dodawanie wyszkolenia");
+            TableRow row = new TableRow(getActivity().getApplicationContext());
+            row.setVisibility(View.VISIBLE);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            row.setLayoutParams(lp);
+
+            TextView trainingName = new TextView(getActivity().getApplicationContext());
+            trainingName.setText("Training Name");
+            trainingName.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            trainingName.setBackground(getResources().getDrawable(R.drawable.border_bottom));
+            trainingName.setVisibility(View.VISIBLE);
+
+            TextView trainingDate = new TextView(getActivity().getApplicationContext());
+            trainingDate.setText("Training Date");
+            trainingName.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            trainingName.setBackground(getResources().getDrawable(R.drawable.border_bottom));
+            trainingDate.setVisibility(View.VISIBLE);
+
+            Button removeButton = new Button(getActivity().getApplicationContext());
+            removeButton.setText("-");
+            trainingName.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            removeButton.setVisibility(View.VISIBLE);
+            removeButton.setOnClickListener(view1 -> {
+                mTrainingsTL.removeView(row);
+            });
+
+            row.addView(trainingName);
+            row.addView(trainingDate);
+            row.addView(removeButton);
+            mTrainingsTL.addView(row);
+        });
 
         setHasOptionsMenu(true);
         return root;
+    }
+
+    private void createAndShowDatePickerDialog(DatePickerDialog.OnDateSetListener mDateSetListener) {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                getActivity(),
+                R.style.Theme_AppCompat_DayNight_Dialog_MinWidth,
+                mDateSetListener,
+                year, month, day);
+        dialog.show();
     }
 
     @Override
