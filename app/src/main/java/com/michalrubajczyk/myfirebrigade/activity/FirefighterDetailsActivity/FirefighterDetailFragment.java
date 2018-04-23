@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.activity.FirefighterDetailsActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,8 +14,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
-
-import java.util.Date;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity.AddEditFirefighterActivity;
 
 public class FirefighterDetailFragment extends Fragment implements FirefighterDetailsContract.ViewDetails {
 
@@ -63,7 +63,8 @@ public class FirefighterDetailFragment extends Fragment implements FirefighterDe
         editFirefighterFloatingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                showMessage("Edycja strażaka");
+                Intent intent = new Intent(getContext(), AddEditFirefighterActivity.class);
+                startActivity(intent);
             }
         });
 

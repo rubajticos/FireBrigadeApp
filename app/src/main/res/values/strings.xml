@@ -139,5 +139,13 @@
     <string name="firefighter_detail_training_edit_info">Edytuj strażaka jeśli chcesz dodać umiejętności</string>
     <string name="firefighter_detail_training_loading_error">Błąd podczas ładowania szkoleń</string>
 
+    <string name="title_activity_add_edit_firefighter">AddEditFirefighterActivity</string>
+
+    <!--ADD EDIT FIREFIGHTER ACTIVITY-->
+    <string name="add_edit_firefighter_name">Imię</string>
+    <string name="add_edit_firefighter_lastName">Nazwisko</string>
+    <string name="add_edit_firefighter_birthday">Data urodzenia</string>
+    <string name="add_edit_firefighter_expiryMedicalTestsDate">Badania medyczne ważne do</string>
+
 
 </resources>
