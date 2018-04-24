@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.TrainingRequestImpl;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
@@ -60,6 +61,7 @@ public class AddEditFirefighterActivity extends AppCompatActivity {
 
         mAddEditFirefighterPresenter = new AddEditFirefighterPresenter(
                 new FirefighterRequestImpl(this),
+                new TrainingRequestImpl(this),
                 addEditFirefighterFragment,
                 firefighterId,
                 shouldLoadDataFromServer,

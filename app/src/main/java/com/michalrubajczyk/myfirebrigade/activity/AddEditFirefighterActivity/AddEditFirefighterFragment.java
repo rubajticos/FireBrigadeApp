@@ -2,8 +2,6 @@ package com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity;
 
 import android.app.Activity;
 import android.app.DatePickerDialog;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -14,10 +12,12 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,6 +25,7 @@ import android.widget.TextView;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
@@ -34,6 +35,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     public static final String ARGUMENT_EDIT_FIREFIGHTER_ID = "ARGUMENT_EDIT_FIREFIGHTER_ID";
 
     private AddEditFirefighterContract.Presenter mPresenter;
+
+    private List<String> mTrainingNames = new ArrayList<>();
 
     private EditText mName;
     private EditText mLastName;
@@ -63,6 +66,12 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     public void setPresenter(AddEditFirefighterContract.Presenter presenter) {
         mPresenter = presenter;
     }
+
+    @Override
+    public void setTrainingNames(List<String> mTrainingNames) {
+        this.mTrainingNames = mTrainingNames;
+    }
+
 
     @Nullable
     @Override
@@ -108,27 +117,28 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
             TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
 
-            TextView trainingName = new TextView(getActivity().getApplicationContext());
-            trainingName.setText("Training Name");
-            trainingName.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-            trainingName.setBackground(getResources().getDrawable(R.drawable.border_bottom));
-            trainingName.setVisibility(View.VISIBLE);
+            Spinner trainingNameSpinner = new Spinner(getActivity().getApplicationContext());
+            trainingNameSpinner.setVisibility(View.VISIBLE);
+
+            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, mTrainingNames);
+            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            trainingNameSpinner.setAdapter(dataAdapter);
 
             TextView trainingDate = new TextView(getActivity().getApplicationContext());
             trainingDate.setText("Training Date");
-            trainingName.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-            trainingName.setBackground(getResources().getDrawable(R.drawable.border_bottom));
+            trainingDate.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            trainingDate.setBackground(getResources().getDrawable(R.drawable.border_bottom));
             trainingDate.setVisibility(View.VISIBLE);
 
             Button removeButton = new Button(getActivity().getApplicationContext());
             removeButton.setText("-");
-            trainingName.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
+            removeButton.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
             removeButton.setVisibility(View.VISIBLE);
             removeButton.setOnClickListener(view1 -> {
                 mTrainingsTL.removeView(row);
             });
 
-            row.addView(trainingName);
+            row.addView(trainingNameSpinner);
             row.addView(trainingDate);
             row.addView(removeButton);
             mTrainingsTL.addView(row);
@@ -163,6 +173,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                 return super.onOptionsItemSelected(item);
         }
     }
+
 
     @Override
     public void showInwalidFirefighterError() {

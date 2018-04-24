@@ -11,6 +11,8 @@ public interface AddEditFirefighterContract {
 
     interface View extends BaseView<Presenter> {
 
+        void setTrainingNames(List<String> mTrainingNames);
+
         void showInwalidFirefighterError();
 
         void showUpdateFirefighterError();
