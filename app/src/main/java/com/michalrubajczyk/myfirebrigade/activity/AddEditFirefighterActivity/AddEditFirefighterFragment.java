@@ -26,7 +26,9 @@ import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddEditFirefighterFragment extends Fragment implements AddEditFirefighterContract.View {
     private static final String TAG = "ADDEDIT FFIGHTER FRAG";
@@ -200,11 +202,40 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
         switch (item.getItemId()) {
             case R.id.action_add_edit_firefighter_save:
                 Log.d("TAG", "Zapis!!!!");
+                prepareFirefighter();
                 return true;
 
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void prepareFirefighter() {
+        Map<String, String> trainings = prepareTrainings();
+        Log.d(TAG, "Trainings: " + trainings.toString());
+    }
+
+    private Map<String, String> prepareTrainings() {
+        Map<String, String> trainings = new HashMap<>();
+        List<TableRow> trainingRows = prepareTrainingRows();
+        for (TableRow row :
+                trainingRows) {
+            Spinner spinner = (Spinner) row.getChildAt(0);
+            String trainingName = spinner.getSelectedItem().toString();
+            TextView trainingDateTv = (TextView) row.getChildAt(1);
+            String trainingDate = trainingDateTv.getText().toString();
+
+            trainings.put(trainingName, trainingDate);
+        }
+        return trainings;
+    }
+
+    private List<TableRow> prepareTrainingRows() {
+        List<TableRow> trainnigRows = new ArrayList<>();
+        for (int i = 0; i < mTrainingsTL.getChildCount(); i++) {
+            trainnigRows.add((TableRow) mTrainingsTL.getChildAt(i));
+        }
+        return trainnigRows;
     }
 
 
