@@ -16,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -112,40 +111,74 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
         mAddTrainingButton = (Button) root.findViewById(R.id.add_edit_firefighter_add_training);
         mAddTrainingButton.setOnClickListener(view -> {
             Log.d(TAG, "kilknieto dodawanie wyszkolenia");
-            TableRow row = new TableRow(getActivity().getApplicationContext());
-            row.setVisibility(View.VISIBLE);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
+            TableRow row = createTrainingRow();
+            Spinner trainingNameSpinner = createTrainingSpinner();
+            createArrayAdapterForTrainingSpinner(trainingNameSpinner, mTrainingNames);
+            TextView trainingDate = createTrainingTextView();
+            trainingDate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                            trainingDate.setText(i2 + "." + i1 + "." + i);
+                        }
+                    };
+                    createAndShowDatePickerDialog(mDateSetListener);
+                }
+            });
 
-            Spinner trainingNameSpinner = new Spinner(getActivity().getApplicationContext());
-            trainingNameSpinner.setVisibility(View.VISIBLE);
-
-            ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, mTrainingNames);
-            dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            trainingNameSpinner.setAdapter(dataAdapter);
-
-            TextView trainingDate = new TextView(getActivity().getApplicationContext());
-            trainingDate.setText("Training Date");
-            trainingDate.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-            trainingDate.setBackground(getResources().getDrawable(R.drawable.border_bottom));
-            trainingDate.setVisibility(View.VISIBLE);
-
-            Button removeButton = new Button(getActivity().getApplicationContext());
-            removeButton.setText("-");
-            removeButton.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1));
-            removeButton.setVisibility(View.VISIBLE);
-            removeButton.setOnClickListener(view1 -> {
+            Button removeTrainingButton = createButtonForRemoveTraining();
+            removeTrainingButton.setOnClickListener(view1 -> {
                 mTrainingsTL.removeView(row);
             });
 
             row.addView(trainingNameSpinner);
             row.addView(trainingDate);
-            row.addView(removeButton);
+            row.addView(removeTrainingButton);
             mTrainingsTL.addView(row);
         });
 
         setHasOptionsMenu(true);
         return root;
+    }
+
+
+    private TableRow createTrainingRow() {
+        TableRow row = new TableRow(getActivity().getApplicationContext());
+        row.setVisibility(View.VISIBLE);
+        TableRow.LayoutParams lp = new TableRow.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT, 1);
+        row.setLayoutParams(lp);
+        return row;
+    }
+
+    private Spinner createTrainingSpinner() {
+        Spinner spinner = new Spinner(getActivity().getApplicationContext());
+        spinner.setVisibility(View.VISIBLE);
+        return spinner;
+    }
+
+    private void createArrayAdapterForTrainingSpinner(Spinner spinner, List<String> valuesList) {
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, valuesList);
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setAdapter(dataAdapter);
+    }
+
+    private TextView createTrainingTextView() {
+        TextView textView = new TextView(getActivity().getApplicationContext());
+        textView.setText("Training Date");
+        textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 4));
+        textView.setBackground(getResources().getDrawable(R.drawable.border_bottom));
+        textView.setVisibility(View.VISIBLE);
+        return textView;
+    }
+
+    private Button createButtonForRemoveTraining() {
+        Button removeButton = new Button(getActivity().getApplicationContext());
+        removeButton.setBackgroundResource(R.drawable.ic_remove_circle_black_24dp);
+        removeButton.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 4));
+        removeButton.setVisibility(View.VISIBLE);
+        return removeButton;
     }
 
     private void createAndShowDatePickerDialog(DatePickerDialog.OnDateSetListener mDateSetListener) {
