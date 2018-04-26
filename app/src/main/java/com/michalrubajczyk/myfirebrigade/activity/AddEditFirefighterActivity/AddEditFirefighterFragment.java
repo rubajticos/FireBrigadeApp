@@ -276,7 +276,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     }
 
     @Override
-    public void setTrainings(List<Training> trainings) {
+    public void setTrainings(HashMap<String, String> trainings) {
 
     }
 

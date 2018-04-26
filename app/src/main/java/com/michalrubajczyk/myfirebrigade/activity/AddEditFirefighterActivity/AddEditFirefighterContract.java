@@ -5,6 +5,7 @@ import com.michalrubajczyk.myfirebrigade.BaseView;
 import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public interface AddEditFirefighterContract {
@@ -27,7 +28,7 @@ public interface AddEditFirefighterContract {
 
         void setExpiryMedicalTests(String expiryMedicalTests);
 
-        void setTrainings(List<Training> trainings);
+        void setTrainings(HashMap<String, String> trainings);
 
         boolean isActive();
 
