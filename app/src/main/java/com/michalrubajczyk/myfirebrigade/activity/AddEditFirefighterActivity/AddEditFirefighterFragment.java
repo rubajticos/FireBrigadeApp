@@ -22,7 +22,6 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -156,6 +155,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
 
     private Spinner createTrainingSpinner() {
         Spinner spinner = new Spinner(getActivity().getApplicationContext());
+        createArrayAdapterForTrainingSpinner(spinner, mTrainingNames);
         spinner.setVisibility(View.VISIBLE);
         return spinner;
     }
@@ -245,6 +245,11 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     }
 
     @Override
+    public void showInwalidTrainingsError() {
+        Snackbar.make(mName, R.string.add_firebrigade_error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showUpdateFirefighterError() {
         Snackbar.make(mName, R.string.update_firebrigade_error, Snackbar.LENGTH_LONG).show();
     }
@@ -277,7 +282,34 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
 
     @Override
     public void setTrainings(HashMap<String, String> trainings) {
+        for (Map.Entry<String, String> entry : trainings.entrySet()) {
+            String trainingName = entry.getKey();
+            String trainingDate = entry.getValue();
 
+            TableRow trainingRow = createTrainingRow();
+            Spinner trainingSpinner = createTrainingSpinner();
+            trainingSpinner.setSelection(getIndexByValue(trainingSpinner, trainingName));
+
+            TextView dateTextView = createTrainingTextView();
+            dateTextView.setText(trainingDate);
+
+            Button removeItemBtn = createButtonForRemoveTraining();
+
+            trainingRow.addView(trainingSpinner);
+            trainingRow.addView(dateTextView);
+            trainingRow.addView(removeItemBtn);
+            mTrainingsTL.addView(trainingRow);
+        }
+    }
+
+    private int getIndexByValue(Spinner spinner, String value) {
+        for (int i = 0; i < spinner.getCount(); i++) {
+            if (spinner.getItemAtPosition(i).toString().equalsIgnoreCase(value)) {
+                return i;
+            }
+        }
+
+        return 0;
     }
 
     @Override

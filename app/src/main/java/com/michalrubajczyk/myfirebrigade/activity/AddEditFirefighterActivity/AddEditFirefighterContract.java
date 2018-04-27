@@ -16,6 +16,8 @@ public interface AddEditFirefighterContract {
 
         void showInwalidFirefighterError();
 
+        void showInwalidTrainingsError();
+
         void showUpdateFirefighterError();
 
         void showFirefighter();

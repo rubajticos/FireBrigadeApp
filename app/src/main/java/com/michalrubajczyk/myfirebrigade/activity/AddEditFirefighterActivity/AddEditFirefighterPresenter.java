@@ -8,6 +8,7 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImp
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.TrainingRequest;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.TrainingRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
+import com.michalrubajczyk.myfirebrigade.model.dto.FirefighterTraining;
 import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
@@ -15,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 public class AddEditFirefighterPresenter implements AddEditFirefighterContract.Presenter {
@@ -123,27 +125,78 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
         }
 
         int firefighterId = Integer.parseInt(mFirefighterId);
+        getAndSetMyFirefighterDetails(firefighterId);
+        getAndSetMyFirefighterTrainings(firefighterId);
+    }
+
+    private void getAndSetMyFirefighterDetails(int firefighterId) {
         mFirefighterRequest.getFirefighterById(firefighterId, new DataListener() {
             @Override
             public void onSuccess(String data) {
+                Log.d(TAG, "Pobralem strazaka");
                 Firefighter firefighter = new Firefighter(data);
                 if (mAddEditFirefighterView.isActive()) {
-                    mAddEditFirefighterView.setName(firefighter.getName());
-                    mAddEditFirefighterView.setLastName(firefighter.getLastName());
-                    mAddEditFirefighterView.setBirthday(simpleDateFormat.format(firefighter.getBirthday()));
-                    mAddEditFirefighterView.setExpiryMedicalTests(simpleDateFormat.format(firefighter.getExpiryMedicalTest()));
+                    if (firefighter != null) {
+                        Log.d(TAG, "Ustawiam strażaka");
+                        mAddEditFirefighterView.setName(firefighter.getName());
+                        mAddEditFirefighterView.setLastName(firefighter.getLastName());
+                        mAddEditFirefighterView.setBirthday(simpleDateFormat.format(firefighter.getBirthday()));
+                        mAddEditFirefighterView.setExpiryMedicalTests(simpleDateFormat.format(firefighter.getExpiryMedicalTest()));
+                        mIsDataMissing = false;
+                    } else {
+                        Log.d(TAG, "Strazak NULL");
+                    }
                 }
-                mIsDataMissing = false;
+
             }
 
             @Override
             public void onError(int code) {
+                Log.d(TAG, "Nie pobralem strażaka");
                 if (mAddEditFirefighterView.isActive()) {
                     mAddEditFirefighterView.showInwalidFirefighterError();
                 }
             }
         });
+    }
 
+    private void getAndSetMyFirefighterTrainings(int firefighterId) {
+        mFirefighterRequest.getFirefighterTrainings(firefighterId, new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                Log.d(TAG, "Pobrane treningi: " + data);
+                List<FirefighterTraining> trainings = makeFirefighterTrainingsFromResponse(data);
+                Log.d(TAG, "Pobrane treningi: " + trainings.toString());
+                if (mAddEditFirefighterView.isActive()) {
+                    if (trainings != null) {
+                        Log.d(TAG, "Ustawiam szkolenia");
+                        HashMap<String, String> trainingsNamesAndDates = new HashMap<>();
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY");
+                        for (FirefighterTraining ft : trainings) {
+                            trainingsNamesAndDates.put(ft.getTraining().getName(), dateFormat.format(ft.getTrainingDate()));
+                        }
+                        mAddEditFirefighterView.setTrainings(trainingsNamesAndDates);
+                        mIsDataMissing = false;
+                    } else {
+                        Log.d(TAG, "szkolenia NULL");
+                    }
+                }
+            }
+
+            private List<FirefighterTraining> makeFirefighterTrainingsFromResponse(String data) {
+                Gson gson = new Gson();
+                FirefighterTraining[] firefighterTrainingsArray = gson.fromJson(data, FirefighterTraining[].class);
+                return Arrays.asList(firefighterTrainingsArray);
+            }
+
+            @Override
+            public void onError(int code) {
+                Log.d(TAG, "Nie pobralem szkolen");
+                if (mAddEditFirefighterView.isActive()) {
+                    mAddEditFirefighterView.showInwalidTrainingsError();
+                }
+            }
+        });
     }
 
     @Override
