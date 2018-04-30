@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity.AddEditFirefighterActivity;
 import com.michalrubajczyk.myfirebrigade.activity.FirefighterDetailsActivity.FirefighterDetailsActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
@@ -145,9 +146,8 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
 
     @Override
     public void showAddFirefighter() {
-        // TODO: 18/04/2018 przejscie do dodawania strazaka
-//        Intent intent = new Intent(getContext(), AddEditFirefighterActivity.class);
-//        startActivityForResult(intent, AddEditFirefighterActivity.REQUEST_ADD_FIREFIGHTER);
+        Intent intent = new Intent(getContext(), AddEditFirefighterActivity.class);
+        startActivityForResult(intent, AddEditFirefighterActivity.REQUEST_ADD_FIREFIGHTER);
     }
 
     @Override
