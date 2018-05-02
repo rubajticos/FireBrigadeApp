@@ -6,11 +6,17 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 import com.michalrubajczyk.myfirebrigade.model.dto.FirefighterTraining;
 import com.michalrubajczyk.myfirebrigade.utils.SSLAccept;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.List;
 
@@ -68,7 +74,39 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void addFirefighterToFireBrigade(Firefighter firefighter, int firebrigadeId, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/firefighter/firebrigade/" + firebrigadeId;
 
+        JSONObject jsonObject = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd" +
+                "").create();
+
+        try {
+            String jsonString = gson.toJson(firefighter, Firefighter.class);
+            Log.d(TAG, jsonString);
+            jsonObject = new JSONObject(jsonString);
+            Log.d(TAG, jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest addFirefighterRequest = new JsonObjectRequest(Request.Method.POST, url,
+                jsonObject,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "sever not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(addFirefighterRequest);
+        // TODO: 01/05/2018 poprawić parsowanie daty na serwerze
     }
 
     @Override

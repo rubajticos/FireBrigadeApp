@@ -12,12 +12,14 @@ import com.michalrubajczyk.myfirebrigade.model.dto.FirefighterTraining;
 import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AddEditFirefighterPresenter implements AddEditFirefighterContract.Presenter {
     public static final String TAG = "AdEd Firefither PRES";
@@ -84,12 +86,6 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
                 return names;
             }
 
-            private List<Training> createTrainingsFromResponse(String data) {
-                Gson gson = new Gson();
-                Training[] training = gson.fromJson(data, Training[].class);
-                return Arrays.asList(training);
-            }
-
             @Override
             public void onError(int code) {
                 Log.d("AddEdit Ffighter PR", "Error: " + code);
@@ -98,23 +94,96 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
         return null;
     }
 
+    private List<Training> createTrainingsFromResponse(String data) {
+        Gson gson = new Gson();
+        Training[] training = gson.fromJson(data, Training[].class);
+        return Arrays.asList(training);
+    }
+
     private boolean isNewFirefighter() {
         return mFirefighterId == null;
     }
 
     @Override
-    public void saveFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, List<Training> trainings) {
+    public void saveFirefighter(String name, String lastName, String birthday, String expiryMedicalTest, HashMap<String, String> trainings) {
         if (isNewFirefighter()) {
-            createFirefighter(name, lastName, birthday, expiryMedicalTest, trainings);
+            Firefighter firefighter = prepareFirefighter(name, lastName, birthday, expiryMedicalTest);
+            List<FirefighterTraining> trainingsList = prepareTrainings(trainings);
+            createFirefighter(firefighter, trainingsList);
         } else {
-            updateFirefighter(name, lastName, birthday, expiryMedicalTest, trainings);
+//            updateFirefighter(name, lastName, birthday, expiryMedicalTest, trainings);
         }
     }
 
-    private void createFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, List<Training> trainings) {
+
+    private Firefighter prepareFirefighter(String name, String lastName, String birthday, String expiryMedicalTest) {
+        Firefighter firefighter = new Firefighter();
+        firefighter.setName(name);
+        firefighter.setLastName(lastName);
+        try {
+            firefighter.setBirthday(simpleDateFormat.parse(birthday));
+            firefighter.setExpiryMedicalTest(simpleDateFormat.parse(expiryMedicalTest));
+        } catch (ParseException e) {
+            Log.d(TAG, "błąd podczas parsowania daty");
+        }
+        return firefighter;
     }
 
-    private void updateFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, List<Training> trainings) {
+    private List<FirefighterTraining> prepareTrainings(HashMap<String, String> trainings) {
+        final List<FirefighterTraining> tr = new ArrayList<>();
+        mTrainingRequest.getAllTrainings(new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                List<Training> baseTrainings = createTrainingsFromResponse(data);
+                List<FirefighterTraining> firefighterTrainings = new ArrayList<>();
+                for (Map.Entry<String, String> entry : trainings.entrySet()) {
+                    Training training = getTrainingByName(baseTrainings, entry.getKey());
+                    Log.d(TAG, "wybrane szkolenie: " + training.toString());
+                    FirefighterTraining firefighterTraining = new FirefighterTraining();
+                    firefighterTraining.setTraining(training);
+                    try {
+                        firefighterTraining.setTrainingDate(simpleDateFormat.parse(entry.getValue()));
+                    } catch (ParseException e) {
+                        Log.d(TAG, "błąd podczas parsowania daty");
+                    }
+                    tr.add(firefighterTraining);
+                }
+                Log.d(TAG, "firefighterTrainings size " + firefighterTrainings.size());
+
+            }
+
+            private Training getTrainingByName(List<Training> trainings, String key) {
+                for (Training training : trainings) {
+                    if (training.getName().equals(key)) return training;
+                }
+                return null;
+            }
+
+            @Override
+            public void onError(int code) {
+                mAddEditFirefighterView.showServerError();
+            }
+        });
+        return tr;
+    }
+
+    private void createFirefighter(Firefighter firefighter, List<FirefighterTraining> trainings) {
+        if (firefighter.isValid()) {
+            mFirefighterRequest.addFirefighterToFireBrigade(firefighter, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
+                @Override
+                public void onSuccess(String data) {
+                    mAddEditFirefighterView.showFirefighter();
+                }
+
+                @Override
+                public void onError(int code) {
+                    mAddEditFirefighterView.showInwalidFirefighterError();
+                }
+            });
+        }
+    }
+
+    private void updateFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, HashMap<String, String> trainings) {
 
     }
 

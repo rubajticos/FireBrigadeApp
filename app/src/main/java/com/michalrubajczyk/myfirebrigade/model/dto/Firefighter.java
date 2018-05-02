@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
 import java.util.Date;
@@ -13,6 +14,7 @@ public class Firefighter {
     private Date expiryMedicalTest;
 
     public Firefighter() {
+        this.idFirefighter = -1;
     }
 
     public Firefighter(int idFirefighter, String name, String lastName, Date birthday, Date expiryMedicalTest) {
@@ -74,5 +76,23 @@ public class Firefighter {
 
     public void setExpiryMedicalTest(Date expiryMedicalTest) {
         this.expiryMedicalTest = expiryMedicalTest;
+    }
+
+    @Override
+    public String toString() {
+        return "Firefighter{" +
+                "idFirefighter=" + idFirefighter +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", birthday=" + birthday +
+                ", expiryMedicalTest=" + expiryMedicalTest +
+                '}';
+    }
+
+    public boolean isValid() {
+        if (Strings.isNullOrEmpty(name) && Strings.isNullOrEmpty(lastName) && birthday == null && expiryMedicalTest == null) {
+            return false;
+        }
+        return true;
     }
 }

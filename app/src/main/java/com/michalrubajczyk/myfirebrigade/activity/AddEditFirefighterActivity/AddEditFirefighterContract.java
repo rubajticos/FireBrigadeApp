@@ -18,6 +18,8 @@ public interface AddEditFirefighterContract {
 
         void showInwalidTrainingsError();
 
+        void showServerError();
+
         void showUpdateFirefighterError();
 
         void showFirefighter();
@@ -39,7 +41,7 @@ public interface AddEditFirefighterContract {
 
     interface Presenter extends BasePresenter {
 
-        void saveFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, List<Training> trainings);
+        void saveFirefighter(String name, String lastName, String birthday, String expiryMedicalTest, HashMap<String, String> trainings);
 
         void populateFirefighter();
 

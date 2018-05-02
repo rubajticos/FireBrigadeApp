@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.0.106:8443</string>
+    <string name="base_server_url">https://192.168.1.114:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -151,6 +151,7 @@
     <string name="add_edit_firefighter_edit_title">Edycja strażaka</string>
     <string name="action_save">Zapisz</string>
     <string name="action_add_training">Dodaj szkolenie</string>
+    <string name="add_edit_firefighter_server_error">Błąd serwera.. spróbuj ponownie</string>
 
 
 </resources>

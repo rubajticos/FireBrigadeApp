@@ -41,4 +41,13 @@ public class FirefighterTraining {
         this.trainingDate = trainingDate;
     }
 
+    @Override
+    public String toString() {
+        return "FirefighterTraining{" +
+                "idFirefighterTraining=" + idFirefighterTraining +
+                ", firefighter=" + firefighter.toString() +
+                ", training=" + training.toString() +
+                ", trainingDate=" + trainingDate +
+                '}';
+    }
 }

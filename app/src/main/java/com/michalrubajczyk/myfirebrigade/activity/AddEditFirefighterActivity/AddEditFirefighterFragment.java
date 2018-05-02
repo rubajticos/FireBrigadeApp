@@ -201,8 +201,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_add_edit_firefighter_save:
-                Log.d("TAG", "Zapis!!!!");
-                prepareFirefighter();
+                Log.d(TAG, "Zapis!!!!");
+                mPresenter.saveFirefighter(mName.getText().toString(), mLastName.getText().toString(), mBirthday.getText().toString(), mExpiryMedicalTests.getText().toString(), prepareTrainingsMap());
                 return true;
 
             default:
@@ -210,13 +210,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
         }
     }
 
-    private void prepareFirefighter() {
-        Map<String, String> trainings = prepareTrainings();
-        Log.d(TAG, "Trainings: " + trainings.toString());
-    }
-
-    private Map<String, String> prepareTrainings() {
-        Map<String, String> trainings = new HashMap<>();
+    private HashMap<String, String> prepareTrainingsMap() {
+        HashMap<String, String> trainings = new HashMap<>();
         List<TableRow> trainingRows = prepareTrainingRows();
         for (TableRow row :
                 trainingRows) {
@@ -247,6 +242,11 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     @Override
     public void showInwalidTrainingsError() {
         Snackbar.make(mName, R.string.add_firebrigade_error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void showServerError() {
+        Snackbar.make(mName, R.string.add_edit_firefighter_server_error, Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -294,6 +294,12 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
             dateTextView.setText(trainingDate);
 
             Button removeItemBtn = createButtonForRemoveTraining();
+            removeItemBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    mTrainingsTL.removeView(trainingRow);
+                }
+            });
 
             trainingRow.addView(trainingSpinner);
             trainingRow.addView(dateTextView);
