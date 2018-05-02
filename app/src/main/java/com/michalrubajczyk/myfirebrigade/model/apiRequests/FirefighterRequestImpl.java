@@ -106,7 +106,6 @@ public class FirefighterRequestImpl implements FirefighterRequest {
                     }
                 });
         RequestQueueSingleton.getInstance(mContext).addToRequestQueue(addFirefighterRequest);
-        // TODO: 01/05/2018 poprawić parsowanie daty na serwerze
     }
 
     @Override
@@ -138,6 +137,11 @@ public class FirefighterRequestImpl implements FirefighterRequest {
                     }
                 });
         RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getFirefighterTrainingRequest);
+    }
+
+    @Override
+    public void addFirefighterTrainings(List<FirefighterTraining> trainings, DataListener dataListener) {
+
     }
 
     @Override

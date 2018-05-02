@@ -9,6 +9,21 @@ public class FirefighterTraining {
     private Training training;
     private Date trainingDate;
 
+    public FirefighterTraining() {
+        this(-1, null, null, null);
+    }
+
+    public FirefighterTraining(Firefighter firefighter, Training training, Date trainingDate) {
+        this(-1, firefighter, training, trainingDate);
+    }
+
+    public FirefighterTraining(int idFirefighterTraining, Firefighter firefighter, Training training, Date trainingDate) {
+        this.idFirefighterTraining = idFirefighterTraining;
+        this.firefighter = firefighter;
+        this.training = training;
+        this.trainingDate = trainingDate;
+    }
+
     public int getIdFirefighterTraining() {
         return idFirefighterTraining;
     }
