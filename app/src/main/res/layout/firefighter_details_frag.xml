@@ -52,7 +52,7 @@
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/row_padding_vertical"
                 android:paddingTop="@dimen/activity_horizontal_margin"
-                android:text="TextView"
+                android:text="@string/firefighter_no_name"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -83,7 +83,7 @@
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/row_padding_vertical"
                 android:paddingTop="@dimen/activity_horizontal_margin"
-                android:text="TextView"
+                android:text="@string/firefighter_no_last_name"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -121,7 +121,7 @@
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/row_padding_vertical"
                 android:paddingTop="@dimen/activity_horizontal_margin"
-                android:text="TextView"
+                android:text="@string/firefighter_no_birthday"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
         </LinearLayout>
@@ -152,7 +152,7 @@
                 android:paddingBottom="@dimen/activity_horizontal_margin"
                 android:paddingLeft="@dimen/row_padding_vertical"
                 android:paddingTop="@dimen/activity_horizontal_margin"
-                android:text="TextView"
+                android:text="@string/firefighter_no_medical_tests"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="16sp" />
         </LinearLayout>

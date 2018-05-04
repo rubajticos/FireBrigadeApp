@@ -10,11 +10,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 import com.michalrubajczyk.myfirebrigade.model.dto.FirefighterTraining;
-import com.michalrubajczyk.myfirebrigade.utils.SSLAccept;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -82,7 +81,7 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
         try {
             String jsonString = gson.toJson(firefighter, Firefighter.class);
-            Log.d(TAG, jsonString);
+            Log.d(TAG, "firefighterJSON: " + jsonString);
             jsonObject = new JSONObject(jsonString);
             Log.d(TAG, jsonObject.toString());
         } catch (JSONException e) {
@@ -141,7 +140,36 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void addFirefighterTrainings(List<FirefighterTraining> trainings, DataListener dataListener) {
+        JSONArray jsonArray = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
+        try {
+            String firefighterTrainingsJson = gson.toJson(trainings);
+            Log.d(TAG, "firefighterTrainingsJSON: " + firefighterTrainingsJson);
+            jsonArray = new JSONArray(firefighterTrainingsJson);
+            Log.d(TAG, jsonArray.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        String url = BASE_SERVER_URL + "/firefighter/trainings";
+        JsonArrayRequest addFirefighterTrainingsRequest = new JsonArrayRequest(Request.Method.POST, url, jsonArray,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (Exception e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "#addFirefighterTrainings() - server not response");
+                    }
+
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(addFirefighterTrainingsRequest);
     }
 
     @Override

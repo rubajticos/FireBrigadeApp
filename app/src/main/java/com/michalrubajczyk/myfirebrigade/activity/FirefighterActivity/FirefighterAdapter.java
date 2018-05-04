@@ -26,6 +26,7 @@ public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.
         public TextView expiryMedicalTest;
 
         private String medicalTestPreText;
+        private String noMedicalTestDate;
 
 
         public MyViewHolder(View view) {
@@ -34,6 +35,7 @@ public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.
             lastName = (TextView) view.findViewById(R.id.firefighter_list_item_lastname);
             expiryMedicalTest = (TextView) view.findViewById(R.id.firefighter_list_item_expiryMedicalTest);
             medicalTestPreText = view.getResources().getString(R.string.firefighter_list_item_medical_tests_first_sentence);
+            noMedicalTestDate = view.getResources().getString(R.string.firefighter_no_medical_tests);
         }
     }
 
@@ -56,7 +58,12 @@ public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.
         holder.name.setText(firefighter.getName());
         holder.lastName.setText(firefighter.getLastName());
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        holder.expiryMedicalTest.setText(holder.medicalTestPreText + " " + dateFormat.format(firefighter.getExpiryMedicalTest()));
+        Date expiryMedicalTestDate = firefighter.getExpiryMedicalTest();
+        if (expiryMedicalTestDate != null) {
+            holder.expiryMedicalTest.setText(holder.medicalTestPreText + " " + dateFormat.format(expiryMedicalTestDate));
+        } else {
+            holder.expiryMedicalTest.setText(holder.noMedicalTestDate);
+        }
     }
 
     @Override

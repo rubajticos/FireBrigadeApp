@@ -3,6 +3,7 @@ package com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.TrainingRequest;
@@ -172,6 +173,27 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
             mFirefighterRequest.addFirefighterToFireBrigade(firefighter, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
                 @Override
                 public void onSuccess(String data) {
+                    Firefighter addedFirefighter = prepareFirefighterFromResponse(data);
+                    Log.d(TAG, "dodany strażak: " + addedFirefighter.toString());
+
+                    List<FirefighterTraining> trainingsCandidate = trainings;
+                    for (FirefighterTraining tr : trainingsCandidate) {
+                        tr.setFirefighter(addedFirefighter);
+                    }
+
+                    mFirefighterRequest.addFirefighterTrainings(trainingsCandidate, new DataListener() {
+                        @Override
+                        public void onSuccess(String data) {
+                            Log.d(TAG, "dodane umiejetnosci!");
+                            Log.d(TAG, "dodane szkolenia: " + data);
+                        }
+
+                        @Override
+                        public void onError(int code) {
+                            Log.d(TAG, "blad przy dodawaniu umiejetnosci!");
+                            mAddEditFirefighterView.showInwalidTrainingsError();
+                        }
+                    });
                     mAddEditFirefighterView.showFirefighter();
                 }
 
@@ -180,7 +202,15 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
                     mAddEditFirefighterView.showInwalidFirefighterError();
                 }
             });
+        } else {
+            mAddEditFirefighterView.showInwalidFirefighterError();
         }
+    }
+
+    private Firefighter prepareFirefighterFromResponse(String data) {
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Firefighter firefighter = gson.fromJson(data, Firefighter.class);
+        return firefighter;
     }
 
     private void updateFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, HashMap<String, String> trainings) {

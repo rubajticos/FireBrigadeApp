@@ -138,6 +138,10 @@
     <string name="firefighters_detail_training_no_content">Strażak nie ma jeszcze żadnych szkoleń</string>
     <string name="firefighter_detail_training_edit_info">Edytuj strażaka jeśli chcesz dodać umiejętności</string>
     <string name="firefighter_detail_training_loading_error">Błąd podczas ładowania szkoleń</string>
+    <string name="firefighter_no_name">Nie podano</string>
+    <string name="firefighter_no_last_name">Nie podano</string>
+    <string name="firefighter_no_medical_tests">Brak badań</string>
+    <string name="firefighter_no_birthday">Nie podano</string>
 
     <string name="title_activity_add_edit_firefighter">AddEditFirefighterActivity</string>
 
