@@ -180,7 +180,7 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
                     for (FirefighterTraining tr : trainingsCandidate) {
                         tr.setFirefighter(addedFirefighter);
                     }
-
+                    // TODO: 05/05/2018 walidacja szkoleń
                     mFirefighterRequest.addFirefighterTrainings(trainingsCandidate, new DataListener() {
                         @Override
                         public void onSuccess(String data) {
@@ -214,7 +214,7 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
     }
 
     private void updateFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, HashMap<String, String> trainings) {
-
+        // TODO: 05/05/2018 aktualizacja strażaka
     }
 
     @Override
