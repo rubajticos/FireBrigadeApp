@@ -11,6 +11,7 @@ import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.dto.FirefighterTraining;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class FirefighterDetailsTrainingAdapter extends RecyclerView.Adapter<FirefighterDetailsTrainingAdapter.MyViewHolder> {
@@ -21,11 +22,13 @@ public class FirefighterDetailsTrainingAdapter extends RecyclerView.Adapter<Fire
 
         public TextView trainingName;
         public TextView trainingDate;
+        public String noTrainingDateText;
 
         public MyViewHolder(View view) {
             super(view);
             trainingName = (TextView) view.findViewById(R.id.firefighter_training_list_item_trainingName);
             trainingDate = (TextView) view.findViewById(R.id.firefighter_training_list_item_trainingDate);
+            noTrainingDateText = view.getResources().getString(R.string.firefighter_no_trainingDate);
         }
 
     }
@@ -49,7 +52,12 @@ public class FirefighterDetailsTrainingAdapter extends RecyclerView.Adapter<Fire
         holder.trainingName.setText(firefighterTraining.getTraining().getName());
 
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        holder.trainingDate.setText(dateFormat.format(firefighterTraining.getTrainingDate()));
+        Date trainingDate = firefighterTraining.getTrainingDate();
+        if (trainingDate != null) {
+            holder.trainingDate.setText(dateFormat.format(firefighterTraining.getTrainingDate()));
+        } else {
+            holder.trainingDate.setText(holder.noTrainingDateText);
+        }
     }
 
     @Override

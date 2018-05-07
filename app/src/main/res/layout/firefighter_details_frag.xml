@@ -12,8 +12,6 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp">
 
-        <!--todo Dodawnie labela "Informacje o strażaku" i etykiet do imienia, nazwisko itd-->
-
         <TextView
             android:id="@+id/firefighter_detailLabel"
             android:layout_width="match_parent"

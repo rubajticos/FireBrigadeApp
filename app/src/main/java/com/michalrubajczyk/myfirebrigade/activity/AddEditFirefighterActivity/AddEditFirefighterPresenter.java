@@ -146,6 +146,8 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
                         firefighterTraining.setTrainingDate(simpleDateFormat.parse(entry.getValue()));
                     } catch (ParseException e) {
                         Log.d(TAG, "błąd podczas parsowania daty");
+                    } catch (NullPointerException e) {
+                        Log.d(TAG, "brak daty");
                     }
                     tr.add(firefighterTraining);
                 }
@@ -180,7 +182,6 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
                     for (FirefighterTraining tr : trainingsCandidate) {
                         tr.setFirefighter(addedFirefighter);
                     }
-                    // TODO: 05/05/2018 walidacja szkoleń
                     mFirefighterRequest.addFirefighterTrainings(trainingsCandidate, new DataListener() {
                         @Override
                         public void onSuccess(String data) {

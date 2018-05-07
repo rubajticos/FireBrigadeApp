@@ -168,7 +168,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
 
     private TextView createTrainingTextView() {
         TextView textView = new TextView(getActivity().getApplicationContext());
-        textView.setText("Training Date");
+        textView.setText(getString(R.string.add_edit_firefighter_training_date));
         textView.setLayoutParams(new TableRow.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT, 4));
         textView.setBackground(getResources().getDrawable(R.drawable.border_bottom));
         textView.setVisibility(View.VISIBLE);
