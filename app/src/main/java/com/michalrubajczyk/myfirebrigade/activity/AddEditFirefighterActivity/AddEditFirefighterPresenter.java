@@ -112,7 +112,9 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
             List<FirefighterTraining> trainingsList = prepareTrainings(trainings);
             createFirefighter(firefighter, trainingsList);
         } else {
-//            updateFirefighter(name, lastName, birthday, expiryMedicalTest, trainings);
+            Firefighter firefighter = prepareFirefighter(name, lastName, birthday, expiryMedicalTest);
+            List<FirefighterTraining> trainingsList = prepareTrainings(trainings);
+            updateFirefighter(firefighter, trainingsList);
         }
     }
 
@@ -214,8 +216,46 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
         return firefighter;
     }
 
-    private void updateFirefighter(String name, String lastName, Date birthday, Date expiryMedicalTest, HashMap<String, String> trainings) {
-        // TODO: 05/05/2018 aktualizacja strażaka
+    private void updateFirefighter(Firefighter firefighter, List<FirefighterTraining> trainingList) {
+        if (isNewFirefighter()) {
+            throw new RuntimeException(("updateFirefighter() was called by firefighter is new"));
+        }
+        int firefighterId = Integer.parseInt(mFirefighterId);
+        Firefighter updateFirefighter = firefighter;
+        firefighter.setIdFirefighter(firefighterId);
+        mFirefighterRequest.updateFirefighter(updateFirefighter, new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                if (trainingList.size() > 0) {
+                    Firefighter updatedFirefighter = prepareFirefighterFromResponse(data);
+
+                    Log.d(TAG, "zaktualizowany strażak: " + updatedFirefighter.toString());
+
+                    List<FirefighterTraining> trainingsCandidate = trainingList;
+                    for (FirefighterTraining tr : trainingsCandidate) {
+                        tr.setFirefighter(updatedFirefighter);
+                    }
+                    mFirefighterRequest.updateFirefighterTrainings(trainingsCandidate, new DataListener() {
+                        @Override
+                        public void onSuccess(String data) {
+                            mAddEditFirefighterView.showFirefighter();
+                        }
+
+                        @Override
+                        public void onError(int code) {
+                            mAddEditFirefighterView.showUpdateFirefighterTrainingsError();
+                        }
+                    });
+                } else {
+                    mAddEditFirefighterView.showFirefighter();
+                }
+            }
+
+            @Override
+            public void onError(int code) {
+                mAddEditFirefighterView.showUpdateFirefighterError();
+            }
+        });
     }
 
     @Override

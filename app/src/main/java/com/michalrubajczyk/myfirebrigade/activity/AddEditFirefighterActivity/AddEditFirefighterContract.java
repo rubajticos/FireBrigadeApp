@@ -22,6 +22,8 @@ public interface AddEditFirefighterContract {
 
         void showUpdateFirefighterError();
 
+        void showUpdateFirefighterTrainingsError();
+
         void showFirefighter();
 
         void setName(String name);

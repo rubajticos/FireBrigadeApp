@@ -174,6 +174,7 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void updateFirefighterTrainings(List<FirefighterTraining> trainingList, DataListener dataListener) {
+        // TODO: 07/05/2018 zaimplementowac
 
     }
 }

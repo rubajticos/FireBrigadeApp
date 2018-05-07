@@ -155,6 +155,7 @@
     <string name="add_edit_firefighter_expiryMedicalTestsDate">Badania medyczne ważne do</string>
     <string name="add_edit_firefighter_add_title">Dodawanie strażaka</string>
     <string name="add_edit_firefighter_edit_title">Edycja strażaka</string>
+    <string name="add_edit_firefighter_update_trainings_error">Błąd podczas aktualizowania szkoleń</string>
     <string name="action_save">Zapisz</string>
     <string name="action_add_training">Dodaj szkolenie</string>
     <string name="add_edit_firefighter_server_error">Błąd serwera.. spróbuj ponownie</string>

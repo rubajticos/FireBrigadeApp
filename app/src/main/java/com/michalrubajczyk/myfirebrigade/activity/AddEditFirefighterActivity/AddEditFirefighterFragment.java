@@ -255,6 +255,11 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
     }
 
     @Override
+    public void showUpdateFirefighterTrainingsError() {
+        Snackbar.make(mName, R.string.add_edit_firefighter_update_trainings_error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
     public void showFirefighter() {
         getActivity().setResult(Activity.RESULT_OK);
         getActivity().finish();
