@@ -1,5 +1,7 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import com.google.common.base.Strings;
+
 import java.util.Date;
 
 public class FirefighterTraining {
@@ -64,5 +66,11 @@ public class FirefighterTraining {
                 ", training=" + training.toString() +
                 ", trainingDate=" + trainingDate +
                 '}';
+    }
+
+    public boolean isValid() {
+        if (trainingDate == null || Strings.isNullOrEmpty(training.getName())) return false;
+
+        return true;
     }
 }
