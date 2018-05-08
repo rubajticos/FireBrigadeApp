@@ -17,10 +17,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public class AddEditFirefighterPresenter implements AddEditFirefighterContract.Presenter {
     public static final String TAG = "AdEd Firefither PRES";
@@ -108,9 +112,26 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
     @Override
     public void saveFirefighter(String name, String lastName, String birthday, String expiryMedicalTest, HashMap<String, String> trainings) {
         if (isNewFirefighter()) {
-            Firefighter firefighter = prepareFirefighter(name, lastName, birthday, expiryMedicalTest);
-            List<FirefighterTraining> trainingsList = prepareTrainings(trainings);
-            createFirefighter(firefighter, trainingsList);
+            ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+            Callable<Firefighter> callableFirefighter = () -> {
+                return prepareFirefighter(name, lastName, birthday, expiryMedicalTest);
+            };
+
+            Callable<List<FirefighterTraining>> callableTrainings = () -> {
+                return prepareTrainings(trainings);
+            };
+
+            Future<List<FirefighterTraining>> futureTrainings = executorService.submit(callableTrainings);
+            Future<Firefighter> futureFirefighter = executorService.submit(callableFirefighter);
+
+            try {
+                createFirefighter(futureFirefighter.get(), futureTrainings.get());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            }
         } else {
             Firefighter firefighter = prepareFirefighter(name, lastName, birthday, expiryMedicalTest);
             List<FirefighterTraining> trainingsList = prepareTrainings(trainings);
@@ -313,7 +334,11 @@ public class AddEditFirefighterPresenter implements AddEditFirefighterContract.P
                         HashMap<String, String> trainingsNamesAndDates = new HashMap<>();
                         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.YYYY");
                         for (FirefighterTraining ft : trainings) {
-                            trainingsNamesAndDates.put(ft.getTraining().getName(), dateFormat.format(ft.getTrainingDate()));
+                            if (ft.getTrainingDate() != null) {
+                                trainingsNamesAndDates.put(ft.getTraining().getName(), dateFormat.format(ft.getTrainingDate()));
+                            } else {
+                                trainingsNamesAndDates.put(ft.getTraining().getName(), "Data szkolenia");
+                            }
                         }
                         mAddEditFirefighterView.setTrainings(trainingsNamesAndDates);
                         mIsDataMissing = false;

@@ -114,7 +114,38 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void updateFirefighter(Firefighter firefighter, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/firefighter";
 
+        JSONObject jsonObject = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd" +
+                "").create();
+
+        try {
+            String jsonString = gson.toJson(firefighter, Firefighter.class);
+            Log.d(TAG, "firefighterJSON: " + jsonString);
+            jsonObject = new JSONObject(jsonString);
+            Log.d(TAG, jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest updateFirefighterRequest = new JsonObjectRequest(Request.Method.PUT, url,
+                jsonObject,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "sever not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(updateFirefighterRequest);
     }
 
     @Override
@@ -174,7 +205,34 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void updateFirefighterTrainings(List<FirefighterTraining> trainingList, DataListener dataListener) {
-        // TODO: 07/05/2018 zaimplementowac
+        JSONArray jsonArray = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
 
+        try {
+            String firefighterTrainingsJson = gson.toJson(trainingList);
+            Log.d(TAG, "firefighterTrainingsJSON: " + firefighterTrainingsJson);
+            jsonArray = new JSONArray(firefighterTrainingsJson);
+            Log.d(TAG, jsonArray.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        String url = BASE_SERVER_URL + "/firefighter/trainings";
+        JsonArrayRequest updateFirefighterTrainingsRequest = new JsonArrayRequest(Request.Method.PUT, url, jsonArray,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (Exception e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "#updateFirefighterTrainings() - server not response");
+                    }
+
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(updateFirefighterTrainingsRequest);
     }
 }
