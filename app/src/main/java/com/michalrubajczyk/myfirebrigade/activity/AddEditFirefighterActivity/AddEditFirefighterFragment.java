@@ -86,7 +86,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                 DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        mBirthday.setText(i2 + "." + i1 + "." + i);
+                        mBirthday.setText(i2 + "." + i1 + 1 + "." + i);
                     }
                 };
                 createAndShowDatePickerDialog(mDateSetListener);
@@ -296,6 +296,18 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
             trainingSpinner.setSelection(getIndexByValue(trainingSpinner, trainingName));
 
             TextView dateTextView = createTrainingTextView();
+            dateTextView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                            dateTextView.setText(i2 + "." + i1 + 1 + "." + i);
+                        }
+                    };
+                    createAndShowDatePickerDialog(mDateSetListener);
+                }
+            });
             dateTextView.setText(trainingDate);
 
             Button removeItemBtn = createButtonForRemoveTraining();
