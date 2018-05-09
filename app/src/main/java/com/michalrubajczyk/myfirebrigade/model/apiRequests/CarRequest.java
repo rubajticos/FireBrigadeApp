@@ -12,6 +12,6 @@ public interface CarRequest {
 
     void updateCar(Car car, DataListener dataListener);
 
-    void deleteCar(Car car, DataListener dataListener);
+    void deleteCar(int carId, DataListener dataListener);
 
 }
