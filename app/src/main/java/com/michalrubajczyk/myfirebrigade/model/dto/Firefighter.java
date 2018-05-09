@@ -27,6 +27,7 @@ public class Firefighter {
 
     public Firefighter(String json) {
         Firefighter prepareFirefighter = prepareFromJson(json);
+        this.idFirefighter = prepareFirefighter.getIdFirefighter();
         this.name = prepareFirefighter.getName();
         this.lastName = prepareFirefighter.getLastName();
         this.birthday = prepareFirefighter.getBirthday();
