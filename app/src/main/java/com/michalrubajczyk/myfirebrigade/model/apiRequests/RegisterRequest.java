@@ -1,6 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.model.apiRequests;
 
-import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.User;
 
 /**
  * Created by Michal on 18/03/2018.
@@ -8,6 +8,6 @@ import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
 
 public interface RegisterRequest {
 
-    void registerUser(UserDTO user, final DataListener dataListener);
+    void registerUser(User user, final DataListener dataListener);
 
 }

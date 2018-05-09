@@ -4,13 +4,10 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
-import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -29,7 +26,7 @@ public class RegisterRequestImpl implements RegisterRequest {
     }
 
     @Override
-    public void registerUser(UserDTO user, final DataListener dataListener) {
+    public void registerUser(User user, final DataListener dataListener) {
         String url = BASE_SERVER_URL + "/register";
 
         JSONObject userJSON = new JSONObject();

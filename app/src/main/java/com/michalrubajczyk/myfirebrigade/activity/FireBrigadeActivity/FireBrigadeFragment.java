@@ -22,7 +22,7 @@ import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeActivity;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditFireBrigadeActivity.AddEditFireBrigadeFragment;
 import com.michalrubajczyk.myfirebrigade.activity.LoginActivity.LoginActivity;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigade;
 
 /**
  * Created by Michal on 21/03/2018.
@@ -126,7 +126,7 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
     }
 
     @Override
-    public void showFireBrigade(FireBrigadeDTO fireBrigade) {
+    public void showFireBrigade(FireBrigade fireBrigade) {
         mFirebrigadeDataView.setText(Html.fromHtml(fireBrigade.toString()));
         mFireBrigadeId = Integer.toString(fireBrigade.getIdFireBrigade());
         mFireBrigadeView.setVisibility(View.VISIBLE);

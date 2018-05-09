@@ -4,7 +4,7 @@ import android.util.Log;
 
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigade;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
 
 public class AddEditFireBrigadePresenter implements AddEditFireBrigadeContract.Presenter {
@@ -61,7 +61,7 @@ public class AddEditFireBrigadePresenter implements AddEditFireBrigadeContract.P
         mFireBrigadeRequest.getFireBrigade(firebrigadeId, new DataListener() {
             @Override
             public void onSuccess(String data) {
-                FireBrigadeDTO fireBrigade = new FireBrigadeDTO(data);
+                FireBrigade fireBrigade = new FireBrigade(data);
                 if (mAddEditFirebrigadeView.isActive()) {
                     mAddEditFirebrigadeView.setName(fireBrigade.getName());
                     mAddEditFirebrigadeView.setVoivodeship(fireBrigade.getVoivodeship());
@@ -89,7 +89,7 @@ public class AddEditFireBrigadePresenter implements AddEditFireBrigadeContract.P
 
 
     private void createFirebrigade(String name, String voivodeship, String district, String community, String city, boolean ksrg) {
-        FireBrigadeDTO newFirebrigade = new FireBrigadeDTO(name, voivodeship, district, community, city, ksrg);
+        FireBrigade newFirebrigade = new FireBrigade(name, voivodeship, district, community, city, ksrg);
         if (newFirebrigade.isEmpty()) {
             mAddEditFirebrigadeView.showInvalidFirebrigadeError();
         } else {
@@ -114,7 +114,7 @@ public class AddEditFireBrigadePresenter implements AddEditFireBrigadeContract.P
         }
         int firebrigadeId = Integer.parseInt(mFirebrigadeId);
 
-        FireBrigadeDTO updateFirebrigade = new FireBrigadeDTO(firebrigadeId, name, voivodeship, district, community, city, ksrg);
+        FireBrigade updateFirebrigade = new FireBrigade(firebrigadeId, name, voivodeship, district, community, city, ksrg);
         mFireBrigadeRequest.updateFirebrigade(updateFirebrigade, new DataListener() {
             @Override
             public void onSuccess(String data) {

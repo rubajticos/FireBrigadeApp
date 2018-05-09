@@ -2,7 +2,7 @@ package com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity;
 
 import com.michalrubajczyk.myfirebrigade.BasePresenter;
 import com.michalrubajczyk.myfirebrigade.BaseView;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigade;
 
 public interface FireBrigadeContract {
 
@@ -12,7 +12,7 @@ public interface FireBrigadeContract {
 
         void hideLoadingSpinner(boolean active);
 
-        void showFireBrigade(FireBrigadeDTO fireBrigade);
+        void showFireBrigade(FireBrigade fireBrigade);
 
         void showAddFireBrigade();
 

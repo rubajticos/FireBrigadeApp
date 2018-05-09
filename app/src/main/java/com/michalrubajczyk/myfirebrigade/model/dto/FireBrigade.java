@@ -1,18 +1,13 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
-import android.icu.text.StringSearch;
-
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Michal on 23/03/2018.
  */
 
-public class FireBrigadeDTO {
+public class FireBrigade {
 
     private Integer idFireBrigade;
     private String name;
@@ -23,7 +18,7 @@ public class FireBrigadeDTO {
     private boolean ksrg;
 
 
-    public FireBrigadeDTO() {
+    public FireBrigade() {
         this.name = "";
         this.voivodeship = "";
         this.district = "";
@@ -32,8 +27,8 @@ public class FireBrigadeDTO {
         this.ksrg = false;
     }
 
-    public FireBrigadeDTO(String json) {
-        FireBrigadeDTO prepareDto = prepareFromJson(json);
+    public FireBrigade(String json) {
+        FireBrigade prepareDto = prepareFromJson(json);
         this.idFireBrigade = prepareDto.getIdFireBrigade();
         this.name = prepareDto.getName();
         this.voivodeship = prepareDto.getVoivodeship();
@@ -43,7 +38,7 @@ public class FireBrigadeDTO {
         this.ksrg = prepareDto.isKsrg();
     }
 
-    public FireBrigadeDTO(String name, String voivodeship, String district, String community, String city, boolean ksrg) {
+    public FireBrigade(String name, String voivodeship, String district, String community, String city, boolean ksrg) {
         this.name = name;
         this.voivodeship = voivodeship;
         this.district = district;
@@ -52,7 +47,7 @@ public class FireBrigadeDTO {
         this.ksrg = ksrg;
     }
 
-    public FireBrigadeDTO(Integer id, String name, String voivodeship, String district, String community, String city, boolean ksrg) {
+    public FireBrigade(Integer id, String name, String voivodeship, String district, String community, String city, boolean ksrg) {
         this.idFireBrigade = id;
         this.name = name;
         this.voivodeship = voivodeship;
@@ -136,9 +131,9 @@ public class FireBrigadeDTO {
         return "NIE";
     }
 
-    private FireBrigadeDTO prepareFromJson(String json) {
+    private FireBrigade prepareFromJson(String json) {
         Gson gson = new Gson();
-        return gson.fromJson(json, FireBrigadeDTO.class);
+        return gson.fromJson(json, FireBrigade.class);
     }
 
     public boolean isEmpty() {

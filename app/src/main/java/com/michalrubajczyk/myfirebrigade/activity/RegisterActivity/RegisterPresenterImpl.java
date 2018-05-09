@@ -3,9 +3,10 @@ package com.michalrubajczyk.myfirebrigade.activity.RegisterActivity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.RegisterRequestImpl;
-import com.michalrubajczyk.myfirebrigade.model.dto.UserDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.User;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;
 
 import java.net.HttpURLConnection;
@@ -33,7 +34,7 @@ public class RegisterPresenterImpl implements RegisterPresenter, HttpErrors {
             if (isPasswordTheSame(password, repassword)) {
                 Log.d("RP: password validation", "hasla takie same");
                 mRegisterView.progressDialogShow();
-                UserDTO user = new UserDTO(username, password);
+                User user = new User(username, password);
                 mRegisterModel.registerUser(user, new DataListener() {
                     @Override
                     public void onSuccess(String data) {

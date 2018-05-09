@@ -4,7 +4,7 @@ package com.michalrubajczyk.myfirebrigade.model.dto;
  * Created by Michal on 23/03/2018.
  */
 
-public class FireBrigadeIncidentDTO {
+public class FireBrigadeIncident {
 
     private int indcidentId;
     private int firebrigadeId;

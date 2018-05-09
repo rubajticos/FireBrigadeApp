@@ -6,11 +6,9 @@ import android.util.Log;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigade;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,12 +72,12 @@ public class FireBrigadeRequestImpl implements FireBrigadeRequest {
     }
 
     @Override
-    public void addFireBrigadeToUser(FireBrigadeDTO fireBrigadeDTO, String username, DataListener dataListener) {
+    public void addFireBrigadeToUser(FireBrigade fireBrigade, String username, DataListener dataListener) {
         String url = BASE_SERVER_URL + "/firebrigade/user/" + username;
         JSONObject jsonObject = null;
         Gson gson = new Gson();
         try {
-            String jsonString = gson.toJson(fireBrigadeDTO, FireBrigadeDTO.class);
+            String jsonString = gson.toJson(fireBrigade, FireBrigade.class);
             Log.d(TAG, jsonString);
             jsonObject = new JSONObject(jsonString);
             Log.d(TAG, jsonObject.toString());
@@ -108,12 +106,12 @@ public class FireBrigadeRequestImpl implements FireBrigadeRequest {
     }
 
     @Override
-    public void updateFirebrigade(FireBrigadeDTO updateFirebrigade, DataListener dataListener) {
+    public void updateFirebrigade(FireBrigade updateFirebrigade, DataListener dataListener) {
         String url = BASE_SERVER_URL + "/firebrigade";
         JSONObject jsonObject = null;
         Gson gson = new Gson();
         try {
-            String jsonString = gson.toJson(updateFirebrigade, FireBrigadeDTO.class);
+            String jsonString = gson.toJson(updateFirebrigade, FireBrigade.class);
             Log.d(TAG, jsonString);
             jsonObject = new JSONObject(jsonString);
             Log.d(TAG, jsonObject.toString());

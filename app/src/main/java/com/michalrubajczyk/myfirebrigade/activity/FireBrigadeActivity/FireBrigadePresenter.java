@@ -4,8 +4,7 @@ package com.michalrubajczyk.myfirebrigade.activity.FireBrigadeActivity;
 import com.google.gson.Gson;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
-import com.michalrubajczyk.myfirebrigade.model.auth.AuthUserInfo;
-import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeDTO;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigade;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
@@ -49,7 +48,7 @@ public class FireBrigadePresenter implements FireBrigadeContract.Presenter {
         mFireBrigadeRequests.getFireBrigadeByUsername(mUser.getUsernameFromSharedPreferences(), new DataListener() {
             @Override
             public void onSuccess(String data) {
-                FireBrigadeDTO firebrigade = makeFirebrigadeFromResponse(data);
+                FireBrigade firebrigade = makeFirebrigadeFromResponse(data);
                 mFireBrigadeUtils.addFireBrigadeIdToSharedPreferences(firebrigade.getIdFireBrigade());
                 mFireBrigadeView.showFireBrigade(firebrigade);
                 mFireBrigadeView.hideLoadingSpinner(true);
@@ -69,9 +68,9 @@ public class FireBrigadePresenter implements FireBrigadeContract.Presenter {
 
     }
 
-    private FireBrigadeDTO makeFirebrigadeFromResponse(String data) {
+    private FireBrigade makeFirebrigadeFromResponse(String data) {
         Gson gson = new Gson();
-        return gson.fromJson(data, FireBrigadeDTO.class);
+        return gson.fromJson(data, FireBrigade.class);
     }
 
     @Override
