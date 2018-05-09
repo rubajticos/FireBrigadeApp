@@ -161,5 +161,14 @@
     <string name="add_edit_firefighter_server_error">Błąd serwera.. spróbuj ponownie</string>
     <string name="add_edit_firefighter_training_date">Data uzyskania</string>
 
+    <!--CAR ACTIVITY-->
+    <string name="title_activity_car">Samochody</string>
+    <string name="car_list_row_model">Model</string>
+    <string name="car_list_row_type">Typ</string>
+    <string name="car_list_row_operational_numbers">Numery operacyjne</string>
+    <string name="car_list_row_operaional_plates">Rejestracja</string>
+    <string name="car_fragment_no_cars">Brak samochodów do wyświetlenia</string>
+    <string name="car_fragment_add_info">Wciśnij + aby dodać samochód</string>
+    <string name="car_fragment_loading_error">Wystąpił błąd podczas ładowania samochodów</string>
 
 </resources>

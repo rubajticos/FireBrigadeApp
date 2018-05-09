@@ -2,7 +2,6 @@ package com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 
 public class FirefighterAdapter extends RecyclerView.Adapter<FirefighterAdapter.MyViewHolder> {
 

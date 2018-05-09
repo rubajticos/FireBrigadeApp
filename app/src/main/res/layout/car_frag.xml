@@ -5,24 +5,24 @@
     android:layout_height="match_parent">
 
     <RelativeLayout
-        android:id="@+id/firefighterContainer"
+        android:id="@+id/carsContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:id="@+id/firefighterRL"
+            android:id="@+id/carRL"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <ProgressBar
-                android:id="@+id/firefighterProgressBar"
+                android:id="@+id/carProgressBar"
                 style="?android:attr/progressBarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/firefighter_recyclerView"
+                android:id="@+id/car_recyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:scrollbars="vertical">
@@ -34,35 +34,35 @@
 
 
         <LinearLayout
-            android:id="@+id/noFirefighterRL"
+            android:id="@+id/noCarsRL"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:layout_centerInParent="true">
 
             <ImageView
-                android:id="@+id/noFirefightersIcon"
+                android:id="@+id/noCarsIcon"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 app:srcCompat="@android:drawable/presence_busy" />
 
             <TextView
-                android:id="@+id/noFirefightersMainText"
+                android:id="@+id/noCarsMainText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="8dp"
-                android:text="@string/firefighters_no_content"
+                android:text="@string/car_fragment_no_cars"
                 android:textSize="17sp" />
 
             <TextView
-                android:id="@+id/noFirefighterAddInfo"
+                android:id="@+id/noCarsAddInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="48dp"
                 android:layout_gravity="center"
                 android:gravity="center"
-                android:text="@string/firefighter_add_info"
+                android:text="@string/car_fragment_add_info"
                 android:textSize="17sp" />
 
 

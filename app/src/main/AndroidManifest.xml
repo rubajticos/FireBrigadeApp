@@ -59,6 +59,10 @@
             android:name=".activity.AddEditFirefighterActivity.AddEditFirefighterActivity"
             android:label="@string/title_activity_add_edit_firefighter"
             android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity
+            android:name=".activity.CarActivity.CarActivity"
+            android:label="@string/title_activity_car"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>
