@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.0.102:8443</string>
+    <string name="base_server_url">https://192.168.0.104:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -170,5 +170,25 @@
     <string name="car_fragment_no_cars">Brak samochodów do wyświetlenia</string>
     <string name="car_fragment_add_info">Wciśnij + aby dodać samochód</string>
     <string name="car_fragment_loading_error">Wystąpił błąd podczas ładowania samochodów</string>
+
+    <!--CAR DETAILS ACTIVITY-->
+    <string name="title_activity_car_details">Informacje o samochodzie</string>
+    <string name="car_detail_label">Dane samochodu</string>
+    <string name="car_detail_model_label">Marka i model</string>
+    <string name="car_detail_operational_numbers_label">Numery operacyjne</string>
+    <string name="car_detail_plates_label">Rejestracja</string>
+    <string name="car_detail_type_label">Typ</string>
+    <string name="car_detail_water_label">Woda</string>
+    <string name="car_detail_foam_label">Piana</string>
+    <string name="car_detail_motor_pump_performance_label">Wydajność pompy</string>
+    <string name="car_detail_number_of_seats_label">Ilość miejsc</string>
+    <string name="car_detail_no_model">Nie podano</string>
+    <string name="car_detail_no_operational_numbers">Nie podano</string>
+    <string name="car_detail_no_plates">Nie podano</string>
+    <string name="car_detail_no_water">Brak danych</string>
+    <string name="car_detail_no_type">Nie podano</string>
+    <string name="car_detail_no_foam">Brak danych</string>
+    <string name="car_detail_no_motor_pump_performance">Brak danych</string>
+    <string name="car_detail_no_number_of_seats">Nie podano</string>
 
 </resources>

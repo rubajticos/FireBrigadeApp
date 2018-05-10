@@ -63,6 +63,11 @@
             android:name=".activity.CarActivity.CarActivity"
             android:label="@string/title_activity_car"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.CarDetailActivity.CarDetailsActivity"
+            android:label="@string/title_activity_car_details"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

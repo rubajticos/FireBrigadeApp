@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.CarDetailActivity.CarDetailsActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.Car;
 
@@ -88,9 +89,9 @@ public class CarFragment extends Fragment implements CarContract.View {
             @Override
             public void onClick(View view, int position) {
                 Log.d(TAG, "Klikniecie samochodu");
-                Integer firefighterId = (int) (long) recyclerView.getAdapter().getItemId(position);
-                Log.d(TAG, "Id wyswietlanego: " + Integer.toString(firefighterId));
-//                mPresenter.openCarDetails(firefighterId); todo otwieranie szczegolow samochodu
+                Integer carId = (int) (long) recyclerView.getAdapter().getItemId(position);
+                Log.d(TAG, "Id wyswietlanego: " + Integer.toString(carId));
+                mPresenter.openCarDetails(carId);
             }
 
             @Override
@@ -150,9 +151,9 @@ public class CarFragment extends Fragment implements CarContract.View {
 
     @Override
     public void showCarDetailUi(int carId) {
-//        Intent intent = new Intent(getContext(), CarDetailsActivity.class);
-//        intent.putExtra(CarDetailsActivity.EXTRA_CAR_ID, Integer.toString(carId));
-//        startActivity(intent); todo przejscie do szczegolow samochodu
+        Intent intent = new Intent(getContext(), CarDetailsActivity.class);
+        intent.putExtra(CarDetailsActivity.EXTRA_CAR_ID, Integer.toString(carId));
+        startActivity(intent);
     }
 
     @Override
