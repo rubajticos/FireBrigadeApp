@@ -12,12 +12,13 @@ public class Car {
     private int water;
     private int foam;
     private int motorPumpPerformance;
+    private int numberOfSeats;
 
     public Car() {
         this.id = -1;
     }
 
-    public Car(int id, String model, String operationalNumbers, String plates, String type, int water, int foam, int motorPumpPerformance) {
+    public Car(int id, String model, String operationalNumbers, String plates, String type, int water, int foam, int motorPumpPerformance, int numberOfSeats) {
         this.id = id;
         this.model = model;
         this.operationalNumbers = operationalNumbers;
@@ -26,6 +27,7 @@ public class Car {
         this.water = water;
         this.foam = foam;
         this.motorPumpPerformance = motorPumpPerformance;
+        this.numberOfSeats = numberOfSeats;
     }
 
     public static Car createCarFromJson(String json) {
@@ -97,4 +99,11 @@ public class Car {
         this.motorPumpPerformance = motorPumpPerformance;
     }
 
+    public int getNumberOfSeats() {
+        return numberOfSeats;
+    }
+
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
+    }
 }
