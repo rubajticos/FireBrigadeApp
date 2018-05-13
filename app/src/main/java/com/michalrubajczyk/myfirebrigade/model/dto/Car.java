@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
 public class Car {
@@ -20,6 +21,18 @@ public class Car {
 
     public Car(int id, String model, String operationalNumbers, String plates, String type, int water, int foam, int motorPumpPerformance, int numberOfSeats) {
         this.id = id;
+        this.model = model;
+        this.operationalNumbers = operationalNumbers;
+        this.plates = plates;
+        this.type = type;
+        this.water = water;
+        this.foam = foam;
+        this.motorPumpPerformance = motorPumpPerformance;
+        this.numberOfSeats = numberOfSeats;
+    }
+
+    public Car(String model, String operationalNumbers, String plates, String type, int water, int foam, int motorPumpPerformance, int numberOfSeats) {
+        this.id = -1;
         this.model = model;
         this.operationalNumbers = operationalNumbers;
         this.plates = plates;
@@ -105,5 +118,17 @@ public class Car {
 
     public void setNumberOfSeats(int numberOfSeats) {
         this.numberOfSeats = numberOfSeats;
+    }
+
+    public boolean isValid() {
+        if (
+                Strings.isNullOrEmpty(model) &&
+                        Strings.isNullOrEmpty(operationalNumbers) &&
+                        Strings.isNullOrEmpty(plates) &&
+                        Strings.isNullOrEmpty(type)
+                ) {
+            return false;
+        }
+        return true;
     }
 }

@@ -31,14 +31,14 @@ public class FirefighterRequestImpl implements FirefighterRequest {
 
     @Override
     public void getFirefightersByFirebrigadeId(int firebrigadeId, DataListener dataListener) {
-        String url = BASE_SERVER_URL + "/firefighters/firebrigade/" + firebrigadeId;
-        JsonArrayRequest getFirefightersRequest = new JsonArrayRequest(Request.Method.GET, url,
+        String url = BASE_SERVER_URL + "/firefighters/firebrigade/" + firebrigadeId; // link
+        JsonArrayRequest getFirefightersRequest = new JsonArrayRequest(Request.Method.GET, url,      //metoda , link, dane wejsciowe(przy put albo post)
                 null,
-                response -> {
+                response -> {                                                                        // jak jest sukces
                     dataListener.onSuccess(response.toString());
                     Log.d(TAG, response.toString());
                 },
-                error -> {
+                error -> {                                      // jak jest błąd to łapie jaki to błąd
                     try {
                         dataListener.onError(error.networkResponse.statusCode);
                         Log.d(TAG, error.toString());

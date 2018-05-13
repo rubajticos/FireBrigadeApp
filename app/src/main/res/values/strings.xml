@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.0.104:8443</string>
+    <string name="base_server_url">https://192.168.1.114:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -190,5 +190,26 @@
     <string name="car_detail_no_foam">Brak danych</string>
     <string name="car_detail_no_motor_pump_performance">Brak danych</string>
     <string name="car_detail_no_number_of_seats">Nie podano</string>
+
+    <!--ADD EDIT CAR ACTIVITY-->
+    <string name="title_activity_add_edit_car_">Dodaj/aktualizuj samochód</string>
+    <string name="add_edit_car_add_title">Dodawanie samochodu</string>
+    <string name="add_edit_car_edit_title">Edycja samochodu</string>
+    <string name="add_edit_car_data_label">Dane samochodu</string>
+    <string name="add_edit_car_model_hint">Marka i model</string>
+    <string name="add_edit_car_operational_numbers_hint">Numery operacyjne</string>
+    <string name="add_edit_car_plates_hint">Numery rejestracyjne</string>
+    <string name="add_edit_car_type_hint">Typ </string>
+    <string name="add_edit_car_water_hint">Ilość wody w litrach</string>
+    <string name="add_edit_car_foam_hint">Ilość środka pianotwórczego w litrach</string>
+    <string name="add_edit_car_motor_pump_performance_hint">Wydajność pompy</string>
+    <string name="add_edit_car_number_of_seats_hint">Ilość miejsc</string>
+    <string name="add_edit_car_invalid_error">Musisz wypełnić pola</string>
+    <string name="add_edit_car_server_error">Błąd serwera. Spróbuj ponownie</string>
+    <string name="add_edit_car_create_error">Błąd podczas dodawanie samochodu</string>
+    <string name="add_edit_car_update_error">Błąd podczas aktualizacji samochodu</string>
+    <string name="add_edit_car_create_success">Dodawanie samochodu powiodło się!</string>
+    <string name="add_edit_car_update_success">Aktualizacja samochodu powiodła się!</string>
+    <string name="add_edit_car_populate_error">Błąd podczas pobierania danych samochodu</string>
 
 </resources>

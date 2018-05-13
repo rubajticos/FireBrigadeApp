@@ -19,6 +19,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditCarActivity.AddEditCarActivity;
 import com.michalrubajczyk.myfirebrigade.activity.CarDetailActivity.CarDetailsActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.Car;
@@ -145,8 +146,8 @@ public class CarFragment extends Fragment implements CarContract.View {
 
     @Override
     public void showAddCar() {
-//        Intent intent = new Intent(getContext(), AddEditCarActivity.class);
-//        startActivityForResult(intent, AddEditCarActivity.REQUEST_ADD_CAR); todo przejscie do dodawanie/edycji samochodu
+        Intent intent = new Intent(getContext(), AddEditCarActivity.class);
+        startActivityForResult(intent, AddEditCarActivity.REQUEST_ADD_CAR);
     }
 
     @Override
