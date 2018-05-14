@@ -2,9 +2,7 @@ package com.michalrubajczyk.myfirebrigade.activity.AddEditFirefighterActivity;
 
 import com.michalrubajczyk.myfirebrigade.BasePresenter;
 import com.michalrubajczyk.myfirebrigade.BaseView;
-import com.michalrubajczyk.myfirebrigade.model.dto.Training;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 

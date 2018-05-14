@@ -1,7 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;

@@ -4,7 +4,6 @@ import com.michalrubajczyk.myfirebrigade.BasePresenter;
 import com.michalrubajczyk.myfirebrigade.BaseView;
 import com.michalrubajczyk.myfirebrigade.model.dto.FirefighterTraining;
 
-import java.util.Date;
 import java.util.List;
 
 public interface FirefighterDetailsContract {

@@ -5,7 +5,6 @@ import android.util.Log;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 

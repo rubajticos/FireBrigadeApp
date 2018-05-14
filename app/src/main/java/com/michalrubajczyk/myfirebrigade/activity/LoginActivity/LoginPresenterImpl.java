@@ -3,6 +3,7 @@ package com.michalrubajczyk.myfirebrigade.activity.LoginActivity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
+
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.LoginRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.errors.HttpErrors;

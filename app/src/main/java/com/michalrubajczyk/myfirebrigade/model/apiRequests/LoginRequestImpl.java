@@ -1,21 +1,16 @@
 package com.michalrubajczyk.myfirebrigade.model.apiRequests;
 
 import android.content.Context;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.google.gson.Gson;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
 import com.michalrubajczyk.myfirebrigade.model.auth.AuthUserInfo;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
