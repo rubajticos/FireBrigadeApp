@@ -48,12 +48,44 @@ public class EquipmentRequestImpl implements EquipmentRequest {
 
     @Override
     public void getActiveEquipmentForCar(int carId, DataListener dataListener) {
-
+        String url = BASE_SERVER_URL + "/car/" + carId + "/equipment/active/";
+        JsonArrayRequest getActiveCarEquipmentsRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getActiveCarEquipmentsRequest);
     }
 
     @Override
     public void getInactiveEquipmentForCar(int carId, DataListener dataListener) {
-
+        String url = BASE_SERVER_URL + "/car/" + carId + "/equipment/disactive/";
+        JsonArrayRequest getInactiveCarEquipmentsRequest = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getInactiveCarEquipmentsRequest);
     }
 
     @Override
