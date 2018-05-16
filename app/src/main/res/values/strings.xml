@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.1.114:8443</string>
+    <string name="base_server_url">https://192.168.43.159:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -212,4 +212,12 @@
     <string name="add_edit_car_update_success">Aktualizacja samochodu powiodła się!</string>
     <string name="add_edit_car_populate_error">Błąd podczas pobierania danych samochodu</string>
 
+    <!--EQUIPMENT ACTIVITY-->
+    <string name="title_activity_equipment">Sprzęt</string>
+    <string name="equipment_fragment_no_equipment">Brak sprzętu do wyświetlenia</string>
+    <string name="equipment_fragment_add_info">Wciśnij + aby dodać sprzęt</string>
+    <string name="equipment_list_row_name">Nazwa sprzętu</string>
+    <string name="equipment_list_row_type">Typ sprzętu</string>
+    <string name="equipment_list_row_car">Przypisany samochód</string>
+    <string name="equipment_fragment_loading_error">Wystąpił bład podczas ładowania sprzętu</string>
 </resources>

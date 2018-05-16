@@ -73,6 +73,11 @@
             android:name=".activity.AddEditCarActivity.AddEditCarActivity"
             android:label="@string/title_activity_add_edit_car_"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.EquipmentActivity.EquipmentActivity"
+            android:label="@string/title_activity_equipment"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

@@ -15,6 +15,7 @@ import android.view.MenuItem;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.CarActivity.CarActivity;
+import com.michalrubajczyk.myfirebrigade.activity.EquipmentActivity.EquipmentActivity;
 import com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity.FirefighterActivity;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
@@ -87,6 +88,8 @@ public class FireBrigadeActivity extends AppCompatActivity {
                         startActivity(carsIntent);
                         break;
                     case R.id.equipment_navigation_menu_item:
+                        Intent equipmentIntent = new Intent(getApplicationContext(), EquipmentActivity.class);
+                        startActivity(equipmentIntent);
                         break;
                     case R.id.incidents_navigation_menu_item:
                         break;

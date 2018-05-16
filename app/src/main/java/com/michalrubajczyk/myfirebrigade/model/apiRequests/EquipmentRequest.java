@@ -6,6 +6,8 @@ public interface EquipmentRequest {
 
     void getFireBrigadeEquipment(int fireBrigadeId, DataListener dataListener);
 
+    void getFireBrigadeEquipmentWithCarInfo(int fireBrigadeId, DataListener dataListener);
+
     void getActiveEquipmentForCar(int carId, DataListener dataListener);
 
     void getInactiveEquipmentForCar(int carId, DataListener dataListener);

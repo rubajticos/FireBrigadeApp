@@ -47,6 +47,27 @@ public class EquipmentRequestImpl implements EquipmentRequest {
     }
 
     @Override
+    public void getFireBrigadeEquipmentWithCarInfo(int fireBrigadeId, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/equipments/firebrigade/" + fireBrigadeId + "/additional/";
+        JsonArrayRequest request = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(request);
+    }
+
+    @Override
     public void getActiveEquipmentForCar(int carId, DataListener dataListener) {
         String url = BASE_SERVER_URL + "/car/" + carId + "/equipment/active/";
         JsonArrayRequest getActiveCarEquipmentsRequest = new JsonArrayRequest(Request.Method.GET, url,
