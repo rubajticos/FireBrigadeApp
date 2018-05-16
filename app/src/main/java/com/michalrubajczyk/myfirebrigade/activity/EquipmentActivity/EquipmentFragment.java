@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditCarActivity.AddEditCarFragment;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity.AddEditEquipmentActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.EquipmentAdapterObj;
 
@@ -86,10 +89,12 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-//                Log.d(TAG, "Klikniecie samochodu");
-//                Integer carId = (int) (long) recyclerView.getAdapter().getItemId(position);
-//                Log.d(TAG, "Id wyswietlanego: " + Integer.toString(carId));
-//                mPresenter.openCarDetails(carId); todo otwieranie edycji sprzętu
+                Log.d(TAG, "Klikniecie sprzętu");
+                Integer equipmentId = (int) (long) recyclerView.getAdapter().getItemId(position);
+                Log.d(TAG, "Id wyswietlanego: " + Integer.toString(equipmentId));
+                Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
+                intent.putExtra(AddEditCarFragment.ARGUMENT_EDIT_CAR_ID, Integer.toString(equipmentId));
+                startActivity(intent);
             }
 
             @Override

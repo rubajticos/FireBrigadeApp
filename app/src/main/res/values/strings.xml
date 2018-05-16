@@ -218,7 +218,7 @@
     <string name="equipment_fragment_add_info">Wciśnij + aby dodać sprzęt</string>
     <string name="equipment_list_row_name">Nazwa sprzętu</string>
     <string name="equipment_list_row_type">Typ sprzętu</string>
-    <string name="equipment_list_row_car">Przypisany samochód</string>
+    <string name="equipment_list_row_car">Nie ma przypisanego samochodu</string>
     <string name="equipment_fragment_loading_error">Wystąpił bład podczas ładowania sprzętu</string>
 
     <!--ADD EDIT EQUIPMENT-->

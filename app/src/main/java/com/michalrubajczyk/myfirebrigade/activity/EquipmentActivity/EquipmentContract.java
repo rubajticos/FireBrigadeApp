@@ -32,6 +32,5 @@ public interface EquipmentContract {
         void result(int requestCode, int resultCode);
 
         void loadEquipment(boolean forceUpdade);
-
     }
 }
