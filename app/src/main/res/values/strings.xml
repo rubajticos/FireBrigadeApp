@@ -220,4 +220,18 @@
     <string name="equipment_list_row_type">Typ sprzętu</string>
     <string name="equipment_list_row_car">Przypisany samochód</string>
     <string name="equipment_fragment_loading_error">Wystąpił bład podczas ładowania sprzętu</string>
+
+    <!--ADD EDIT EQUIPMENT-->
+    <string name="title_activity_add_edit_equipment">Dodaj/aktualizuj samochód</string>
+    <string name="add_edit_equipment_add_title">Dodawanie sprzętu</string>
+    <string name="add_edit_equipment_edit_title">Edycja sprzętu</string>
+    <string name="add_edit_equipment_data_label">Dane sprzętu</string>
+    <string name="add_edit_equipment_name">Nazwa</string>
+    <string name="add_edit_equipment_type">Typ</string>
+    <string name="add_edit_equipment_car_label">Samochód</string>
+    <string name="add_edit_equipment_no_cars_main_info">Twoja jednostka nie posiada samochodów.</string>
+    <string name="add_edit_equipment_no_cars_second_info">Kliknij w przycisk aby dodać jeśli chcesz go dodać. W przeciwnym razie sprzęt nie zostanie przypisany do samochodu.</string>
+    <string name="add_edit_equipment_no_cars_add_car">Dodaj samochód</string>
+
+
 </resources>
