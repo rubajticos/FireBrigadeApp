@@ -86,7 +86,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                 DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        mBirthday.setText(i2 + "." + i1 + 1 + "." + i);
+                        mBirthday.setText(i2 + "." + i1 + "." + i);
                     }
                 };
                 createAndShowDatePickerDialog(mDateSetListener);
@@ -302,7 +302,7 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                     DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            dateTextView.setText(i2 + "." + i1 + 1 + "." + i);
+                            dateTextView.setText(i2 + "." + i1 + "." + i);
                         }
                     };
                     createAndShowDatePickerDialog(mDateSetListener);

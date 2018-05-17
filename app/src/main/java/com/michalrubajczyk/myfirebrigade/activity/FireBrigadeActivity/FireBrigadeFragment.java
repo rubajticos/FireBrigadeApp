@@ -49,6 +49,8 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
 
     private String mFireBrigadeId;
 
+    private FloatingActionButton mFloatingButton;
+
     public FireBrigadeFragment() {
     }
 
@@ -89,10 +91,10 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
         mNoFirebrigadeAddView.setOnClickListener(v -> showAddFireBrigade());
 
 
-        FloatingActionButton fab =
+        mFloatingButton =
                 (FloatingActionButton) getActivity().findViewById(R.id.fab_add_firebrigade);
-        fab.setImageResource(R.drawable.ic_add_circle);
-        fab.setOnClickListener(view -> {
+        mFloatingButton.setImageResource(R.drawable.ic_add_circle);
+        mFloatingButton.setOnClickListener(view -> {
             showAddFireBrigade();
         });
 
@@ -130,6 +132,7 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
         mFirebrigadeDataView.setText(Html.fromHtml(fireBrigade.toString()));
         mFireBrigadeId = Integer.toString(fireBrigade.getIdFireBrigade());
         mFireBrigadeView.setVisibility(View.VISIBLE);
+        mFloatingButton.setVisibility(View.GONE);
         mNoFireBrigadeView.setVisibility(View.GONE);
     }
 
@@ -161,6 +164,7 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
     @Override
     public void showNoFireBrigade() {
         mFireBrigadeView.setVisibility(View.GONE);
+        mFloatingButton.setVisibility(View.VISIBLE);
         mNoFireBrigadeView.setVisibility(View.VISIBLE);
     }
 
