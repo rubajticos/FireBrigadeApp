@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="equipment_main_categories">
+        <item></item>
+        <item>Sprzęt pożarniczy</item>
+        <item>Sprzęt ratowniczy</item>
+        <item>Sprzęt ochrony osobistej</item>
+        <item>Pozostałe</item>
+    </string-array>
+
+    <string-array name="equipment_sprzet_pozarniczy_subcategories">
+        <item>Podręczny sprzęt gaśniczy</item>
+        <item>Sprzęt i armatura wodna</item>
+        <item>Pompy pożarnicze</item>
+    </string-array>
+
+    <string-array name="equipment_sprzet_ratowniczy_subcategories">
+        <item>Sprzęt tnący</item>
+        <item>Sprzęt burzący</item>
+        <item>Sprzęt podnoszący</item>
+        <item>Sprzęt rozpierający</item>
+        <item>Sprzęt ewakuujący</item>
+    </string-array>
+
+    <string-array name="equipment_sprzet_ochrony_osobistej_subcategories">
+        <item></item>
+    </string-array>
+
+    <string-array name="equipment_pozostale_subcategories">
+        <item></item>
+    </string-array>
+
+</resources>
