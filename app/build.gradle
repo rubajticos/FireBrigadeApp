@@ -20,6 +20,7 @@ android {
         targetCompatibility 1.8
         sourceCompatibility 1.8
     }
+
 }
 
 dependencies {
@@ -38,6 +39,11 @@ dependencies {
     compile group: 'com.google.guava', name: 'guava', version: '24.1-android'
     // RecyclerView
     implementation 'com.android.support:recyclerview-v7:27.1.1'
+//    ButterKnife
+    implementation 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+//   Lombok
+    compileOnly "org.projectlombok:lombok:1.16.20"
 
 
 }
