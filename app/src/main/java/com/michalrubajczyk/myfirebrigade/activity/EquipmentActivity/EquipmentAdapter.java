@@ -20,12 +20,14 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.MyVi
     public class MyViewHolder extends RecyclerView.ViewHolder {
         public TextView name;
         public TextView type;
+        public TextView subtype;
         public TextView carName;
 
         public MyViewHolder(View view) {
             super(view);
             name = (TextView) view.findViewById(R.id.equipment_list_item_name);
             type = (TextView) view.findViewById(R.id.equipment_list_item_type);
+            subtype = (TextView) view.findViewById(R.id.equipment_list_item_subtype);
             carName = (TextView) view.findViewById(R.id.equipment_list_item_car);
         }
     }
@@ -50,6 +52,12 @@ public class EquipmentAdapter extends RecyclerView.Adapter<EquipmentAdapter.MyVi
         holder.type.setText(eq.getType());
         if (!Strings.isNullOrEmpty(eq.getCarName())) {
             holder.carName.setText(eq.getCarName());
+        }
+
+        if (!Strings.isNullOrEmpty(eq.getSubtype())) {
+            holder.subtype.setText(" | " + eq.getSubtype());
+        } else {
+            holder.subtype.setText("");
         }
     }
 

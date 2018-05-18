@@ -5,15 +5,17 @@ public class EquipmentAdapterObj {
     private int id;
     private String name;
     private String type;
+    private String subtype;
     private String carName;
 
     public EquipmentAdapterObj() {
     }
 
-    public EquipmentAdapterObj(int id, String name, String type, String carName) {
+    public EquipmentAdapterObj(int id, String name, String type, String subtype, String carName) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.subtype = subtype;
         this.carName = carName;
     }
 
@@ -39,6 +41,14 @@ public class EquipmentAdapterObj {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getSubtype() {
+        return subtype;
+    }
+
+    public void setSubtype(String subtype) {
+        this.subtype = subtype;
     }
 
     public String getCarName() {

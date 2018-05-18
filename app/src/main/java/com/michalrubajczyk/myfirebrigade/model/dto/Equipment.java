@@ -8,21 +8,24 @@ public class Equipment {
     private int id;
     private String name;
     private String type;
+    private String subtype;
 
     public Equipment() {
         this.id = -1;
     }
 
-    public Equipment(String name, String type) {
+    public Equipment(String name, String type, String subtype) {
         this.id = -1;
         this.name = name;
         this.type = type;
+        this.subtype = subtype;
     }
 
-    public Equipment(int id, String name, String type) {
+    public Equipment(int id, String name, String type, String subtype) {
         this.id = id;
         this.name = name;
         this.type = type;
+        this.subtype = subtype;
     }
 
     public int getId() {
@@ -47,6 +50,14 @@ public class Equipment {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public String getSubtype() {
+        return subtype;
+    }
+
+    public void setSubtype(String subtype) {
+        this.subtype = subtype;
     }
 
     public static Equipment createEquipmentFromJson(String json) {
