@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.1.114:8443</string>
+    <string name="base_server_url">https://192.168.0.103:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -229,10 +229,16 @@
     <string name="add_edit_equipment_data_label">Dane sprzętu</string>
     <string name="add_edit_equipment_name">Nazwa</string>
     <string name="add_edit_equipment_type">Typ</string>
+    <string name="add_edit_equipment_subtype">Podtyp</string>
     <string name="add_edit_equipment_car_label">Samochód</string>
     <string name="add_edit_equipment_no_cars_main_info">Twoja jednostka nie posiada samochodów.</string>
     <string name="add_edit_equipment_no_cars_second_info">Kliknij w przycisk aby dodać jeśli chcesz go dodać. W przeciwnym razie sprzęt nie zostanie przypisany do samochodu.</string>
     <string name="add_edit_equipment_no_cars_add_car">Dodaj samochód</string>
+    <string name="add_edit_equipment_server_error">Wystąpił błąd serwera, spróbuj ponownie.</string>
+    <string name="add_edit_equipment_inwalid_equipment_error">Niepoprawnie wprowadzone dane</string>
+    <string name="add_edit_equipment_add_equipment_error">Wystąpił błąd podczas dodawania sprzętu</string>
+    <string name="add_edit_equipment_update_equipment_error">Wystąpił błąd podczas aktualizacji sprzętu</string>
+    <string name="add_edit_equipment_car_not_choosen">Nie należy do żadnego samochodu</string>
 
 
 </resources>

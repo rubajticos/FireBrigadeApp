@@ -2,12 +2,17 @@ package com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity;
 
 import com.michalrubajczyk.myfirebrigade.BasePresenter;
 import com.michalrubajczyk.myfirebrigade.BaseView;
+import com.michalrubajczyk.myfirebrigade.model.dto.CarEquipment;
 
 import java.util.List;
 
 public interface AddEditEquipmentContract {
 
     interface View extends BaseView<Presenter> {
+
+        void showProgress();
+
+        void hideProgress();
 
         void setCarNames(List<String> mCarNames);
 
@@ -23,14 +28,15 @@ public interface AddEditEquipmentContract {
 
         void showNoCars();
 
+        void showCars();
+
         void setName(String name);
 
-        void setType(String type);
+        void setTypes(String type, String subtype);
 
         void setCar(String carName);
 
         boolean isActive();
-
 
     }
 
@@ -38,7 +44,7 @@ public interface AddEditEquipmentContract {
 
         void saveEquipment(String name, String type, String carName);
 
-        void populateEquipment();
+        void populateEquipment(CarEquipment carEquipment);
 
         boolean isDataMissing();
 

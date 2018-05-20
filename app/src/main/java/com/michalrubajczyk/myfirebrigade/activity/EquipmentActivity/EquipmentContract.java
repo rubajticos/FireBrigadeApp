@@ -18,7 +18,7 @@ public interface EquipmentContract {
 
         void showAddEquipment();
 
-        void showEditEquipment();
+        void showEditEquipment(String equipmentId);
 
         void showLoadingEquipmentError();
 

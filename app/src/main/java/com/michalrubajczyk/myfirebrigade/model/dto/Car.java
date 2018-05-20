@@ -3,6 +3,9 @@ package com.michalrubajczyk.myfirebrigade.model.dto;
 import com.google.common.base.Strings;
 import com.google.gson.Gson;
 
+import java.util.Arrays;
+import java.util.List;
+
 public class Car {
 
     private int id;
@@ -46,6 +49,12 @@ public class Car {
     public static Car createCarFromJson(String json) {
         Gson gson = new Gson();
         return gson.fromJson(json, Car.class);
+    }
+
+    public static List<Car> createCarListFromJson(String jsonArray) {
+        Gson gson = new Gson();
+        Car[] carsArray = gson.fromJson(jsonArray, Car[].class);
+        return Arrays.asList(carsArray);
     }
 
     public int getId() {

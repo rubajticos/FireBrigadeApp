@@ -201,4 +201,26 @@ public class EquipmentRequestImpl implements EquipmentRequest {
                 });
         RequestQueueSingleton.getInstance(mContext).addToRequestQueue(deleteEquipmentRequest);
     }
+
+    @Override
+    public void getSingleEquipmentWithAllCars(int equipmentId, int fireBrigadeId, DataListener dataListener) {
+        Log.d(TAG, "call getSingleEquipmentWithAllCars()");
+        String url = BASE_SERVER_URL + "/equipment/" + equipmentId + "/firebrigade/" + fireBrigadeId + "/with-cars";
+        JsonObjectRequest apiRequest = new JsonObjectRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(apiRequest);
+    }
 }

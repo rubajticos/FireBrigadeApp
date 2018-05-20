@@ -17,4 +17,6 @@ public interface EquipmentRequest {
     void updateEquipment(Equipment equipment, DataListener dataListener);
 
     void deleteEquipment(Equipment equipment, DataListener dataListener);
+
+    void getSingleEquipmentWithAllCars(int equipmentId, int fireBrigadeId, DataListener dataListener);
 }

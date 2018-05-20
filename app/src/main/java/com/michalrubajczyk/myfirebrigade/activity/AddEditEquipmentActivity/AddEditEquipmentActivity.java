@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.CarRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.EquipmentRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
@@ -59,6 +60,7 @@ public class AddEditEquipmentActivity extends AppCompatActivity {
         mAddEditEquipmentPresenter = new AddEditEquipmentPresenter(
                 new FirefighterRequestImpl(this),
                 new EquipmentRequestImpl(this),
+                new CarRequestImpl(this),
                 addEditEquipmentFragment,
                 equipmentId,
                 shouldLoadDataFromServer,

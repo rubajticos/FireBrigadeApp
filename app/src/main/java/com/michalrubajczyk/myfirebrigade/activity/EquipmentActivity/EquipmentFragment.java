@@ -19,8 +19,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.activity.AddEditCarActivity.AddEditCarFragment;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity.AddEditEquipmentActivity;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity.AddEditEquipmentFragment;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.EquipmentAdapterObj;
 
@@ -90,11 +90,9 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
             @Override
             public void onClick(View view, int position) {
                 Log.d(TAG, "Klikniecie sprzętu");
-                Integer equipmentId = (int) (long) recyclerView.getAdapter().getItemId(position);
-                Log.d(TAG, "Id wyswietlanego: " + Integer.toString(equipmentId));
-                Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
-                intent.putExtra(AddEditCarFragment.ARGUMENT_EDIT_CAR_ID, Integer.toString(equipmentId));
-                startActivity(intent);
+                Integer equipmentId = (int) recyclerView.getAdapter().getItemId(position);
+                Log.d(TAG, "Id kliknietego sprzetu: " + Integer.toString(equipmentId));
+                showEditEquipment(Integer.toString(equipmentId));
             }
 
             @Override
@@ -148,14 +146,15 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
 
     @Override
     public void showAddEquipment() {
-//        Intent intent = new Intent(getContext(), AddEditCarActivity.class);
-//        startActivityForResult(intent, AddEditCarActivity.REQUEST_ADD_CAR);
-        // TODO: 15/05/2018 dodawanie sprzetu
+        Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
+        startActivityForResult(intent, AddEditEquipmentActivity.REQUEST_ADD_EQUIPMENT);
     }
 
     @Override
-    public void showEditEquipment() {
-        // TODO: 15/05/2018 edytowanie sprzetu
+    public void showEditEquipment(String equipmentId) {
+        Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
+        intent.putExtra(AddEditEquipmentFragment.ARGUMENT_EDIT_EQUIPMENT_ID, equipmentId);
+        startActivity(intent);
     }
 
     @Override
