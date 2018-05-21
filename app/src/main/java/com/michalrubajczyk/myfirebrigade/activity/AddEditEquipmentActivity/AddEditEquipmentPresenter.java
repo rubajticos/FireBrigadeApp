@@ -2,6 +2,7 @@ package com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity;
 
 import android.util.Log;
 
+import com.google.common.base.Strings;
 import com.google.gson.Gson;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
@@ -12,10 +13,12 @@ import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImp
 import com.michalrubajczyk.myfirebrigade.model.dto.Car;
 import com.michalrubajczyk.myfirebrigade.model.dto.CarEquipment;
 import com.michalrubajczyk.myfirebrigade.model.dto.CarEquipmentWithCars;
+import com.michalrubajczyk.myfirebrigade.model.dto.Equipment;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class AddEditEquipmentPresenter implements AddEditEquipmentContract.Presenter {
@@ -153,19 +156,109 @@ public class AddEditEquipmentPresenter implements AddEditEquipmentContract.Prese
     }
 
     @Override
-    public void saveEquipment(String name, String type, String carName) {
+    public void saveEquipment(String name, String type, String subtype, String carName) {
+        mAddEditFirefighterView.showProgress();
         if (isNewEquipment()) {
-            createEquipment(name, type, carName);
+            createEquipment(name, type, subtype, carName);
         } else {
-            updateEquipment(name, type, carName);
+            updateEquipment(name, type, subtype, carName);
         }
     }
 
-    private void createEquipment(String name, String type, String carName) {
-        // TODO: 18/05/2018 nie zapomniec o dacie dodania
+    private void createEquipment(String name, String type, String subtype, String carName) {
+        if (isEquipmentNameEmpty(name)) {
+            if (isCarNotSelected(carName)) {
+                createOnlyEquipment(name, type, subtype);
+            } else {
+                createEquipmentWithCar(name, type, subtype, carName);
+            }
+        } else {
+            mAddEditFirefighterView.hideProgress();
+            mAddEditFirefighterView.showInwalidEquipmentError();
+        }
     }
 
-    private void updateEquipment(String name, String type, String carName) {
+    private boolean isCarNotSelected(String carName) {
+        return Strings.isNullOrEmpty(carName) || carName.equals(ResourcesSingleton.getInstance().getString(R.string.add_edit_equipment_car_not_choosen));
+    }
+
+    private boolean isEquipmentNameEmpty(String name) {
+        return Strings.isNullOrEmpty(name);
+    }
+
+    private void createEquipmentWithCar(String name, String type, String subtype, String carName) {
+        Equipment equipment = new Equipment(name, type, subtype);
+        Car car = searchCarByName(carName, myCars);
+        CarEquipment carEquipment = new CarEquipment();
+        carEquipment.setEquipment(equipment);
+        carEquipment.setCar(car);
+        carEquipment.setDateOfPut(new Date());
+        mEquipmentRequest.createEquipmentAndSetToCar(carEquipment, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                mAddEditFirefighterView.hideProgress();
+                mAddEditFirefighterView.showEquipments();
+            }
+
+            @Override
+            public void onError(int code) {
+                mAddEditFirefighterView.hideProgress();
+                mAddEditFirefighterView.showAddEquipmentError();
+            }
+        });
+    }
+
+    private Car searchCarByName(String carName, List<Car> cars) {
+        for (Car car : cars) {
+            if (car.getModel().equals(carName)) return car;
+        }
+        return null;
+    }
+
+    private void createOnlyEquipment(String name, String type, String subtype) {
+        Equipment equipment = new Equipment(name, type, subtype);
+        mEquipmentRequest.createEquipment(equipment, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                mAddEditFirefighterView.showEquipments();
+                mAddEditFirefighterView.hideProgress();
+            }
+
+            @Override
+            public void onError(int code) {
+                mAddEditFirefighterView.hideProgress();
+                mAddEditFirefighterView.showAddEquipmentError();
+            }
+        });
+    }
+
+    private void updateEquipment(String name, String type, String subtype, String carName) {
+        if (isNewEquipment()) {
+            throw new RuntimeException("updateEquipment() was called but equipment is new");
+        }
+        int equipmentId = Integer.parseInt(mEquipmentId);
+
+        Equipment equipment = new Equipment(equipmentId, name, type, subtype);
+        Car car = searchCarByName(carName, myCars);
+
+        CarEquipment carEquipment = new CarEquipment();
+        carEquipment.setEquipment(equipment);
+        carEquipment.setCar(car);
+
+        mEquipmentRequest.updateEquipmentAndCheckCar(carEquipment, new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                mAddEditFirefighterView.hideProgress();
+                mAddEditFirefighterView.showEquipments();
+            }
+
+            @Override
+            public void onError(int code) {
+                mAddEditFirefighterView.hideProgress();
+                mAddEditFirefighterView.showUpdateEquipmentError();
+            }
+        });
+
     }
 
     @Override

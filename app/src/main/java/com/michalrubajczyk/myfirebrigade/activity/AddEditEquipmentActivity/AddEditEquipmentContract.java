@@ -42,7 +42,7 @@ public interface AddEditEquipmentContract {
 
     interface Presenter extends BasePresenter {
 
-        void saveEquipment(String name, String type, String carName);
+        void saveEquipment(String name, String type, String subtype, String carName);
 
         void populateEquipment(CarEquipment carEquipment);
 

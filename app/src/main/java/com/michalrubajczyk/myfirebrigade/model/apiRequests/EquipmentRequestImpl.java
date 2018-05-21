@@ -10,6 +10,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.model.ResourcesSingleton;
+import com.michalrubajczyk.myfirebrigade.model.dto.CarEquipment;
 import com.michalrubajczyk.myfirebrigade.model.dto.Equipment;
 
 import org.json.JSONException;
@@ -222,5 +223,77 @@ public class EquipmentRequestImpl implements EquipmentRequest {
                     }
                 });
         RequestQueueSingleton.getInstance(mContext).addToRequestQueue(apiRequest);
+    }
+
+    @Override
+    public void createEquipmentAndSetToCar(CarEquipment carEquipment, int fireBrigadeId, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/equipment/with-car/fireBrigade/" + fireBrigadeId;
+
+        JSONObject jsonObject = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd" +
+                "").create();
+
+        try {
+            String jsonString = gson.toJson(carEquipment, CarEquipment.class);
+            Log.d(TAG, "carEquipmentJSON: " + jsonString);
+            jsonObject = new JSONObject(jsonString);
+            Log.d(TAG, jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest addEquipmentAndSetCarRequest = new JsonObjectRequest(Request.Method.POST, url,
+                jsonObject,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "sever not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(addEquipmentAndSetCarRequest);
+    }
+
+    @Override
+    public void updateEquipmentAndCheckCar(CarEquipment carEquipment, DataListener dataListener) {
+        String url = BASE_SERVER_URL + "/equipment";
+
+        JSONObject jsonObject = null;
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd" +
+                "").create();
+
+        try {
+            String jsonString = gson.toJson(carEquipment, CarEquipment.class);
+            Log.d(TAG, "carEquipmentJSON: " + jsonString);
+            jsonObject = new JSONObject(jsonString);
+            Log.d(TAG, jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+        JsonObjectRequest updateEquipmentAndHisCarSelectionRequest = new JsonObjectRequest(Request.Method.PUT, url,
+                jsonObject,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "sever not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(updateEquipmentAndHisCarSelectionRequest);
     }
 }

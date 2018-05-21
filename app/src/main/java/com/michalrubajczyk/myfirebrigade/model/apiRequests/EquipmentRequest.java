@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.model.apiRequests;
 
+import com.michalrubajczyk.myfirebrigade.model.dto.CarEquipment;
 import com.michalrubajczyk.myfirebrigade.model.dto.Equipment;
 
 public interface EquipmentRequest {
@@ -19,4 +20,8 @@ public interface EquipmentRequest {
     void deleteEquipment(Equipment equipment, DataListener dataListener);
 
     void getSingleEquipmentWithAllCars(int equipmentId, int fireBrigadeId, DataListener dataListener);
+
+    void createEquipmentAndSetToCar(CarEquipment carEquipment, int fireBrigadeId, DataListener dataListener);
+
+    void updateEquipmentAndCheckCar(CarEquipment carEquipment, DataListener dataListener);
 }

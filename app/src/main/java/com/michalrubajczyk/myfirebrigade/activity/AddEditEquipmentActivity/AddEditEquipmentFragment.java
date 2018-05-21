@@ -10,6 +10,7 @@ import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -139,6 +140,35 @@ public class AddEditEquipmentFragment extends Fragment implements AddEditEquipme
         ArrayAdapter<String> subtypeAdapter = new ArrayAdapter<>(getActivity().getApplicationContext(), android.R.layout.simple_spinner_item, subcategoriesArray);
         subtypeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mSubtype.setAdapter(subtypeAdapter);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_edit_equipment_save:
+                saveEquipment();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void saveEquipment() {
+        String eqName = mName.getText().toString();
+        String type = mType.getSelectedItem().toString();
+        String subtype = mSubtype.getSelectedItem().toString();
+
+        String car = null;
+        try {
+            car = mCarSpinner.getSelectedItem().toString();
+        } catch (Exception e) {
+            Log.d(TAG, "nie ma samochodów w jednostce");
+            e.printStackTrace();
+        }
+
+        mPresenter.saveEquipment(eqName, type, subtype, car);
+
     }
 
     private void navigateToAddCar() {
