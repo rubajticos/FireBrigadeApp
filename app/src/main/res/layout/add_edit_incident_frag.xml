@@ -84,7 +84,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -96,6 +96,7 @@
                     android:paddingRight="4dp"
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp"
+                    android:layout_gravity="center_vertical"
                     android:textSize="18sp"
                     android:textColor="@color/black_overlay"
                     android:text="@string/add_edit_incident_datetime_of_alarm" />
@@ -107,10 +108,11 @@
                     android:layout_weight="1"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_gravity="center"
                     android:textSize="18sp"
+                    android:textAlignment="center"
                     android:textColor="@color/darkful"
-                    android:background="@drawable/border_bottom_no_white"
-                    android:text="" />
+                    android:background="@drawable/border_bottom_no_white" />
             </LinearLayout>
 
             <TextView
@@ -123,13 +125,12 @@
                 android:text="@string/add_edit_incident_details_information"
                 android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
 
-            <TableLayout
+            <LinearLayout
                 android:id="@+id/add_edit_incident_details"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
 
-
-            </TableLayout>
 
             <Button
                 android:id="@+id/add_edit_incident_add_car"
