@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class CarFragment extends Fragment implements CarContract.View {
+public class CarFragment extends Fragment implements CarContract.View, SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "Car Fragment";
 
     private CarContract.Presenter mPresenter;
@@ -45,7 +45,7 @@ public class CarFragment extends Fragment implements CarContract.View {
     private TextView mNoCarsMainText;
     private TextView mNoCarsAddView;
 
-    private ProgressBar mProgressBar;
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private RecyclerView recyclerView;
 
@@ -119,7 +119,16 @@ public class CarFragment extends Fragment implements CarContract.View {
             Snackbar.make(getView(), "Dodawanie samochodu", Snackbar.LENGTH_LONG).show();
         });
 
-        mProgressBar = (ProgressBar) root.findViewById(R.id.carProgressBar);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.car_swipeRefreshLayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.alarm_red));
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                mPresenter.loadCars(false);
+            }
+        });
 
         setHasOptionsMenu(true);
 
@@ -128,12 +137,12 @@ public class CarFragment extends Fragment implements CarContract.View {
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        mProgressBar.setVisibility(View.VISIBLE);
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideLoadingIndicator() {
-        mProgressBar.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -176,5 +185,10 @@ public class CarFragment extends Fragment implements CarContract.View {
     @Override
     public boolean isActive() {
         return isAdded();
+    }
+
+    @Override
+    public void onRefresh() {
+
     }
 }
