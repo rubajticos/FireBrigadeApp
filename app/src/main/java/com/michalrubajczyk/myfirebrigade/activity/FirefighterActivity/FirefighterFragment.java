@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,7 +30,7 @@ import java.util.List;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class FirefighterFragment extends Fragment implements FirefighterContract.View {
+public class FirefighterFragment extends Fragment implements FirefighterContract.View, SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "Firefighter Fragment";
 
     private FirefighterContract.Presenter mPresenter;
@@ -45,9 +45,9 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
     private TextView mNoFirefightersMainText;
     private TextView mNoFirefightersAddView;
 
-    private ProgressBar mProgressBar;
-
     private RecyclerView recyclerView;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public FirefighterFragment() {
     }
@@ -119,7 +119,16 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
             Snackbar.make(getView(), "Dodawanie strażaka", Snackbar.LENGTH_LONG).show();
         });
 
-        mProgressBar = (ProgressBar) root.findViewById(R.id.firefighterProgressBar);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.firefighter_swipeRefreshlayout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.alarm_red));
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                mPresenter.loadFirefighters(false);
+            }
+        });
 
         setHasOptionsMenu(true);
 
@@ -128,12 +137,12 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
 
     @Override
     public void setLoadingIndicator(boolean active) {
-        mProgressBar.setVisibility(View.VISIBLE);
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideLoadingIndicator() {
-        mProgressBar.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -176,5 +185,10 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
     @Override
     public boolean isActive() {
         return isAdded();
+    }
+
+    @Override
+    public void onRefresh() {
+        mPresenter.loadFirefighters(false);
     }
 }
