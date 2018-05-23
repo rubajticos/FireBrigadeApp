@@ -240,5 +240,25 @@
     <string name="add_edit_equipment_update_equipment_error">Wystąpił błąd podczas aktualizacji sprzętu</string>
     <string name="add_edit_equipment_car_not_choosen">Nie należy do żadnego samochodu</string>
 
+    <!--ADD EDIT INCIDENT-->
+    <string name="title_activity_add_edit_incident">Dodaj/aktualizuje zdarzenie</string>
+    <string name="add_edit_incident_add_title">Dodawanie zdarzenia</string>
+    <string name="add_edit_incident_edit_title">Edycja zdarzenia</string>
+    <string name="add_edit_incident_simple_data_label">Podstawowe dane zdarzenia</string>
+    <string name="add_edit_incident_description">Opis zdarzenia</string>
+    <string name="add_edit_incident_city">Miejscowość</string>
+    <string name="add_edit_incident_date">Data zdarzenia</string>
+    <string name="add_edit_incident_datetime_of_alarm">Data i godzina zaalarmowania</string>
+    <string name="add_edit_incident_type">Typ</string>
+    <string name="add_edit_incident_subtype">Podtyp</string>
+    <string name="add_edit_incident_datetime_of_departure">Data i godzina wyjazdu</string>
+    <string name="add_edit_incident_datetime_of_return">Data i godzina powrotu</string>
+    <string name="add_edit_incident_commander">Dowódca</string>
+    <string name="add_edit_incident_driver">Kierowca</string>
+    <string name="add_edit_incident_car">Samochód</string>
+    <string name="add_edit_incident_firefighters">Ratownicy</string>
+    <string name="add_edit_incident_details_information">Informacje szczegółowe</string>
+    <string name="add_edit_incident_action_add_car">Dodaj samochód</string>
+
 
 </resources>

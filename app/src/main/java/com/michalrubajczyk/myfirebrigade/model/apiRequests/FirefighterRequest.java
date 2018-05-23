@@ -22,4 +22,8 @@ public interface FirefighterRequest {
     void addFirefighterTrainings(List<FirefighterTraining> trainings, DataListener dataListener);
 
     void updateFirefighterTrainings(List<FirefighterTraining> trainingList, DataListener dataListener);
+
+    List<Firefighter> getCommanders(int fireBrigadeId, DataListener dataListener);
+
+    List<Firefighter> getDrivers(int fireBrigadeId, DataListener dataListener);
 }
