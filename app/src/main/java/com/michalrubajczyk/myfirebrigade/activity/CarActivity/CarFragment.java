@@ -189,6 +189,6 @@ public class CarFragment extends Fragment implements CarContract.View, SwipeRefr
 
     @Override
     public void onRefresh() {
-
+        mPresenter.loadCars(false);
     }
 }
