@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Html;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -15,7 +16,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
@@ -28,7 +28,7 @@ import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigade;
  * Created by Michal on 21/03/2018.
  */
 
-public class FireBrigadeFragment extends Fragment implements FireBrigadeContract.View {
+public class FireBrigadeFragment extends Fragment implements FireBrigadeContract.View, SwipeRefreshLayout.OnRefreshListener {
     private static final String TAG = "FireBrigade Fragment";
 
     private FireBrigadeContract.Presenter mPresenter;
@@ -45,11 +45,11 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
 
     private LinearLayout mFireBrigadeView;
 
-    private ProgressBar mProgressBar;
-
     private String mFireBrigadeId;
 
     private FloatingActionButton mFloatingButton;
+
+    private SwipeRefreshLayout mSwipeRefreshLayout;
 
     public FireBrigadeFragment() {
     }
@@ -98,7 +98,16 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
             showAddFireBrigade();
         });
 
-        mProgressBar = (ProgressBar) root.findViewById(R.id.firebrigadeProgressBar);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.firebrigade_refresh_layout);
+        mSwipeRefreshLayout.setOnRefreshListener(this);
+        mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.alarm_red));
+        mSwipeRefreshLayout.post(new Runnable() {
+            @Override
+            public void run() {
+                mSwipeRefreshLayout.setRefreshing(true);
+                mPresenter.loadFireBrigade(false);
+            }
+        });
 
         setHasOptionsMenu(true);
 
@@ -119,12 +128,13 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
 
     @Override
     public void showLoadingSpinner(boolean active) {
-        mProgressBar.setVisibility(View.VISIBLE);
+
+        mSwipeRefreshLayout.setRefreshing(true);
     }
 
     @Override
     public void hideLoadingSpinner(boolean active) {
-        mProgressBar.setVisibility(View.GONE);
+        mSwipeRefreshLayout.setRefreshing(false);
     }
 
     @Override
@@ -176,4 +186,8 @@ public class FireBrigadeFragment extends Fragment implements FireBrigadeContract
         onDestroy();
     }
 
+    @Override
+    public void onRefresh() {
+        mPresenter.loadFireBrigade(false);
+    }
 }

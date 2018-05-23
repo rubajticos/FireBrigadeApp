@@ -235,4 +235,14 @@ public class FirefighterRequestImpl implements FirefighterRequest {
                 });
         RequestQueueSingleton.getInstance(mContext).addToRequestQueue(updateFirefighterTrainingsRequest);
     }
+
+    @Override
+    public List<Firefighter> getCommanders(int fireBrigadeId, DataListener dataListener) {
+        return null;
+    }
+
+    @Override
+    public List<Firefighter> getDrivers(int fireBrigadeId, DataListener dataListener) {
+        return null;
+    }
 }
