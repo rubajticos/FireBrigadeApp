@@ -219,9 +219,18 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         singleCarLL.addView(carSpinner);
 
         //DATE OF DEPARTURE section
-//        TextView
+        TextView dateOfDepartureLabel = createLabelTextView("Data i godzina wyjazdu");
+        TextView dateOfDepartureTv = createSimpleTextView("");
+        dateOfDepartureTv.setOnClickListener(view -> createDateTimePickerDialogAndSetDateTime(dateOfDepartureTv));
+        singleCarLL.addView(dateOfDepartureLabel);
+        singleCarLL.addView(dateOfDepartureTv);
 
         //DATE OF RETURN section
+        TextView dateOfReturnLabel = createLabelTextView("Data i godzina powrotu");
+        TextView dateOfReturnTv = createSimpleTextView("");
+        dateOfDepartureTv.setOnClickListener(view -> createDateTimePickerDialogAndSetDateTime(dateOfReturnTv));
+        singleCarLL.addView(dateOfReturnLabel);
+        singleCarLL.addView(dateOfReturnTv);
 
         //COMMANDER section
         TextView commandorLabel = createLabelTextView(getResources().getString(R.string.add_edit_incident_commander));
