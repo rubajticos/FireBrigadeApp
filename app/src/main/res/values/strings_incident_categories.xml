@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="incident_main_categories">
+        <item>Pożar</item>
+        <item>Miejscowe zagrożenie</item>
+        <item>Ćwiczenia</item>
+        <item>Fałszywy alarm</item>
+    </string-array>
+
+    <string-array name="incident_pozar_subcategories">
+        <item>Pożar budynku</item>
+        <item>Pożar traw</item>
+        <item>Pożar lasu</item>
+    </string-array>
+
+    <string-array name="incident_miejscowe_subcategories">
+        <item>Zdarzenie drogowe</item>
+        <item>Gwałtowne opady atmosferyczne</item>
+        <item>Plamy substancji ropopochodnych</item>
+        <item>Huragany, silne wiatry</item>
+        <item>Pozostałe</item>
+    </string-array>
+
+    <string-array name="incident_falszywe_subcategories">
+        <item></item>
+    </string-array>
+
+    <string-array name="incident_cwiczenia_subcategories">
+        <item></item>
+    </string-array>
+
+</resources>
