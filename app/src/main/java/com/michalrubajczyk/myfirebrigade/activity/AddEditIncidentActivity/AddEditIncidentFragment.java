@@ -77,12 +77,7 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
     private Calendar mCalendar;
 
     String[] firefighterItems = new String[]{"Michał Rubajczyk", "Krzysztof Moskal", "Michał Moskal", "Łukasz Gomółka", "Mateusz Patryn", "Test", "tererere"};
-    boolean[] firefighterCheckedItems;
-    ArrayList<Integer> mFirefighterItems = new ArrayList<>();
-
-    String[] eqItems = new String[]{"Hooligan", "Wąż W-52"};
-    boolean[] equipmentCheckedItems;
-    ArrayList<Integer> mEquipmentItems = new ArrayList<>();
+    String[] equipmentItems = new String[]{"Hooligan", "Wąż W-52"};
 
     public AddEditIncidentFragment() {
         this.dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
@@ -228,7 +223,7 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         //DATE OF RETURN section
         TextView dateOfReturnLabel = createLabelTextView("Data i godzina powrotu");
         TextView dateOfReturnTv = createSimpleTextView("");
-        dateOfDepartureTv.setOnClickListener(view -> createDateTimePickerDialogAndSetDateTime(dateOfReturnTv));
+        dateOfReturnTv.setOnClickListener(view -> createDateTimePickerDialogAndSetDateTime(dateOfReturnTv));
         singleCarLL.addView(dateOfReturnLabel);
         singleCarLL.addView(dateOfReturnTv);
 
@@ -245,14 +240,16 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         singleCarLL.addView(driversSpinner);
 
         //FIREFIGHTERS section
+        boolean[] myFirefightersChecked = new boolean[firefighterItems.length];
+        ArrayList<Integer> mFirefightersSelected = new ArrayList<>();
         TextView firefightersLabel = createLabelTextView("Ratownicy");
-        Button chooseFirefightersButton = new Button(getActivity());
-        chooseFirefightersButton.setText("Wybierz ratowników");
         TextView firefightersTV = createSimpleTextView("Wybrani ratownicy...");
+        Button chooseFirefightersButton = createButton("Wybierz ratowników");
 
-        firefighterCheckedItems = new boolean[firefighterItems.length];
+
+
         chooseFirefightersButton.setOnClickListener(view -> {
-            createMultichoiceDialogWithData(firefighterItems, firefighterCheckedItems, mFirefighterItems, firefightersTV);
+            createMultichoiceDialogWithData(firefighterItems, myFirefightersChecked, mFirefightersSelected, firefightersTV);
         });
 
         singleCarLL.addView(firefightersLabel);
@@ -260,14 +257,14 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         singleCarLL.addView(firefightersTV);
 
         //EQUIPMENT section
-        TextView equipmentLabel = createLabelTextView("Użyty sprzęt");
-        Button chooseEquipmentButton = new Button(getActivity());
-        chooseEquipmentButton.setText("Wybierz użyty sprzęt");
-        TextView equipmentsTV = createSimpleTextView("Wybrany sprzęt");
+        boolean[] equipmentCheckedItems = new boolean[equipmentItems.length];
+        ArrayList<Integer> mEquipmentSelected = new ArrayList<>();
 
-        equipmentCheckedItems = new boolean[eqItems.length];
+        TextView equipmentLabel = createLabelTextView("Użyty sprzęt");
+        TextView equipmentsTV = createSimpleTextView("Wybrany sprzęt");
+        Button chooseEquipmentButton = createButton("Wybierz użyty sprzęt");
         chooseEquipmentButton.setOnClickListener(view -> {
-            createMultichoiceDialogWithData(eqItems, equipmentCheckedItems, mFirefighterItems, equipmentsTV);
+            createMultichoiceDialogWithData(equipmentItems, equipmentCheckedItems, mEquipmentSelected, equipmentsTV);
         });
 
         singleCarLL.addView(equipmentLabel);
@@ -275,12 +272,27 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         singleCarLL.addView(equipmentsTV);
 
         //END SECTION
+        Button removeCarBtn = createButton("Usuń ten samochód");
+        removeCarBtn.setOnClickListener(view -> {
+            mDetailsLayout.removeView(singleCarLL);
+        });
+
+        singleCarLL.addView(removeCarBtn);
+
         View spacer = createLineSpacer();
         singleCarLL.addView(spacer);
 
         mDetailsLayout.addView(singleCarLL);
+    }
 
-        // TODO: 24/05/2018 data powrotu i wyjazdu, ratownicy, sprzet
+    private Button createButton(String text) {
+        Button button = new Button(getActivity());
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        lp.setMargins(0, 10, 0, 10);
+        button.setLayoutParams(lp);
+        button.setText(text);
+        button.setVisibility(View.VISIBLE);
+        return button;
     }
 
     private TextView createSimpleTextView(String text) {
