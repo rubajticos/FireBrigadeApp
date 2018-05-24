@@ -6,6 +6,8 @@ interface IncidentRequest {
 
     void getIncidentsByFireBrigadeId(int fireBrigadeId, DataListener dataListener);
 
+    void getFirefightersAndCars(int fireBrigadeId, DataListener dataListener);
+
 //    void addIncident(Incident incident, DataListener dataListener);
 
 //    void updateIncident(Incident incident, DataListener dataListener);

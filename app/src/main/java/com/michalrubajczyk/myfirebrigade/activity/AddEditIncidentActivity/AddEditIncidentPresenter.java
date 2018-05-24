@@ -1,10 +1,14 @@
 package com.michalrubajczyk.myfirebrigade.activity.AddEditIncidentActivity;
 
+import android.util.Log;
+
 import com.michalrubajczyk.myfirebrigade.dto.additional.PreparedCarInIncident;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.CarRequestImpl;
+import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.IncidentRequestImpl;
-import com.michalrubajczyk.myfirebrigade.model.dto.Car;
+import com.michalrubajczyk.myfirebrigade.model.dto.CarWithEquipment;
+import com.michalrubajczyk.myfirebrigade.model.dto.CarsAndFirefighters;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
@@ -31,12 +35,9 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
 
     private SimpleDateFormat simpleDateFormat;
 
-    private List<Car> myFireBrigadeCars;
-
+    private List<CarWithEquipment> myFireBrigadeCars;
     private List<Firefighter> myFireBrigadeFirefighters;
-
     private List<Firefighter> myFireBrigadeCommanders;
-
     private List<Firefighter> myFireBrigadeDrivers;
 
     public AddEditIncidentPresenter(IncidentRequestImpl mIncidentRequest,
@@ -63,8 +64,37 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
     @Override
     public void start() {
         if (!isNewIncicent() && mIsDataMissing) {
-            populateIncident();
+            prepareDataAndPopulateIncident();
+        } else {
+            prepareData();
         }
+    }
+
+    private void prepareDataAndPopulateIncident() {
+
+    }
+
+    private void prepareData() {
+        mAddEditIncidentView.showProgress();
+        mIncidentRequest.getFirefightersAndCars(mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                CarsAndFirefighters carsAndFirefighters = CarsAndFirefighters.prepareFromJson(data);
+
+                myFireBrigadeCars = carsAndFirefighters.getCars();
+                myFireBrigadeCommanders = carsAndFirefighters.getCommanders();
+                myFireBrigadeDrivers = carsAndFirefighters.getDrivers();
+                myFireBrigadeFirefighters = carsAndFirefighters.getFirefighters();
+
+                // TODO: 24/05/2018 Ustawienie danych we fragmencie
+                Log.d(TAG, "finish pobierania danych");
+            }
+
+            @Override
+            public void onError(int code) {
+                // TODO: 24/05/2018 obsluga bledow
+            }
+        });
     }
 
     private boolean isNewIncicent() {
