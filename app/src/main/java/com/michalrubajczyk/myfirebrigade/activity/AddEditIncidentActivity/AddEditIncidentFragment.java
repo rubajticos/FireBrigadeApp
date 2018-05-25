@@ -9,8 +9,10 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -24,12 +26,15 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.michalrubajczyk.myfirebrigade.R;
+import com.michalrubajczyk.myfirebrigade.dto.additional.PreparedCarInIncident;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -76,8 +81,11 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
 
     private Calendar mCalendar;
 
-    String[] firefighterItems = new String[]{"Michał Rubajczyk", "Krzysztof Moskal", "Michał Moskal", "Łukasz Gomółka", "Mateusz Patryn", "Test", "tererere"};
-    String[] equipmentItems = new String[]{"Hooligan", "Wąż W-52"};
+    private String[] firefighterItems;
+    private String[] commandersItems;
+    private String[] driversItems;
+    private HashMap<String, String[]> carsItems;
+
 
     public AddEditIncidentFragment() {
         this.dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
@@ -203,41 +211,53 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
 
     private void createIncidentCarLayout() {
         LinearLayout singleCarLL = createCarLL(false);
-        String[] cars = new String[]{"Iveco", "Steyr"}; //tymczasowo
-        String[] commandors = new String[]{"Zdzisław Moskal", "Piotr Pawłowski"}; //tymczasowo
-        String[] drivers = new String[]{"Paweł Pukacz", "Tomasz Szczygieł"}; //tymczasowo
 
-        //CAR section
+        //CAR and EQUIPMENT section
         TextView carLabel = createLabelTextView(getResources().getString(R.string.add_edit_incident_car));
-        Spinner carSpinner = createSpinner(cars);
-        singleCarLL.addView(carLabel);
-        singleCarLL.addView(carSpinner);
+        String[] carNames = prepareCarNames(carsItems);
+        Spinner carSpinner = createSpinner(carNames);
+
+
+        TextView equipmentLabel = createLabelTextView("Użyty sprzęt");
+        TextView equipmentsTV = createSimpleTextView("Wybrany sprzęt");
+        Button chooseEquipmentButton = createButton("Wybierz użyty sprzęt");
+
+        carSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String selectedValue = carSpinner.getSelectedItem().toString();
+                String[] actualItems = carsItems.get(selectedValue);
+                boolean[] actualCheckedItems = new boolean[actualItems.length];
+                ArrayList<Integer> mActualEquipmentSelected = new ArrayList<>();
+                chooseEquipmentButton.setOnClickListener(view1 -> {
+                    createMultichoiceDialogWithData(actualItems, actualCheckedItems, mActualEquipmentSelected, equipmentsTV);
+                });
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
 
         //DATE OF DEPARTURE section
         TextView dateOfDepartureLabel = createLabelTextView("Data i godzina wyjazdu");
         TextView dateOfDepartureTv = createSimpleTextView("");
         dateOfDepartureTv.setOnClickListener(view -> createDateTimePickerDialogAndSetDateTime(dateOfDepartureTv));
-        singleCarLL.addView(dateOfDepartureLabel);
-        singleCarLL.addView(dateOfDepartureTv);
 
         //DATE OF RETURN section
         TextView dateOfReturnLabel = createLabelTextView("Data i godzina powrotu");
         TextView dateOfReturnTv = createSimpleTextView("");
         dateOfReturnTv.setOnClickListener(view -> createDateTimePickerDialogAndSetDateTime(dateOfReturnTv));
-        singleCarLL.addView(dateOfReturnLabel);
-        singleCarLL.addView(dateOfReturnTv);
 
         //COMMANDER section
         TextView commandorLabel = createLabelTextView(getResources().getString(R.string.add_edit_incident_commander));
-        Spinner commandorsSpinner = createSpinner(commandors);
-        singleCarLL.addView(commandorLabel);
-        singleCarLL.addView(commandorsSpinner);
+        Spinner commandorsSpinner = createSpinner(commandersItems);
 
         //DRIVER section
         TextView driversLabel = createLabelTextView(getResources().getString(R.string.add_edit_incident_driver));
-        Spinner driversSpinner = createSpinner(drivers);
-        singleCarLL.addView(driversLabel);
-        singleCarLL.addView(driversSpinner);
+        Spinner driversSpinner = createSpinner(driversItems);
 
         //FIREFIGHTERS section
         boolean[] myFirefightersChecked = new boolean[firefighterItems.length];
@@ -246,26 +266,30 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         TextView firefightersTV = createSimpleTextView("Wybrani ratownicy...");
         Button chooseFirefightersButton = createButton("Wybierz ratowników");
 
-
-
         chooseFirefightersButton.setOnClickListener(view -> {
             createMultichoiceDialogWithData(firefighterItems, myFirefightersChecked, mFirefightersSelected, firefightersTV);
         });
+
+        //BUILD VIEW section
+        singleCarLL.addView(carLabel);
+        singleCarLL.addView(carSpinner);
+
+        singleCarLL.addView(dateOfDepartureLabel);
+        singleCarLL.addView(dateOfDepartureTv);
+
+        singleCarLL.addView(dateOfReturnLabel);
+        singleCarLL.addView(dateOfReturnTv);
+
+        singleCarLL.addView(commandorLabel);
+        singleCarLL.addView(commandorsSpinner);
+
+        singleCarLL.addView(driversLabel);
+        singleCarLL.addView(driversSpinner);
 
         singleCarLL.addView(firefightersLabel);
         singleCarLL.addView(chooseFirefightersButton);
         singleCarLL.addView(firefightersTV);
 
-        //EQUIPMENT section
-        boolean[] equipmentCheckedItems = new boolean[equipmentItems.length];
-        ArrayList<Integer> mEquipmentSelected = new ArrayList<>();
-
-        TextView equipmentLabel = createLabelTextView("Użyty sprzęt");
-        TextView equipmentsTV = createSimpleTextView("Wybrany sprzęt");
-        Button chooseEquipmentButton = createButton("Wybierz użyty sprzęt");
-        chooseEquipmentButton.setOnClickListener(view -> {
-            createMultichoiceDialogWithData(equipmentItems, equipmentCheckedItems, mEquipmentSelected, equipmentsTV);
-        });
 
         singleCarLL.addView(equipmentLabel);
         singleCarLL.addView(chooseEquipmentButton);
@@ -283,6 +307,11 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         singleCarLL.addView(spacer);
 
         mDetailsLayout.addView(singleCarLL);
+    }
+
+    private String[] prepareCarNames(HashMap<String, String[]> carsItems) {
+        Object[] carNames = carsItems.keySet().toArray();
+        return Arrays.asList(carNames).toArray(new String[carNames.length]);
     }
 
     private Button createButton(String text) {
@@ -409,18 +438,87 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
     }
 
     @Override
-    public void setCarNames(Map<String, Integer> carNames) {
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_add_edit_incident_save:
+                performIncident();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 
+    private void performIncident() {
+        Log.d(TAG, "Dodanych samochodow:" + mDetailsLayout.getChildCount());
+        int numOfCars = mDetailsLayout.getChildCount();
+
+        String description = mDescription.getText().toString();
+        String city = mCity.getText().toString();
+        String date = mDate.getText().toString();
+        String dateTimeOfAlarm = mDatetimeOfAlarm.getText().toString();
+        String type = mIncidentType.getSelectedItem().toString();
+        String subtype = mIncidentSubtype.getSelectedItem().toString();
+
+        List<PreparedCarInIncident> listOfCars = new ArrayList<>();
+
+        for (int i = 0; i < numOfCars; i++) {
+            LinearLayout carLL = (LinearLayout) mDetailsLayout.getChildAt(i);
+
+            Spinner car = (Spinner) carLL.getChildAt(1);
+            String carName = car.getSelectedItem().toString();
+
+            TextView dateOfDeparture = (TextView) carLL.getChildAt(3);
+            String departure = dateOfDeparture.getText().toString();
+
+            TextView dateOfReturn = (TextView) carLL.getChildAt(5);
+            String returnDate = dateOfReturn.getText().toString();
+
+            Spinner commander = (Spinner) carLL.getChildAt(7);
+            String commanderName = commander.getSelectedItem().toString();
+
+            Spinner driver = (Spinner) carLL.getChildAt(9);
+            String driverName = driver.getSelectedItem().toString();
+
+            TextView firefighters = (TextView) carLL.getChildAt(12);
+            String firefightersName = firefighters.getText().toString();
+
+            TextView equipment = (TextView) carLL.getChildAt(15);
+            String equipments = equipment.getText().toString();
+            Log.d(TAG, "koniec samochodu nr" + i);
+
+            PreparedCarInIncident preparedCarInIncident = new PreparedCarInIncident();
+            preparedCarInIncident.setCarName(carName);
+            preparedCarInIncident.setDatetimeOfDeparture(departure);
+            preparedCarInIncident.setDatetimeOfReturn(returnDate);
+            preparedCarInIncident.setCommanderName(commanderName);
+            preparedCarInIncident.setDriverName(driverName);
+            preparedCarInIncident.setFirefightersNames(PreparedCarInIncident.makeAStringList(firefightersName, ","));
+            preparedCarInIncident.setEquipmentNames(PreparedCarInIncident.makeAStringList(equipments, ","));
+
+            listOfCars.add(preparedCarInIncident);
+        }
+
+        Log.d(TAG, "Przygotowane zdarzenie");
     }
 
     @Override
-    public void setCommandersNames(Map<String, Integer> commandersNames) {
-
+    public void setCarsNames(HashMap<String, String[]> carNames) {
+        carsItems = carNames;
     }
 
     @Override
-    public void setDriversNames(Map<String, Integer> driversNames) {
+    public void setCommandorsNames(String[] commandersNames) {
+        commandersItems = commandersNames;
+    }
 
+    @Override
+    public void setDriversNames(String[] driversNames) {
+        driversItems = driversNames;
+    }
+
+    @Override
+    public void setFirefighterNames(String[] firefighters) {
+        firefighterItems = firefighters;
     }
 
     @Override

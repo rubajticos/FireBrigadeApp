@@ -5,18 +5,20 @@ import com.michalrubajczyk.myfirebrigade.BaseView;
 import com.michalrubajczyk.myfirebrigade.dto.additional.PreparedCarInIncident;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public interface AddEditIncidentContract {
 
     interface View extends BaseView<Presenter> {
 
-        void setCarNames(Map<String, Integer> carNames);
+        void setCommandorsNames(String[] commandersNames);
 
-        void setCommandersNames(Map<String, Integer> commandersNames);
+        void setDriversNames(String[] driversNames);
 
-        void setDriversNames(Map<String, Integer> driversNames);
+        void setCarsNames(HashMap<String, String[]> carNames);
+
+        void setFirefighterNames(String[] firefighters);
 
         void showInwalidIncidentError();
 
