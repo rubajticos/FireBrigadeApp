@@ -1,16 +1,23 @@
 package com.michalrubajczyk.myfirebrigade.activity.AddEditIncidentActivity;
 
-import com.michalrubajczyk.myfirebrigade.dto.additional.PreparedCarInIncident;
+import android.util.Log;
+
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.CarRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.DataListener;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FirefighterRequestImpl;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.IncidentRequestImpl;
+import com.michalrubajczyk.myfirebrigade.model.dto.CarIncident;
 import com.michalrubajczyk.myfirebrigade.model.dto.CarWithEquipment;
 import com.michalrubajczyk.myfirebrigade.model.dto.CarsAndFirefighters;
 import com.michalrubajczyk.myfirebrigade.model.dto.Equipment;
+import com.michalrubajczyk.myfirebrigade.model.dto.FireBrigadeIncident;
 import com.michalrubajczyk.myfirebrigade.model.dto.Firefighter;
+import com.michalrubajczyk.myfirebrigade.model.dto.Incident;
+import com.michalrubajczyk.myfirebrigade.model.dto.IncidentFull;
+import com.michalrubajczyk.myfirebrigade.model.dto.PreparedCarInIncident;
 import com.michalrubajczyk.myfirebrigade.utils.FireBrigadeUtils;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -34,7 +41,8 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
 
     private FireBrigadeUtils mFirebrigadeUtils;
 
-    private SimpleDateFormat simpleDateFormat;
+    private SimpleDateFormat dateFormatter;
+    private SimpleDateFormat datetimeFormatter;
 
     private List<CarWithEquipment> myFireBrigadeCars;
     private List<Firefighter> myFireBrigadeFirefighters;
@@ -58,7 +66,8 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
 
         mAddEditIncidentView.setPresenter(this);
 
-        simpleDateFormat = new SimpleDateFormat("dd.MM.yyyy");
+        dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
+        datetimeFormatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
 
     }
 
@@ -165,7 +174,7 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
     }
 
     @Override
-    public void saveIncident(String type, String subtype, Date date, String city, String description, List<PreparedCarInIncident> cars) {
+    public void saveIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars) {
         if (isNewIncicent()) {
             createIncident(type, subtype, date, city, description, cars);
         } else {
@@ -173,10 +182,109 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
         }
     }
 
-    private void createIncident(String type, String subtype, Date date, String city, String description, List<PreparedCarInIncident> cars) {
+    private void createIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars) {
+        Incident incident = new Incident();
+        incident.setType(type);
+        incident.setSubtype(subtype);
+        try {
+            incident.setDate(dateFormatter.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        incident.setCity(city);
+        incident.setDescription(description);
+
+        List<CarIncident> carIncidentList = prepareCarIncidentList(cars);
+
+        List<FireBrigadeIncident> fireBrigadeIncidents = new ArrayList<>();
+        FireBrigadeIncident fireBrigadeIncident = new FireBrigadeIncident();
+        try {
+            fireBrigadeIncident.setDateTimeOfAlarm(dateFormatter.parse(date));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        fireBrigadeIncidents.add(fireBrigadeIncident);
+
+        IncidentFull incidentFull = new IncidentFull(incident, carIncidentList, fireBrigadeIncidents);
+
+        // TODO: 26/05/2018 nie dodaje samochodow
+
+        mIncidentRequest.addIncident(incidentFull, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
+            @Override
+            public void onSuccess(String data) {
+                Log.d(TAG, "Dodawanie zdarzenia udane");
+            }
+
+            @Override
+            public void onError(int code) {
+
+            }
+        });
+
+
     }
 
-    private void updateIncident(String type, String subtype, Date date, String city, String description, List<PreparedCarInIncident> cars) {
+    private List<CarIncident> prepareCarIncidentList(List<PreparedCarInIncident> cars) {
+        List<CarIncident> carIncidents = new ArrayList<>();
+        for (PreparedCarInIncident preparedCarInIncident : cars) {
+            CarIncident carIncident = new CarIncident();
+
+            for (CarWithEquipment item : myFireBrigadeCars) {
+                if (item.getCar().getModel().equals(preparedCarInIncident.getCarName())) {
+                    carIncident.setCar(item.getCar());
+                    List<Equipment> carEquipments = prepareEquipments(item.getEquipments(), preparedCarInIncident.getEquipmentNames());
+                    carIncident.setUsedEquipments(carEquipments);
+                }
+            }
+
+            Firefighter commander = findFirefighter(preparedCarInIncident.getCommanderName(), myFireBrigadeCommanders);
+            carIncident.setCommander(commander);
+
+            Firefighter driver = findFirefighter(preparedCarInIncident.getDriverName(), myFireBrigadeDrivers);
+            carIncident.setDriver(driver);
+
+            try {
+                Date datetimeOfDeparture = datetimeFormatter.parse(preparedCarInIncident.getDatetimeOfDeparture());
+                carIncident.setDateTimeOfDeparture(datetimeOfDeparture);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            try {
+                Date datetimeOfReturn = datetimeFormatter.parse(preparedCarInIncident.getDatetimeOfReturn());
+                carIncident.setDateTimeOfDeparture(datetimeOfReturn);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        }
+        return carIncidents;
+    }
+
+    private Firefighter findFirefighter(String commanderName, List<Firefighter> firefighters) {
+        for (Firefighter f : firefighters) {
+            String commanderConcat = f.getName() + " " + f.getLastName();
+            if (commanderConcat.equals(commanderName)) {
+                return f;
+            }
+        }
+
+        return null;
+    }
+
+    private List<Equipment> prepareEquipments(List<Equipment> equipments, List<String> equipmentNames) {
+        List<Equipment> equipmentList = new ArrayList<>();
+        for (String s : equipmentNames) {
+            for (Equipment e : equipments) {
+                if (e.getName().equals(s)) {
+                    equipmentList.add(e);
+                }
+            }
+        }
+        return equipmentList;
+    }
+
+    private void updateIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars) {
     }
 
     @Override

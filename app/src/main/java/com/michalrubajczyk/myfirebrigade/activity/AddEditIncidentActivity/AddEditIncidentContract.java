@@ -2,9 +2,8 @@ package com.michalrubajczyk.myfirebrigade.activity.AddEditIncidentActivity;
 
 import com.michalrubajczyk.myfirebrigade.BasePresenter;
 import com.michalrubajczyk.myfirebrigade.BaseView;
-import com.michalrubajczyk.myfirebrigade.dto.additional.PreparedCarInIncident;
+import com.michalrubajczyk.myfirebrigade.model.dto.PreparedCarInIncident;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -55,7 +54,7 @@ public interface AddEditIncidentContract {
 
     interface Presenter extends BasePresenter {
 
-        void saveIncident(String type, String subtype, Date date, String city, String description, List<PreparedCarInIncident> cars);
+        void saveIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars);
 
         void populateIncident();
 

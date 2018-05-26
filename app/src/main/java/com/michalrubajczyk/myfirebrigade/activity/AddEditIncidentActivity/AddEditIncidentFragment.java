@@ -26,7 +26,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.dto.additional.PreparedCarInIncident;
+import com.michalrubajczyk.myfirebrigade.model.dto.PreparedCarInIncident;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -497,6 +497,8 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
 
             listOfCars.add(preparedCarInIncident);
         }
+
+        mPresenter.saveIncident(type, subtype, date, city, description, listOfCars);
 
         Log.d(TAG, "Przygotowane zdarzenie");
     }

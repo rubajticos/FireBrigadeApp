@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.dto.additional;
+package com.michalrubajczyk.myfirebrigade.model.dto;
 
 import java.util.Arrays;
 import java.util.List;
