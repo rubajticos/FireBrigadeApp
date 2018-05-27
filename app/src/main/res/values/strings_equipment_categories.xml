@@ -20,14 +20,17 @@
         <item>Sprzęt podnoszący</item>
         <item>Sprzęt rozpierający</item>
         <item>Sprzęt ewakuujący</item>
+        <item>Sprzęt medyczny</item>
     </string-array>
 
     <string-array name="equipment_sprzet_ochrony_osobistej_subcategories">
         <item></item>
+
     </string-array>
 
     <string-array name="equipment_pozostale_subcategories">
-        <item></item>
+        <item>Oznakowanie terenu</item>
+        <item>Podręczny sprzęt</item>
     </string-array>
 
 </resources>
