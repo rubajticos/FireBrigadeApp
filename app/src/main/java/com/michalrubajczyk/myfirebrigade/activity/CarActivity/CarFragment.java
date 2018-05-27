@@ -81,7 +81,7 @@ public class CarFragment extends Fragment implements CarContract.View, SwipeRefr
         mCarsView = (RelativeLayout) root.findViewById(R.id.carRL);
         recyclerView = (RecyclerView) root.findViewById(R.id.car_recyclerView);
         mAdapter = new CarAdapter(new ArrayList<>(0));
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
@@ -127,6 +127,14 @@ public class CarFragment extends Fragment implements CarContract.View, SwipeRefr
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(true);
                 mPresenter.loadCars(false);
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mSwipeRefreshLayout.setEnabled(mLayoutManager.findFirstCompletelyVisibleItemPosition() == 0);
             }
         });
 

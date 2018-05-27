@@ -81,7 +81,7 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
         mFirefighterView = (RelativeLayout) root.findViewById(R.id.firefighterRL);
         recyclerView = (RecyclerView) root.findViewById(R.id.firefighter_recyclerView);
         mAdapter = new FirefighterAdapter(new ArrayList<>(0));
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(mAdapter);
@@ -127,6 +127,14 @@ public class FirefighterFragment extends Fragment implements FirefighterContract
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(true);
                 mPresenter.loadFirefighters(false);
+            }
+        });
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                mSwipeRefreshLayout.setEnabled(mLayoutManager.findFirstCompletelyVisibleItemPosition() == 0);
             }
         });
 

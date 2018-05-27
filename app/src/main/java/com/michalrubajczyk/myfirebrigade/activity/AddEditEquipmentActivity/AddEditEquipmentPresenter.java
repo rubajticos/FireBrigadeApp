@@ -166,7 +166,7 @@ public class AddEditEquipmentPresenter implements AddEditEquipmentContract.Prese
     }
 
     private void createEquipment(String name, String type, String subtype, String carName) {
-        if (isEquipmentNameEmpty(name)) {
+        if (!isEquipmentNameEmpty(name)) {
             if (isCarNotSelected(carName)) {
                 createOnlyEquipment(name, type, subtype);
             } else {

@@ -23,10 +23,12 @@ import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class AddEditFirefighterFragment extends Fragment implements AddEditFirefighterContract.View {
@@ -47,8 +49,13 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
 
     private Button mAddTrainingButton;
 
+    private Calendar mCalendar;
+    private SimpleDateFormat mDateFormatter;
+
 
     public AddEditFirefighterFragment() {
+        this.mDateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        this.mCalendar = Calendar.getInstance();
     }
 
     public static AddEditFirefighterFragment newInstance() {
@@ -86,7 +93,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                 DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        mBirthday.setText(i2 + "." + i1 + "." + i);
+                        mCalendar.set(i, i1, i2);
+                        mBirthday.setText(mDateFormatter.format(mCalendar.getTime()));
                     }
                 };
                 createAndShowDatePickerDialog(mDateSetListener);
@@ -100,7 +108,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                 DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                        mExpiryMedicalTests.setText(i2 + "." + i1 + "." + i);
+                        mCalendar.set(i, i1, i2);
+                        mExpiryMedicalTests.setText(mDateFormatter.format(mCalendar.getTime()));
                     }
                 };
                 createAndShowDatePickerDialog(mDateSetListener);
@@ -122,7 +131,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                     DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            trainingDate.setText(i2 + "." + i1 + "." + i);
+                            mCalendar.set(i, i1, i2);
+                            trainingDate.setText(mDateFormatter.format(mCalendar.getTime()));
                         }
                     };
                     createAndShowDatePickerDialog(mDateSetListener);
@@ -302,7 +312,8 @@ public class AddEditFirefighterFragment extends Fragment implements AddEditFiref
                     DatePickerDialog.OnDateSetListener mDateSetListener = new DatePickerDialog.OnDateSetListener() {
                         @Override
                         public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
-                            dateTextView.setText(i2 + "." + i1 + "." + i);
+                            mCalendar.set(i, i1, i2);
+                            dateTextView.setText(mDateFormatter.format(mCalendar.getTime()));
                         }
                     };
                     createAndShowDatePickerDialog(mDateSetListener);
