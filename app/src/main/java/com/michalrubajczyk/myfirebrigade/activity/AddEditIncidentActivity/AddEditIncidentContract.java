@@ -23,6 +23,12 @@ public interface AddEditIncidentContract {
 
         void showNumOfPeopleExceeded(String carName);
 
+        void showAddSuccess();
+
+        void showAddError(int code);
+
+        void showIncidents();
+
         void showNoCars();
 
         void showNoFirefighters();

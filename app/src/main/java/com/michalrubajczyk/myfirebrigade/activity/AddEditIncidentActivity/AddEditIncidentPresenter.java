@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class AddEditIncidentPresenter implements AddEditIncidentContract.Presenter {
     public static final String TAG = "AdEd Firefither PRES";
@@ -66,8 +67,8 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
 
         mAddEditIncidentView.setPresenter(this);
 
-        dateFormatter = new SimpleDateFormat("dd.MM.yyyy");
-        datetimeFormatter = new SimpleDateFormat("dd.MM.yyyy HH:mm");
+        dateFormatter = new SimpleDateFormat("dd.MM.yyyy", Locale.getDefault());
+        datetimeFormatter = new SimpleDateFormat("dd.MM.yyyy HH:mm", Locale.getDefault());
 
     }
 
@@ -97,7 +98,7 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
                 myFireBrigadeFirefighters = carsAndFirefighters.getFirefighters();
 
                 setItemsInView(myFireBrigadeCars, myFireBrigadeCommanders, myFireBrigadeDrivers, myFireBrigadeFirefighters);
-
+                mAddEditIncidentView.hideProgress();
             }
 
 
@@ -176,6 +177,7 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
     @Override
     public void saveIncident(String type, String subtype, String date, String datetimeOfAlarm, String city, String description, List<PreparedCarInIncident> cars) {
         if (isNewIncicent()) {
+            mAddEditIncidentView.showProgress();
             createIncident(type, subtype, date, datetimeOfAlarm, city, description, cars);
         } else {
             updateIncident(type, subtype, date, datetimeOfAlarm, city, description, cars);
@@ -207,18 +209,20 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
 
         IncidentFull incidentFull = new IncidentFull(incident, carIncidentList, fireBrigadeIncidents);
 
-        // TODO: 26/05/2018 nie dodaje samochodow
         // TODO: 26/05/2018 walidacja zdarzenia
 
         mIncidentRequest.addIncident(incidentFull, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
             @Override
             public void onSuccess(String data) {
                 Log.d(TAG, "Dodawanie zdarzenia udane");
+                mAddEditIncidentView.hideProgress();
+                mAddEditIncidentView.showAddSuccess();
             }
-
             @Override
             public void onError(int code) {
-
+                Log.d(TAG, "Dodawanie zdarzenia nieudane");
+                mAddEditIncidentView.hideProgress();
+                mAddEditIncidentView.showAddError(code);
             }
         });
 

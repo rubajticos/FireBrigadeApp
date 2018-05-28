@@ -24,6 +24,7 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 public class IncidentDetailFragment extends Fragment implements IncidentDetailsContract.ViewDetails {
+    public final static String TAG = "IncidentDetail Fragment";
 
     @NonNull
     private static final String ARGUMENT_INCIDENT_ID = "INCIDENT_ID";
@@ -174,7 +175,9 @@ public class IncidentDetailFragment extends Fragment implements IncidentDetailsC
         carViewHolder.mIncidentDetailsCarInfoFirefighters.setText(firefighters);
         carViewHolder.mIncidentDetailsCarInfoUsedEquipment.setText(usedEquipment);
 
+        childCarView.setVisibility(View.VISIBLE);
         mIncidentDetailCarInfoLL.addView(childCarView);
+        Log.d(TAG, Integer.toString(mIncidentDetailCarInfoLL.getChildCount()));
     }
 
     @Override

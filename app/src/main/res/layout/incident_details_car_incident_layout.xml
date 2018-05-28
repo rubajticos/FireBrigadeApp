@@ -140,11 +140,9 @@
             android:id="@+id/view1"
             android:layout_width="fill_parent"
             android:layout_height="2dp"
-            android:layout_alignParentEnd="true"
-            android:layout_below="@+id/textView1"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
-            android:background="@color/alarm_red" />
+            android:background="@color/dark_gray" />
 
 
     </LinearLayout>

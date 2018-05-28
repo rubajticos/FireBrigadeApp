@@ -31,7 +31,7 @@ public class IncidentDetailPresenter implements IncidentDetailsContract.Presente
         this.mIncidentId = mIncidentId;
 
         this.dateFormatter = new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault());
-        this.dateTimeFormatter = new SimpleDateFormat("dd-MM-yyyy hh:mm", Locale.getDefault());
+        this.dateTimeFormatter = new SimpleDateFormat("dd-MM-yyyy HH:mm", Locale.getDefault());
 
         mIncidentDetailsView.setPresenter(this);
 

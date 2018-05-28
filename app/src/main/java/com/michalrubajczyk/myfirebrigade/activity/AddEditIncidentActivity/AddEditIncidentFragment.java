@@ -1,5 +1,6 @@
 package com.michalrubajczyk.myfirebrigade.activity.AddEditIncidentActivity;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -7,6 +8,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -128,6 +130,7 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
         String[] mainSecondValueSubcategories = getResources().getStringArray(R.array.incident_miejscowe_subcategories);
         String[] mainThirdValueSubcategories = getResources().getStringArray(R.array.incident_cwiczenia_subcategories);
         String[] mainFourthValueSubcategories = getResources().getStringArray(R.array.incident_falszywe_subcategories);
+        String[] mainFifthValueSubcategories = getResources().getStringArray(R.array.incident_zabezpieczenie_subcategories);
 
         mIncidentType.setAdapter(mainTypeAdapter);
         mIncidentType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -146,6 +149,8 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
                     case 3:
                         setSubcategoriesAdapter(mainFourthValueSubcategories);
                         break;
+                    case 4:
+                        setSubcategoriesAdapter(mainFifthValueSubcategories);
                 }
             }
 
@@ -531,6 +536,27 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
     @Override
     public void showNumOfPeopleExceeded(String carName) {
 
+    }
+
+    @Override
+    public void showAddSuccess() {
+        showMessage("Dodanie zdarzenia udane!");
+        showIncidents();
+    }
+
+    @Override
+    public void showAddError(int code) {
+        showMessage("Dodawanie nieudane. Kod błędu: " + code);
+    }
+
+    @Override
+    public void showIncidents() {
+        getActivity().setResult(Activity.RESULT_OK);
+        getActivity().finish();
+    }
+
+    private void showMessage(String s) {
+        Snackbar.make(getView(), s, Snackbar.LENGTH_LONG).show();
     }
 
     @Override

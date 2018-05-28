@@ -6,6 +6,7 @@
         <item>Miejscowe zagrożenie</item>
         <item>Ćwiczenia</item>
         <item>Fałszywy alarm</item>
+        <item>Zabezpieczenie rejonu operacyjnego</item>
     </string-array>
 
     <string-array name="incident_pozar_subcategories">
@@ -27,6 +28,10 @@
     </string-array>
 
     <string-array name="incident_cwiczenia_subcategories">
+        <item></item>
+    </string-array>
+
+    <string-array name="incident_zabezpieczenie_subcategories">
         <item></item>
     </string-array>
 
