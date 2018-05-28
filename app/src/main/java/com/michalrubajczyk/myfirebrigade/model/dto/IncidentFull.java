@@ -27,4 +27,10 @@ public class IncidentFull {
         return Arrays.asList(incidentFullsArr);
     }
 
+    public static IncidentFull makeObjectFromJson(String data) {
+        GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+
+        IncidentFull incidentFullsArr = gsonBuilder.create().fromJson(data, IncidentFull.class);
+        return incidentFullsArr;
+    }
 }

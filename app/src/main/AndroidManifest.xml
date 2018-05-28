@@ -93,6 +93,11 @@
             android:name=".activity.IncidentActivity.IncidentActivity"
             android:label="@string/title_activity_incident"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.IncidentDetailActivity.IncidentDetailsActivity"
+            android:label="@string/title_activity_incident_details"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

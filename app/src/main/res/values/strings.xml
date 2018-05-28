@@ -271,5 +271,24 @@
     <string name="incident_list_row_city">Miejsce zdarzenia</string>
     <string name="incident_fragment_loading_error">Wystąpił bład podczas ładowania zdarzeń</string>
 
+    <!--INCIDENT DETAILS ACTIVITY-->
+    <string name="title_activity_incident_details">Zdarzenie</string>
+    <string name="incident_detail_detail_label">Podstawowe informacje o zdarzeniu</string>
+    <string name="incident_detail_description">Opis zdarzenia</string>
+    <string name="incident_detail_city">Miejscowość</string>
+    <string name="incident_detail_type">Typ zdarzenia</string>
+    <string name="incident_detail_subtype">Podtyp zdarzenia</string>
+    <string name="incident_detail_date">Data zdarzenia</string>
+    <string name="incident_detail_dateOfAlarm">Data i godzina zaalarmowania</string>
+    <string name="incident_detail_carInfoLabel">Dane o zadysponowanych samochodach</string>
+    <string name="incident_detail_carName">Samochód</string>
+    <string name="incident_detail_dateTimeOfDeparture">Data i godzina wyjazdu</string>
+    <string name="incident_detail_dateTimeOfReturn">Data i godzina powrotu</string>
+    <string name="incident_detail_carCommander">Dowódca</string>
+    <string name="incident_detail_carDriver">Kierowca</string>
+    <string name="incident_detail_carFirefighters">Ratownicy</string>
+    <string name="incident_detail_carEquipment">Użyty sprzęt</string>
+    <string name="incident_detail_missing_incident">Brak zdarzenia.. błąd</string>
+
 
 </resources>

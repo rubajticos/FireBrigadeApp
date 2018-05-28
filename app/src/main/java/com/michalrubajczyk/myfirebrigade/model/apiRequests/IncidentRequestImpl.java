@@ -27,7 +27,23 @@ public class IncidentRequestImpl implements IncidentRequest {
 
     @Override
     public void getIncidentById(int incidentId, DataListener dataListener) {
-
+        String url = BASE_SERVER_URL + "/incident/" + incidentId;
+        JsonObjectRequest getFirefightersAndCars = new JsonObjectRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "#getFirefighterTrainings() - server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getFirefightersAndCars);
     }
 
     @Override

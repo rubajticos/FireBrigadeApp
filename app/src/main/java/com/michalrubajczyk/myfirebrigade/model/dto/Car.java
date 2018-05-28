@@ -140,4 +140,12 @@ public class Car {
         }
         return true;
     }
+
+    public String getModelAndNumbers() {
+        StringBuilder s = new StringBuilder();
+        s.append(getModel());
+        s.append(", ");
+        s.append(getOperationalNumbers());
+        return s.toString();
+    }
 }

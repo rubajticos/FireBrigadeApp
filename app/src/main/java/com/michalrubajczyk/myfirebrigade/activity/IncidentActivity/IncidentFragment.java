@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
 import com.michalrubajczyk.myfirebrigade.activity.AddEditIncidentActivity.AddEditIncidentActivity;
+import com.michalrubajczyk.myfirebrigade.activity.IncidentDetailActivity.IncidentDetailsActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
 import com.michalrubajczyk.myfirebrigade.model.dto.IncidentFull;
 
@@ -91,9 +92,9 @@ public class IncidentFragment extends Fragment implements IncidentContract.View,
             @Override
             public void onClick(View view, int position) {
                 Log.d(TAG, "Klikniecie zdarzenia");
-                Integer equipmentId = (int) recyclerView.getAdapter().getItemId(position);
-                Log.d(TAG, "Id kliknietego zdarzenia: " + Integer.toString(equipmentId));
-                showDetailsIncident(Integer.toString(equipmentId));
+                Integer incidentId = (int) recyclerView.getAdapter().getItemId(position);
+                Log.d(TAG, "Id kliknietego zdarzenia: " + Integer.toString(incidentId));
+                showDetailsIncident(Integer.toString(incidentId));
             }
 
             @Override
@@ -170,10 +171,9 @@ public class IncidentFragment extends Fragment implements IncidentContract.View,
 
     @Override
     public void showDetailsIncident(String incidentId) {
-//        Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
-//        intent.putExtra(AddEditEquipmentFragment.ARGUMENT_EDIT_EQUIPMENT_ID, incidentId);
-//        startActivity(intent);
-        // TODO: 28/05/2018 przechodzenie do szczegolow
+        Intent intent = new Intent(getContext(), IncidentDetailsActivity.class);
+        intent.putExtra(IncidentDetailsActivity.EXTRA_INCIDENT_ID, incidentId);
+        startActivity(intent);
     }
 
     @Override

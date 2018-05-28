@@ -105,4 +105,12 @@ public class Firefighter {
         }
         return true;
     }
+
+    public String getNameAndLastName() {
+        StringBuilder s = new StringBuilder();
+        s.append(getName());
+        s.append(" ");
+        s.append(getLastName());
+        return s.toString();
+    }
 }

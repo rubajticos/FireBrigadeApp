@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/incident_detailLL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_margin="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_carName"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_carName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_carName" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_dateTimeOfDeparture"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_departureTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_dateTimeOfDeparture" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_dateTimeOfReturn"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_returnTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_dateTimeOfReturn" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_carCommander"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_commander"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_carCommander" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_carDriver"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_driver"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_carDriver" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_carFirefighters"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_firefighters"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_carFirefighters" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="10dp"
+            android:textStyle="bold"
+            android:text="@string/incident_detail_carEquipment"
+            android:textAppearance="@style/TextAppearance.AppCompat.Tooltip" />
+
+        <TextView
+            android:id="@+id/incident_details_car_info_used_equipment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/row_padding_vertical"
+            android:textSize="16sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="@string/incident_detail_carEquipment" />
+
+        <View
+            android:id="@+id/view1"
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@+id/textView1"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="@color/alarm_red" />
+
+
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>
