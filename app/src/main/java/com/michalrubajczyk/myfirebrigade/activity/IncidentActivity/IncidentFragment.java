@@ -1,4 +1,4 @@
-package com.michalrubajczyk.myfirebrigade.activity.EquipmentActivity;
+package com.michalrubajczyk.myfirebrigade.activity.IncidentActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,41 +19,42 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.michalrubajczyk.myfirebrigade.R;
-import com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity.AddEditEquipmentActivity;
-import com.michalrubajczyk.myfirebrigade.activity.AddEditEquipmentActivity.AddEditEquipmentFragment;
+import com.michalrubajczyk.myfirebrigade.activity.AddEditIncidentActivity.AddEditIncidentActivity;
 import com.michalrubajczyk.myfirebrigade.activity.RecyclerTouchListener;
-import com.michalrubajczyk.myfirebrigade.model.dto.EquipmentAdapterObj;
+import com.michalrubajczyk.myfirebrigade.model.dto.IncidentFull;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * A placeholder fragment containing a simple view.
  */
-public class EquipmentFragment extends Fragment implements EquipmentContract.View, SwipeRefreshLayout.OnRefreshListener {
-    private static final String TAG = "Equipment Fragment";
+public class IncidentFragment extends Fragment implements IncidentContract.View, SwipeRefreshLayout.OnRefreshListener {
+    private static final String TAG = "Incident Fragment";
 
-    private EquipmentContract.Presenter mPresenter;
+    private IncidentContract.Presenter mPresenter;
 
-    private EquipmentAdapter mAdapter;
+    private IncidentAdapter mAdapter;
 
-    private View mNoEquipmentView;
+    private View mNoIncidentsView;
 
-    private View mEquipmentView;
+    private View mIncidentsView;
 
-    private ImageView mNoEquipmentIcon;
-    private TextView mNoEquipmentMainText;
-    private TextView mNoEquipmentAddView;
+    private ImageView mNoIncidentIcon;
+    private TextView mNoIncidentMainText;
+    private TextView mNoIncidentAddView;
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
 
     private RecyclerView recyclerView;
 
-    public EquipmentFragment() {
+    public IncidentFragment() {
     }
 
-    public static EquipmentFragment newInstance() {
-        return new EquipmentFragment();
+    public static IncidentFragment newInstance() {
+        return new IncidentFragment();
     }
 
     @Override
@@ -63,7 +64,7 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
     }
 
     @Override
-    public void setPresenter(EquipmentContract.Presenter presenter) {
+    public void setPresenter(IncidentContract.Presenter presenter) {
         mPresenter = presenter;
     }
 
@@ -75,12 +76,12 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.equipment_frag, container, false);
+        View root = inflater.inflate(R.layout.incident_frag, container, false);
 
         //Setup cars view
-        mEquipmentView = (RelativeLayout) root.findViewById(R.id.equipmentRL);
-        recyclerView = (RecyclerView) root.findViewById(R.id.equipment_recyclerView);
-        mAdapter = new EquipmentAdapter(new ArrayList<>(0));
+        mIncidentsView = (RelativeLayout) root.findViewById(R.id.incidentRL);
+        recyclerView = (RecyclerView) root.findViewById(R.id.incident_recyclerView);
+        mAdapter = new IncidentAdapter(new ArrayList<>(0), new SimpleDateFormat("dd-MM-yyyy", Locale.getDefault()));
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -89,10 +90,10 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
         recyclerView.addOnItemTouchListener(new RecyclerTouchListener(getActivity().getApplicationContext(), recyclerView, new RecyclerTouchListener.ClickListener() {
             @Override
             public void onClick(View view, int position) {
-                Log.d(TAG, "Klikniecie sprzętu");
+                Log.d(TAG, "Klikniecie zdarzenia");
                 Integer equipmentId = (int) recyclerView.getAdapter().getItemId(position);
-                Log.d(TAG, "Id kliknietego sprzetu: " + Integer.toString(equipmentId));
-                showEditEquipment(Integer.toString(equipmentId));
+                Log.d(TAG, "Id kliknietego zdarzenia: " + Integer.toString(equipmentId));
+                showDetailsIncident(Integer.toString(equipmentId));
             }
 
             @Override
@@ -103,30 +104,30 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
 
 
         //Setup noCars view
-        mNoEquipmentView = (LinearLayout) root.findViewById(R.id.noEquipmentRL);
-        mNoEquipmentIcon = (ImageView) root.findViewById(R.id.noEquipmentIcon);
-        mNoEquipmentMainText = (TextView) root.findViewById(R.id.noEquipmentMainText);
-        mNoEquipmentAddView = (TextView) root.findViewById(R.id.noEquipmentAddInfo);
-        mNoEquipmentAddView.setOnClickListener(v -> {
-            showAddEquipment();
-            Snackbar.make(getView(), "Dodawanie sprzętu", Snackbar.LENGTH_LONG).show();
+        mNoIncidentsView = (LinearLayout) root.findViewById(R.id.noIncidentRL);
+        mNoIncidentIcon = (ImageView) root.findViewById(R.id.noIncidentIcon);
+        mNoIncidentMainText = (TextView) root.findViewById(R.id.noIncidentMainText);
+        mNoIncidentAddView = (TextView) root.findViewById(R.id.noIncidentAddInfo);
+        mNoIncidentAddView.setOnClickListener(v -> {
+            showAddIncident();
+            Snackbar.make(getView(), "Dodawanie zdarzenia", Snackbar.LENGTH_LONG).show();
         });
 
         FloatingActionButton fab =
-                (FloatingActionButton) getActivity().findViewById(R.id.equipment_addFloatingButton);
+                (FloatingActionButton) getActivity().findViewById(R.id.incident_addFloatingButton);
         fab.setOnClickListener(v -> {
-            showAddEquipment();
-            Snackbar.make(getView(), "Dodawanie sprzętu", Snackbar.LENGTH_LONG).show();
+            showAddIncident();
+            Snackbar.make(getView(), "Dodawanie zdarzenia", Snackbar.LENGTH_LONG).show();
         });
 
-        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.equipment_swipeRefreshLayout);
+        mSwipeRefreshLayout = (SwipeRefreshLayout) root.findViewById(R.id.incident_swipeRefreshLayout);
         mSwipeRefreshLayout.setOnRefreshListener(this);
         mSwipeRefreshLayout.setColorSchemeColors(getResources().getColor(R.color.alarm_red));
         mSwipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
                 mSwipeRefreshLayout.setRefreshing(true);
-                mPresenter.loadEquipment(false);
+                mPresenter.loadIncidents(false);
             }
         });
 
@@ -154,29 +155,30 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
     }
 
     @Override
-    public void showEquipment(List<EquipmentAdapterObj> equipmentList) {
-        mAdapter.replaceData(equipmentList);
+    public void showIncidents(List<IncidentFull> incidentFullList) {
+        mAdapter.replaceData(incidentFullList);
 
-        mEquipmentView.setVisibility(View.VISIBLE);
-        mNoEquipmentView.setVisibility(View.GONE);
+        mIncidentsView.setVisibility(View.VISIBLE);
+        mNoIncidentsView.setVisibility(View.GONE);
     }
 
     @Override
-    public void showAddEquipment() {
-        Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
-        startActivityForResult(intent, AddEditEquipmentActivity.REQUEST_ADD_EQUIPMENT);
+    public void showAddIncident() {
+        Intent intent = new Intent(getContext(), AddEditIncidentActivity.class);
+        startActivityForResult(intent, AddEditIncidentActivity.REQUEST_ADD_INCIDENT);
     }
 
     @Override
-    public void showEditEquipment(String equipmentId) {
-        Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
-        intent.putExtra(AddEditEquipmentFragment.ARGUMENT_EDIT_EQUIPMENT_ID, equipmentId);
-        startActivity(intent);
+    public void showDetailsIncident(String incidentId) {
+//        Intent intent = new Intent(getContext(), AddEditEquipmentActivity.class);
+//        intent.putExtra(AddEditEquipmentFragment.ARGUMENT_EDIT_EQUIPMENT_ID, incidentId);
+//        startActivity(intent);
+        // TODO: 28/05/2018 przechodzenie do szczegolow
     }
 
     @Override
-    public void showLoadingEquipmentError() {
-        showMessage(getString(R.string.equipment_fragment_loading_error));
+    public void showLoadingIncidentError() {
+        showMessage(getString(R.string.incident_fragment_loading_error));
     }
 
     private void showMessage(String message) {
@@ -184,10 +186,10 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
     }
 
     @Override
-    public void showNoEquipment() {
-        mEquipmentView.setVisibility(View.GONE);
-        mNoEquipmentView.setVisibility(View.VISIBLE);
-        showMessage(getString(R.string.equipment_fragment_loading_error));
+    public void showNoIncidents() {
+        mIncidentsView.setVisibility(View.GONE);
+        mNoIncidentsView.setVisibility(View.VISIBLE);
+        showMessage(getString(R.string.incident_fragment_no_incident));
     }
 
     @Override
@@ -197,6 +199,6 @@ public class EquipmentFragment extends Fragment implements EquipmentContract.Vie
 
     @Override
     public void onRefresh() {
-        mPresenter.loadEquipment(false);
+        mPresenter.loadIncidents(false);
     }
 }

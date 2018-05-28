@@ -12,6 +12,7 @@ public class Firefighter {
     private String lastName;
     private Date birthday;
     private Date expiryMedicalTest;
+    private FireBrigade fireBrigade;
 
     public Firefighter() {
         this.idFirefighter = -1;
@@ -77,6 +78,14 @@ public class Firefighter {
 
     public void setExpiryMedicalTest(Date expiryMedicalTest) {
         this.expiryMedicalTest = expiryMedicalTest;
+    }
+
+    public FireBrigade getFireBrigade() {
+        return fireBrigade;
+    }
+
+    public void setFireBrigade(FireBrigade fireBrigade) {
+        this.fireBrigade = fireBrigade;
     }
 
     @Override

@@ -174,15 +174,15 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
     }
 
     @Override
-    public void saveIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars) {
+    public void saveIncident(String type, String subtype, String date, String datetimeOfAlarm, String city, String description, List<PreparedCarInIncident> cars) {
         if (isNewIncicent()) {
-            createIncident(type, subtype, date, city, description, cars);
+            createIncident(type, subtype, date, datetimeOfAlarm, city, description, cars);
         } else {
-            updateIncident(type, subtype, date, city, description, cars);
+            updateIncident(type, subtype, date, datetimeOfAlarm, city, description, cars);
         }
     }
 
-    private void createIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars) {
+    private void createIncident(String type, String subtype, String date, String datettimeOfAlarm, String city, String description, List<PreparedCarInIncident> cars) {
         Incident incident = new Incident();
         incident.setType(type);
         incident.setSubtype(subtype);
@@ -199,7 +199,7 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
         List<FireBrigadeIncident> fireBrigadeIncidents = new ArrayList<>();
         FireBrigadeIncident fireBrigadeIncident = new FireBrigadeIncident();
         try {
-            fireBrigadeIncident.setDateTimeOfAlarm(dateFormatter.parse(date));
+            fireBrigadeIncident.setDateTimeOfAlarm(datetimeFormatter.parse(datettimeOfAlarm));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -208,6 +208,7 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
         IncidentFull incidentFull = new IncidentFull(incident, carIncidentList, fireBrigadeIncidents);
 
         // TODO: 26/05/2018 nie dodaje samochodow
+        // TODO: 26/05/2018 walidacja zdarzenia
 
         mIncidentRequest.addIncident(incidentFull, mFirebrigadeUtils.getFireBrigadeIdFromSharedPreferences(), new DataListener() {
             @Override
@@ -234,6 +235,7 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
                     carIncident.setCar(item.getCar());
                     List<Equipment> carEquipments = prepareEquipments(item.getEquipments(), preparedCarInIncident.getEquipmentNames());
                     carIncident.setUsedEquipments(carEquipments);
+                    carIncident.setFirefighters(prepareFirefighters(preparedCarInIncident.getFirefightersNames(), myFireBrigadeFirefighters));
                 }
             }
 
@@ -252,13 +254,23 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
 
             try {
                 Date datetimeOfReturn = datetimeFormatter.parse(preparedCarInIncident.getDatetimeOfReturn());
-                carIncident.setDateTimeOfDeparture(datetimeOfReturn);
+                carIncident.setDateTimeOfReturn(datetimeOfReturn);
             } catch (ParseException e) {
                 e.printStackTrace();
             }
 
+            carIncidents.add(carIncident);
+
         }
         return carIncidents;
+    }
+
+    private List<Firefighter> prepareFirefighters(List<String> firefightersNames, List<Firefighter> myFireBrigadeFirefighters) {
+        List<Firefighter> firefighterList = new ArrayList<>();
+        for (String s : firefightersNames) {
+            firefighterList.add(findFirefighter(s, myFireBrigadeFirefighters));
+        }
+        return firefighterList;
     }
 
     private Firefighter findFirefighter(String commanderName, List<Firefighter> firefighters) {
@@ -278,13 +290,14 @@ public class AddEditIncidentPresenter implements AddEditIncidentContract.Present
             for (Equipment e : equipments) {
                 if (e.getName().equals(s)) {
                     equipmentList.add(e);
+                    break;
                 }
             }
         }
         return equipmentList;
     }
 
-    private void updateIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars) {
+    private void updateIncident(String type, String subtype, String date, String datetimeOfAlarm, String city, String description, List<PreparedCarInIncident> cars) {
     }
 
     @Override

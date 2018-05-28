@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.1.114:8443</string>
+    <string name="base_server_url">https://192.168.0.102:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -259,6 +259,17 @@
     <string name="add_edit_incident_firefighters">Ratownicy</string>
     <string name="add_edit_incident_details_information">Informacje szczegółowe</string>
     <string name="add_edit_incident_action_add_car">Dodaj samochód</string>
+
+    <!--INCIDENT ACTIVITY-->
+    <string name="title_activity_incident">Zdarzenia</string>
+    <string name="incident_fragment_no_incident">Brak zdarzeń do wyświetlenia</string>
+    <string name="incident_fragment_add_info">Wciśnij + aby dodać zdarzenie</string>
+    <string name="incident_list_row_desc">Opis zdarzenia</string>
+    <string name="incident_list_row_date">Data zdarzenia</string>
+    <string name="incident_list_row_type">Typ zdarzenia</string>
+    <string name="incident_list_row_subtype">Podtyp zdarzenia</string>
+    <string name="incident_list_row_city">Miejsce zdarzenia</string>
+    <string name="incident_fragment_loading_error">Wystąpił bład podczas ładowania zdarzeń</string>
 
 
 </resources>

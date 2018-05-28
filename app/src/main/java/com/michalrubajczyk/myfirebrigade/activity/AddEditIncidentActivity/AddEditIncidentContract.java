@@ -54,7 +54,7 @@ public interface AddEditIncidentContract {
 
     interface Presenter extends BasePresenter {
 
-        void saveIncident(String type, String subtype, String date, String city, String description, List<PreparedCarInIncident> cars);
+        void saveIncident(String type, String subtype, String date, String datetimeOfAlarm, String city, String description, List<PreparedCarInIncident> cars);
 
         void populateIncident();
 

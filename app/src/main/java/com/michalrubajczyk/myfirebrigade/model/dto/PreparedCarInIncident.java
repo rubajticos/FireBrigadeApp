@@ -17,7 +17,7 @@ public class PreparedCarInIncident {
     List<String> equipmentNames;
 
     public static List<String> makeAStringList(String string, String regex) {
-        List<String> stringList = Arrays.asList(string.trim().split(regex));
+        List<String> stringList = Arrays.asList(string.split(regex));
         return stringList;
     }
 

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/incident_listRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/row_padding_vertical"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/row_padding_vertical">
+
+        <TextView
+            android:id="@+id/incident_list_item_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/incident_list_row_desc"
+            android:layout_toLeftOf="@id/incident_list_item_city"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/incident_list_item_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:text="@string/incident_list_row_city" />
+
+        <TextView
+            android:id="@+id/incident_list_item_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incident_list_row_type"
+            android:layout_below="@id/incident_list_item_description"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/incident_list_item_subtype"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/incident_list_row_subtype"
+            android:layout_below="@id/incident_list_item_description"
+            android:layout_toRightOf="@id/incident_list_item_type"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/incident_list_item_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/incident_list_row_date"
+            android:textAlignment="viewEnd"
+            android:layout_below="@id/incident_list_item_description"
+            android:layout_toRightOf="@id/incident_list_item_subtype"
+            android:textColor="@color/colorPrimary" />
+
+
+    </RelativeLayout>
+</android.support.constraint.ConstraintLayout>

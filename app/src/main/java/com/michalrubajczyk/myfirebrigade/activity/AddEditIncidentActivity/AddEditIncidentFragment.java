@@ -468,10 +468,10 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
             String carName = car.getSelectedItem().toString();
 
             TextView dateOfDeparture = (TextView) carLL.getChildAt(3);
-            String departure = dateOfDeparture.getText().toString();
+            String departureDateTime = dateOfDeparture.getText().toString();
 
             TextView dateOfReturn = (TextView) carLL.getChildAt(5);
-            String returnDate = dateOfReturn.getText().toString();
+            String returnDateTime = dateOfReturn.getText().toString();
 
             Spinner commander = (Spinner) carLL.getChildAt(7);
             String commanderName = commander.getSelectedItem().toString();
@@ -488,17 +488,17 @@ public class AddEditIncidentFragment extends Fragment implements AddEditIncident
 
             PreparedCarInIncident preparedCarInIncident = new PreparedCarInIncident();
             preparedCarInIncident.setCarName(carName);
-            preparedCarInIncident.setDatetimeOfDeparture(departure);
-            preparedCarInIncident.setDatetimeOfReturn(returnDate);
+            preparedCarInIncident.setDatetimeOfDeparture(departureDateTime);
+            preparedCarInIncident.setDatetimeOfReturn(returnDateTime);
             preparedCarInIncident.setCommanderName(commanderName);
             preparedCarInIncident.setDriverName(driverName);
-            preparedCarInIncident.setFirefightersNames(PreparedCarInIncident.makeAStringList(firefightersName, ","));
-            preparedCarInIncident.setEquipmentNames(PreparedCarInIncident.makeAStringList(equipments, ","));
+            preparedCarInIncident.setFirefightersNames(PreparedCarInIncident.makeAStringList(firefightersName, ", "));
+            preparedCarInIncident.setEquipmentNames(PreparedCarInIncident.makeAStringList(equipments, ", "));
 
             listOfCars.add(preparedCarInIncident);
         }
 
-        mPresenter.saveIncident(type, subtype, date, city, description, listOfCars);
+        mPresenter.saveIncident(type, subtype, date, dateTimeOfAlarm, city, description, listOfCars);
 
         Log.d(TAG, "Przygotowane zdarzenie");
     }

@@ -1,5 +1,8 @@
 package com.michalrubajczyk.myfirebrigade.model.dto;
 
+import com.google.gson.GsonBuilder;
+
+import java.util.Arrays;
 import java.util.List;
 
 import lombok.Data;
@@ -16,4 +19,12 @@ public class IncidentFull {
         this.cars = carIncidentList;
         this.fireBrigades = fireBrigadeIncidents;
     }
+
+    public static List<IncidentFull> makeObjectsFromJson(String data) {
+        GsonBuilder gsonBuilder = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+
+        IncidentFull[] incidentFullsArr = gsonBuilder.create().fromJson(data, IncidentFull[].class);
+        return Arrays.asList(incidentFullsArr);
+    }
+
 }

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -31,7 +32,23 @@ public class IncidentRequestImpl implements IncidentRequest {
 
     @Override
     public void getIncidentsByFireBrigadeId(int fireBrigadeId, DataListener dataListener) {
-
+        String url = BASE_SERVER_URL + "/incident/firebrigade/" + fireBrigadeId;
+        JsonArrayRequest getIncidents = new JsonArrayRequest(Request.Method.GET, url,
+                null,
+                response -> {
+                    dataListener.onSuccess(response.toString());
+                    Log.d(TAG, response.toString());
+                },
+                error -> {
+                    try {
+                        dataListener.onError(error.networkResponse.statusCode);
+                        Log.d(TAG, error.toString());
+                    } catch (NullPointerException e) {
+                        dataListener.onError(-999);
+                        Log.d(TAG, "#getFirefighterTrainings() - server not response");
+                    }
+                });
+        RequestQueueSingleton.getInstance(mContext).addToRequestQueue(getIncidents);
     }
 
     @Override
@@ -58,7 +75,7 @@ public class IncidentRequestImpl implements IncidentRequest {
     @Override
     public void addIncident(IncidentFull incident, int fireBrigadeId, DataListener dataListener) {
         JSONObject jsonObject = null;
-        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd").create();
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS").create();
 
         try {
             String incidentJson = gson.toJson(incident);

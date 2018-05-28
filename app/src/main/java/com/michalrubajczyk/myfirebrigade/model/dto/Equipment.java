@@ -9,6 +9,7 @@ public class Equipment {
     private String name;
     private String type;
     private String subtype;
+    private FireBrigade fireBrigade;
 
     public Equipment() {
         this.id = -1;
@@ -58,6 +59,14 @@ public class Equipment {
 
     public void setSubtype(String subtype) {
         this.subtype = subtype;
+    }
+
+    public FireBrigade getFireBrigade() {
+        return fireBrigade;
+    }
+
+    public void setFireBrigade(FireBrigade fireBrigade) {
+        this.fireBrigade = fireBrigade;
     }
 
     public static Equipment createEquipmentFromJson(String json) {
