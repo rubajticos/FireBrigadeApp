@@ -19,6 +19,7 @@ import com.michalrubajczyk.myfirebrigade.activity.CarActivity.CarActivity;
 import com.michalrubajczyk.myfirebrigade.activity.EquipmentActivity.EquipmentActivity;
 import com.michalrubajczyk.myfirebrigade.activity.FirefighterActivity.FirefighterActivity;
 import com.michalrubajczyk.myfirebrigade.activity.IncidentActivity.IncidentActivity;
+import com.michalrubajczyk.myfirebrigade.activity.StatisticsActivity.StatisticsActivity;
 import com.michalrubajczyk.myfirebrigade.model.apiRequests.FireBrigadeRequestImpl;
 import com.michalrubajczyk.myfirebrigade.utils.ActivityUtils;
 import com.michalrubajczyk.myfirebrigade.utils.AuthUserUtils;
@@ -96,6 +97,10 @@ public class FireBrigadeActivity extends AppCompatActivity {
                     case R.id.incidents_navigation_menu_item:
                         Intent incidentIntent = new Intent(getApplicationContext(), IncidentActivity.class);
                         startActivity(incidentIntent);
+                        break;
+                    case R.id.statistics_navigation_menu_item:
+                        Intent staticticsIntent = new Intent(getApplicationContext(), StatisticsActivity.class);
+                        startActivity(staticticsIntent);
                         break;
                     case R.id.analyze_navigation_menu_item:
                         Intent analysisIntent = new Intent(getApplicationContext(), AnalysisActivity.class);

@@ -27,6 +27,11 @@
             android:title="@string/drawer_incidents" />
 
         <item
+            android:id="@+id/statistics_navigation_menu_item"
+            android:icon="@drawable/ic_grain_black_24dp"
+            android:title="@string/drawer_statistics" />
+
+        <item
             android:id="@+id/analyze_navigation_menu_item"
             android:icon="@drawable/ic_donut_small_black"
             android:title="@string/drawer_analyze" />

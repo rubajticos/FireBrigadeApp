@@ -103,6 +103,11 @@
             android:name=".activity.AnalysisActivity.AnalysisActivity"
             android:label="@string/title_activity_analysis"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <activity
+            android:name=".activity.StatisticsActivity.StatisticsActivity"
+            android:label="@string/title_statistics_activity"
+            android:theme="@style/AppTheme.NoActionBar" />
     </application>
 
 </manifest>

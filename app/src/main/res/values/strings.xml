@@ -304,6 +304,20 @@
     <string name="report_choose_error">Musisz wybrać typ raportu!</string>
     <string name="analysis_type_error">Musisz wybrać typ analizy</string>
     <string name="analysis_error">Wystapił błąd podczas analizy danych. Spróbuj ponownie.</string>
+    <string name="staticstics_info">Poniżej zostały przedstawione statystyki Twojej jednostki</string>
+    <string name="num_of_firefighters">Liczba strażaków:</string>
+    <string name="num_of_commanders">Dowódcy:</string>
+    <string name="num_of_drivers">Kierowcy:</string>
+    <string name="num_of_cars">Samochody:</string>
+    <string name="num_of_equipment">Liczba sprzętu:</string>
+    <string name="num_of_incidents">Liczba zdarzeń:</string>
+    <string name="num_of_fire">Pożary:</string>
+    <string name="num_of_local_threat">Miejscowe zagrożenia:</string>
+    <string name="num_of_trainings">Ćwiczenia:</string>
+    <string name="num_of_false_alarms">Fałszywe alarmy: </string>
+    <string name="num_of_securing_area">Zabezpieczenia rejonu operacyjnego:</string>
+    <string name="title_statistics_activity">Statystyki</string>
+    <string name="drawer_statistics">Statystyki</string>
 
 
 </resources>
