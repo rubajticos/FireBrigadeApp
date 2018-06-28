@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Moja jednostka OSP</string>
     <string name="app_name_pl">Moja jednostka OSP</string>
-    <string name="base_server_url">https://192.168.0.102:8443</string>
+    <string name="base_server_url">https://192.168.1.114:8443</string>
 
     <!-- Strings related to login -->
     <string name="prompt_email">Email</string>
@@ -114,6 +114,7 @@
     <string name="activity_addEditFirebrigade">Dodaj/edytuj</string>
     <string name="activity_firefighter">Strażacy</string>
     <string name="activity_firefighter_details">Informacje</string>
+    <string name="title_activity_analysis">Analiza danych</string>
 
     <!--OTHERS-->
     <string name="refresh_action">Odśwież</string>
@@ -289,6 +290,20 @@
     <string name="incident_detail_carFirefighters">Ratownicy</string>
     <string name="incident_detail_carEquipment">Użyty sprzęt</string>
     <string name="incident_detail_missing_incident">Brak zdarzenia.. błąd</string>
+    <string name="analysis_method">Wybierz metodę analizy</string>
+    <string name="general_analysis">Analiza ogólna</string>
+    <string name="detail_analysis">Analiza szczegółowa</string>
+    <string name="general_analysis_description">Analiza wyznacza reguły asocjacyjne na podstawie zdarzeń jednostki. Podczas analizy bazuje na typach zdarzeń i sprzętu użytego podczas zdarzeń</string>
+    <string name="detail_analysis_description">Analiza wyznacza reguły asocjacyjne na podstawie zdarzeń jednostki. Podczas analizy bazuje na podtypach zdarzeń i sprzętu użytego podczas zdarzeń</string>
+    <string name="report_type_choose">Wybierz typ raportu PDF</string>
+    <string name="full_report">Raport pełny (naukowy)</string>
+    <string name="simple_report_description">Raport prosty zawiera podstawowe wyniki analizy i jest przetworzony do formy przyjaznej osobom, które nie mają szczegółowej wiedzy na temat reguł asocjacyjnych.</string>
+    <string name="full_report_description">Raport pełny zawiera szczegółowe informacje, od których wymagana jest wiedza dotycząca reguł asocjacyjnych.</string>
+    <string name="do_analysis">Wykonaj analizę</string>
+    <string name="simple_report">Raport prosty</string>
+    <string name="report_choose_error">Musisz wybrać typ raportu!</string>
+    <string name="analysis_type_error">Musisz wybrać typ analizy</string>
+    <string name="analysis_error">Wystapił błąd podczas analizy danych. Spróbuj ponownie.</string>
 
 
 </resources>
